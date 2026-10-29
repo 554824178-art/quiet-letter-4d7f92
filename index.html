@@ -481,30 +481,9 @@
     }
   </style>
 </head>
-<body class="locked">
+<body>
   <main>
-    <section class="cover" id="cover">
-      <div class="envelope">
-        <div class="eyebrow">2026 · 关于我们</div>
-        <h1>我们的<br>年度报告</h1>
-        <p class="subtitle">小婷，从 6 月 24 日的第一句话，到 10 月 28 日最后一次联系。127 天，我都还记得。</p>
-        <button class="open-btn" id="openLetter">翻开这一年</button>
-        <p class="tiny">会有点长。慢慢看，回不回都行。</p>
-      </div>
-    </section>
-
-    <article class="letter" id="letter">
-      <header class="letter-head wrap reveal">
-        <div class="eyebrow">2026.06.24 — 10.28</div>
-        <h2>这一年不算长，可咱们真的过得很满。</h2>
-        <p class="lead">我知道你现在看到这些，可能第一反应就是，咋又来了。</p>
-        <p class="lead">这次我不跟你争，也不跟你犟。就是有些日子真的发生过，好的坏的都在里面。我不想最后只剩一句“咱们没成”。</p>
-        <div class="year-intro">
-          <p>这不是拿数字来证明我付出得多，也不是跟你算账。</p>
-          <p>这些数字对我来说，就是咱们每天从“到公司了吗”聊到“早点睡”，是电话那边有人应我，是我真真切切喜欢过你的证据。</p>
-        </div>
-      </header>
-
+    <article class="letter open" id="letter">
       <div class="wrap">
         <section class="panel reveal">
           <div class="chapter-no">01 / 全年总览</div>
@@ -799,24 +778,13 @@
     </article>
 
     <nav class="nav" id="quickNav" aria-label="快速导航">
-      <a href="#cover">封面</a><a href="#letter">总览</a><a href="#calls">电话</a><a href="#ending">最后</a>
+      <a href="#letter">总览</a><a href="#calls">电话</a><a href="#ending">最后</a>
     </nav>
   </main>
 
   <script>
-    const openButton = document.getElementById('openLetter');
-    const letter = document.getElementById('letter');
-    const nav = document.getElementById('quickNav');
-    const openLetter = () => {
-      document.body.classList.remove('locked');
-      document.getElementById('cover').style.display = 'none';
-      letter.classList.add('open');
-      nav.classList.add('visible');
-      window.scrollTo(0, 0);
-      document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
-    };
-    openButton.addEventListener('click', openLetter);
-    if (new URLSearchParams(location.search).get('open') === '1') openLetter();
+    document.getElementById('quickNav').classList.add('visible');
+    document.querySelectorAll('.reveal').forEach((element) => element.classList.add('visible'));
   </script>
 </body>
 </html>
