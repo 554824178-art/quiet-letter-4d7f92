@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="robots" content="noindex,nofollow,noarchive,noimageindex">
   <meta name="theme-color" content="#f7ece9">
-  <meta property="og:title" content="有一封信想交给你">
-  <meta property="og:description" content="不催你回复，也不替你做决定。">
-  <title>有一封信想交给你</title>
+  <meta property="og:title" content="有些话我想慢慢跟你说">
+  <meta property="og:description" content="不催你回复，也不拿过去逼你做决定。">
+  <title>有些话我想慢慢跟你说</title>
   <style>
     :root {
       --paper: #fffaf6;
@@ -169,6 +169,19 @@
       font-size: 12px; font-weight: 800;
     }
     .honest-item p { margin: 0; }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 4px 11px;
+      border: 1px solid rgba(168, 78, 101, .2);
+      border-radius: 999px;
+      background: rgba(238, 212, 217, .34);
+      color: var(--rose-deep);
+      font-size: 13px;
+      line-height: 1.35;
+    }
     .memory-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 20px; }
     .memory {
       min-height: 190px;
@@ -190,6 +203,50 @@
     }
     .memory-summary p { margin: 0 0 8px; color: var(--rose-deep); font-size: 15px; }
     .memory-summary span { color: var(--muted); font-size: 14px; }
+    .stats-note { margin: 14px 0 0; color: var(--muted); font-size: 14px; }
+    .table-wrap {
+      margin-top: 18px;
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, .5);
+      -webkit-overflow-scrolling: touch;
+    }
+    .stats-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+    .stats-table th, .stats-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+    }
+    .stats-table th {
+      background: rgba(238, 212, 217, .32);
+      color: var(--rose-deep);
+      font-size: 12px;
+      letter-spacing: .04em;
+    }
+    .stats-table tr:last-child td { border-bottom: 0; }
+    .stats-table td:first-child { color: var(--rose-deep); font-weight: 750; }
+    .table-hint { margin: 8px 0 0; color: var(--muted); font-size: 12px; }
+    .story-list { display: grid; gap: 12px; margin-top: 20px; }
+    .story-item { display: grid; grid-template-columns: 86px 1fr; gap: 14px; padding: 16px 0; border-bottom: 1px dashed var(--line); }
+    .story-item:last-child { border-bottom: 0; }
+    .story-item time { color: var(--rose); font-size: 13px; font-weight: 750; }
+    .story-item h3 { margin: 0 0 5px; font-size: 17px; }
+    .story-item p { margin: 0; color: var(--muted); }
+    .duo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
+    .bubble-card { border-radius: 19px; padding: 18px; border: 1px solid var(--line); background: rgba(255,255,255,.58); }
+    .bubble-card time { display: block; color: var(--rose); font-size: 12px; font-weight: 750; margin-bottom: 10px; }
+    .bubble { width: fit-content; max-width: 100%; border-radius: 15px; padding: 9px 13px; margin: 7px 0; font-size: 15px; line-height: 1.65; }
+    .bubble.them { background: #f1e5e4; color: #49373d; border-top-left-radius: 4px; }
+    .bubble.me { margin-left: auto; background: #e2eee8; color: #27443b; border-top-right-radius: 4px; }
     blockquote {
       margin: 28px 0;
       padding: 22px 24px;
@@ -219,26 +276,6 @@
     }
     .respect h2 { font-family: "Songti SC", "STSong", "SimSun", serif; font-size: clamp(29px, 6vw, 42px); font-weight: 500; }
     .respect p { color: rgba(255,255,255,.84); }
-    .choices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 24px 0 4px; }
-    .choice {
-      border: 1px solid rgba(255,255,255,.24);
-      background: rgba(255,255,255,.09);
-      color: #fff;
-      border-radius: 16px;
-      padding: 15px;
-      text-align: left;
-      font: inherit;
-      cursor: pointer;
-    }
-    .choice.active { background: rgba(255,255,255,.19); }
-    .choice small { display: block; color: rgba(255,255,255,.66); margin-top: 4px; }
-    .response {
-      margin-top: 13px;
-      padding: 15px 17px;
-      border-radius: 15px;
-      background: rgba(255,255,255,.13);
-      color: rgba(255,255,255,.92);
-    }
     .ending {
       padding: 72px 0 88px;
       text-align: center;
@@ -284,7 +321,9 @@
       .envelope { border-radius: 24px; padding: 28px 22px 30px; }
       .memory-grid { grid-template-columns: 1fr; }
       .memory { min-height: 0; }
-      .choices { grid-template-columns: 1fr; }
+      .duo-grid { grid-template-columns: 1fr; }
+      .stats-table { font-size: 12px; }
+      .stats-table th, .stats-table td { padding: 9px 6px; }
       blockquote { font-size: 18px; padding: 18px; }
       .nav { bottom: 10px; }
     }
@@ -299,26 +338,28 @@
     <section class="cover" id="cover">
       <div class="envelope">
         <div class="eyebrow">A LETTER FOR YOU</div>
-        <h1>有一封信<br>想交给你</h1>
-        <p class="subtitle">你说过的原因我都听见了。这一次，不解释、不辩解，也不催你立刻给我答案。</p>
-        <button class="open-btn" id="openLetter">打开这封信</button>
-        <p class="tiny">建议戴上耳机之外的安静，只需要几分钟。</p>
+        <h1>有些话<br>想认真跟你说</h1>
+        <p class="subtitle">小婷，不是来争对错，也不催你现在给答案。你看完就行，回不回都行。</p>
+        <button class="open-btn" id="openLetter">打开看看</button>
+        <p class="tiny">有点长，慢慢看。</p>
       </div>
     </section>
 
     <article class="letter" id="letter">
       <header class="letter-head wrap reveal">
         <div class="eyebrow">写给 小婷</div>
-        <h2>见字如面。</h2>
-        <p class="lead">我重新看了我们留在微信、短信和抖音里的那些话。记录下来的不只有快乐，也有我让你累、让你委屈、让你一次次失望的地方。</p>
+        <h2>小婷，这些话我在心里憋了很久，还是想认真跟你说一遍。</h2>
+        <p class="lead">我知道你现在看到这些，可能第一反应就是，咋又来了。</p>
+        <p class="lead">这次我不跟你争对错。你短信里说的那些，我重新看了，也确实知道自己哪儿让你难受了。</p>
       </header>
 
       <div class="wrap">
         <section class="panel reveal">
-          <div class="chapter-no">01 / 我听见了</div>
-          <h2 class="section-title">你不是突然离开，是很多次没有被好好听见。</h2>
-          <p>短信里，你已经把理由说得很清楚：见面之后发现我们不合适；异地太远；父母不愿意你远嫁，希望你在本地生活。这些不是我能用一句“我会改”轻轻带过的事。</p>
-          <p>你说我态度强硬，总想争出谁对谁错，爱讲大道理，有时还让你觉得没有面子、被放在很低的位置。我认。你明明说过不喜欢那样，我却还是把自己的不安和胜负心放在你的感受前面。</p>
+          <div class="chapter-no">01 / 你说的，我都认</div>
+          <h2 class="section-title">你说的那些问题，我不跟你犟。</h2>
+          <p>你说，见面以后觉得咱们不合适。这个我听到了，也不硬说不是。</p>
+          <p>你说离得太远，叔叔阿姨想让你找个本地人，不想你嫁那么远。这个现实我也知道，不是我嘴上说两句就能解决的。</p>
+          <p>你还说我太犟，老想争个谁对谁错，爱讲大道理。有时候让你下不来台，觉得自己被我放得很低。你明明说过不喜欢，我还是顾着自己那点不安。这个确实是我做得不对。</p>
           <div class="pill-row">
             <span class="pill">见面后的不合适</span><span class="pill">异地距离</span><span class="pill">父母意见</span><span class="pill">沟通方式</span><span class="pill">被消耗的感受</span>
           </div>
@@ -327,87 +368,186 @@
 
       <div class="wrap">
         <section class="panel reveal">
-          <div class="chapter-no">02 / 先道歉</div>
-          <h2 class="section-title">对不起，我把自己的不安变成了你的负担。</h2>
+          <div class="chapter-no">02 / 对不起</div>
+          <h2 class="section-title">本来是想让你开心，结果让你谈得这么累。</h2>
           <div class="honest-list">
-            <div class="honest-item"><span>01</span><p><strong>我把每一次分歧都变成了输赢。</strong>我急着证明自己是对的，却忘了感情里更重要的是听懂你，而不是把你辩到无话可说。</p></div>
-            <div class="honest-item"><span>02</span><p><strong>我把担心变成了要求。</strong>你不回消息、需要空间时，我用连续的信息和电话逼你回应，把自己的不安交给了你处理。</p></div>
-            <div class="honest-item"><span>03</span><p><strong>我把付出说成了筹码。</strong>分开时我提到自己给过什么，还说到补偿。那些话很不体面，也否定了感情本来应该是自愿的。</p></div>
-            <div class="honest-item"><span>04</span><p><strong>我不该提起你的过去。</strong>拿你和前任的经历作比较，只会让你再次受伤，也很不公平。</p></div>
-            <div class="honest-item"><span>05</span><p><strong>在我最该停下来的时候，我还在解释。</strong>你已经有情绪了，我却急着讲自己的道理，没有先问一句：你希望我现在怎么听你？</p></div>
-            <div class="honest-item"><span>06</span><p><strong>我把边界谈成了服从。</strong>朋友、游戏、公开关系和个人空间，本该一起商量，而不是由我单方面定规则。</p></div>
+            <div class="honest-item"><span>01</span><p><strong>我老想争个对错。</strong>有时候你只是想让我听两句，我却急着讲道理、证明自己没错。最后你更难受了，我还只顾着证明自己没做错。</p></div>
+            <div class="honest-item"><span>02</span><p><strong>你越不回，我越追。</strong>电话一个接一个，消息一条接一条。我总觉得这是在乎，其实是我把自己的慌张全压给你了。</p></div>
+            <div class="honest-item"><span>03</span><p><strong>分开以后，我还提钱、提补偿。</strong>这个最不该。感情不是算账，你也不是收了我多少东西，就必须留下。</p></div>
+            <div class="honest-item"><span>04</span><p><strong>我拿你的过去刺痛过你。</strong>这是我的错。你受过的伤，不该被我拿来比较，更不该成为我逼你给答案的理由。</p></div>
+            <div class="honest-item"><span>05</span><p><strong>你难受的时候，我还在解释自己。</strong>我那时候该说「我知道了，对不起」，而不是一直问你怎么又生气了。</p></div>
+            <div class="honest-item"><span>06</span><p><strong>我总说我会改、不会离开。</strong>可说多了，跟空话一样。我现在不敢再拿这句话跟你要原谅。</p></div>
           </div>
         </section>
       </div>
 
       <div class="wrap">
         <section class="reveal">
-          <div class="chapter-no">03 / 我记得</div>
-          <h2 class="section-title">我记得的不只是爱，还有你给过我的耐心。</h2>
+          <div class="chapter-no">03 / 小事我都记得</div>
+          <h2 class="section-title">你别觉得我只会说想你、爱你。</h2>
           <div class="memory-grid">
-            <div class="memory"><time>6 月 24 日</time><h3>“可以开始聊天了”</h3><p>抖音里第一句普通的招呼，后来变成了一整段真实发生过的生活。</p></div>
-            <div class="memory"><time>7 月 22 日</time><h3>从一句“小婷”开始</h3><p>你让我叫你小婷。那时候我总觉得来日很长，没想到后来每一句普通的话，都成了我反复想起的细节。</p></div>
-            <div class="memory"><time>8 月 1 日</time><h3>一起点亮聊天火花</h3><p>你给我分享猫咪、综艺、短剧和好笑的视频。那些零碎日常，是我认真喜欢过你的证据。</p></div>
-            <div class="memory"><time>10 月 23 日</time><h3>终于真正见到你</h3><p>所有隔着屏幕的紧张，在真正见到你的时候才有了落点。那些画面我到现在都记得。</p></div>
+            <div class="memory"><time>6 月 24 日 · 抖音</time><h3>你跟我说，微信不聊天，纯扩列</h3><p>一开始你还把边界说得清清楚楚。后来从一句句闲话聊起来，我真没想到会这么喜欢你。</p></div>
+            <div class="memory"><time>7 月 22 日</time><h3>从大美女，到我的小婷</h3><p>那天第一句是我问你，怎么啦大美女。你回我，在骂领导呀。后来你让我叫你小婷，这个名字我一直记着。</p></div>
+            <div class="memory"><time>8 月 1 日</time><h3>看到好笑的，先发给你</h3><p>猫、综艺、短剧、离谱视频。你给我发，我也给你发。没什么正事，但那就是咱们每天的日子。</p></div>
+            <div class="memory"><time>10 月 23 日</time><h3>终于真的见到你</h3><p>我五点就出门，紧张到手都划破了。在大堂等你的时候，又紧张又高兴。隔着屏幕喜欢那么久的人，终于站我面前了。</p></div>
+          </div>
+        </section>
+      </div>
+
+      <div class="wrap">
+        <section class="panel reveal">
+          <div class="chapter-no">04 / 我们真的一起过</div>
+          <h2 class="section-title">咱们不是只有吵架，好的时候也是真的好。</h2>
+          <div class="story-list">
+            <div class="story-item"><time>每天</time><div><h3>从「到公司了吗」聊到「早点睡」</h3><p>你骂领导、讲工作，我让你先吃饭。你头疼，我催你吹头发。都是特别普通的话，后来却成了我每天最习惯的事。</p></div></div>
+            <div class="story-item"><time>吃饭时</time><div><h3>奶茶、肯德基，还有你嘴硬地让我别乱花钱</h3><p>你肚子疼的时候，说贴暖宝宝就行，不让我天天点饮品。我还总想一股脑给你点。现在我知道了，先问你要不要，比我自作主张强。</p></div></div>
+            <div class="story-item"><time>打游戏时</time><div><h3>「你辅助打得太好了」不是哄你</h3><p>我是真觉得你厉害。那段时间我最盼的就是晚上开一局，能一直跟你说话，能听见你回我。</p></div></div>
+            <div class="story-item"><time>刷抖音时</time><div><h3>292 次分享，猫和短剧占了一大半</h3><p>很多就是几秒钟的视频。可我看到好笑的，第一反应还是「给她看看」。你发给我，我也会认真看。</p></div></div>
+            <div class="story-item"><time>打电话时</time><div><h3>下班打，快睡了还打</h3><p>最长一次挂了 11 小时 40 分。后来有时候都不说话了，我也还想让电话挂着，因为知道你在那边。</p></div></div>
+            <div class="story-item"><time>8 月 9 日</time><div><h3>隔着屏幕过的生日</h3><p>你说「祝圣杰老公生日快乐呀～」，还说蜡烛也点上了。那时候我是真的很开心。不是礼物多重要，是你记得我。</p></div></div>
+            <div class="story-item"><time>10 月 23 日</time><div><h3>见面那天，我真的紧张坏了</h3><p>在机场、在大堂，我都一直在等你。后来看到你，我才真觉得，咱们不是在手机里谈恋爱。</p></div></div>
+          </div>
+          <p class="stats-note">都不是什么惊天动地的大事。可我现在最舍不得的，偏偏就是这些小事。</p>
+        </section>
+      </div>
+
+      <div class="wrap">
+        <section class="reveal">
+          <div class="chapter-no">05 / 以后那些事</div>
+          <h2 class="section-title">那些以后，我是真想过。</h2>
+          <p>咱们聊过机票、高铁，聊过你来北京以后租哪儿、吃什么。我还认真看过新房，想着咱们一起住、一起养猫。那些事不是我顺口哄你，我是真的想过。</p>
+          <p>我舍不得的，不只是那几句甜话。是咱们认认真真想过的以后，最后没能过成日子。</p>
+          <div class="pill-row">
+            <span class="pill">结束异地</span><span class="pill">你来北京</span><span class="pill">以后每天都能见到</span><span class="pill">一起住新房</span><span class="pill">养一只猫</span><span class="pill">去上海或日本迪士尼</span>
+          </div>
+        </section>
+      </div>
+
+      <div class="wrap">
+        <section class="panel reveal">
+          <div class="chapter-no">06 / 甜也是真的</div>
+          <h2 class="section-title">你跟我说过的话，我到现在都记得。</h2>
+          <div class="duo-grid">
+            <div class="bubble-card"><time>7 月 27 日 · 微信</time><div class="bubble them">老公呀</div><div class="bubble me">晚安啦老婆</div></div>
+            <div class="bubble-card"><time>8 月 6 日 · 微信</time><div class="bubble them">我超级喜欢圣杰老公呀</div></div>
+            <div class="bubble-card"><time>8 月 9 日 · 微信</time><div class="bubble them">我把蜡烛也点上了</div><div class="bubble them">祝圣杰老公生日快乐呀～</div><div class="bubble them">世界正数第一般配</div></div>
+            <div class="bubble-card"><time>8 月 26 日 · 微信</time><div class="bubble them">在等你给我打电话呀</div></div>
+            <div class="bubble-card"><time>9 月 1 日 · 微信</time><div class="bubble them">老公呀我好想你呀</div></div>
+            <div class="bubble-card"><time>9 月 25 日 · 微信</time><div class="bubble them">我将用最直白，最直接，最不绕弯子，最客观，最正确，最系统，最真实，最简洁，最容易理解，最不卖关子的方式告诉你，我想你了。</div></div>
+            <div class="bubble-card"><time>10 月 21 日 · 微信</time><div class="bubble them">老公呀我只想和你过</div></div>
+            <div class="bubble-card"><time>10 月 25 日 · 微信</time><div class="bubble them">这是很正常的戒断反应，没有关系的，老公</div></div>
           </div>
           <div class="memory-summary">
-            <p><strong>2,597</strong> 条抖音私信 · <strong>292</strong> 次视频分享 · <strong>33</strong> 次通话 · <strong>92</strong> 天有联系</p>
-            <span>我把这些写下来，不是拿数量证明感情，也不是把过去变成筹码。只是提醒自己：我们确实认真陪过彼此，我更应该认真对待这段关系留下的问题。</span>
+            <p>这些原话我都留着，没有拿来跟你算感情。</p>
+            <span>我只是想告诉你，你给过我的喜欢，我一直都记得。</span>
           </div>
         </section>
       </div>
 
       <div class="wrap">
         <section class="panel reveal">
-          <div class="chapter-no">04 / 我想明白的</div>
-          <h2 class="section-title">喜欢一个人，不该让她一直证明自己不会离开。</h2>
-          <blockquote>以前我总想知道“你会不会一直在”。后来才发现，真正让人愿意留下来的，不是被反复问住，而是在一起时能呼吸、能安心，也能做自己。</blockquote>
-          <p>我不能用一句“我会改”把所有问题抹掉。可我知道，如果还有以后，我想改的不是说话好听一点，而是我面对不安时的反应：先停一下，先听你，先尊重你的节奏，再表达我自己。</p>
-          <p>你在抖音问过我：“你是不是真的认定我了呀？”现在我才明白，认定不是反复要你给一个答案，而是在你告诉我“不合适”之后，仍然尊重你的感受和选择。</p>
+          <div class="chapter-no">07 / 我们打过多少电话</div>
+          <h2 class="section-title">咱们到底聊了多少，打了多久，我都数了。</h2>
+          <div class="table-wrap">
+            <table class="stats-table">
+              <thead>
+                <tr>
+                  <th>渠道</th>
+                  <th>消息</th>
+                  <th>电话</th>
+                  <th>接通和总长</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>微信</strong></td>
+                  <td>29,006 条</td>
+                  <td>574 条记录</td>
+                  <td>接通 462 次<br><strong>23 天 16 小时<br>16 分 23 秒</strong></td>
+                </tr>
+                <tr>
+                  <td><strong>抖音</strong></td>
+                  <td>2,597 条</td>
+                  <td>33 条事件</td>
+                  <td>31 条写了“通话成功”<br>没记录到时长</td>
+                </tr>
+                <tr>
+                  <td><strong>合计</strong></td>
+                  <td>31,603 条</td>
+                  <td>607 条记录</td>
+                  <td>有明确时长的是微信</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="table-hint">抖音里还有 292 次分享，92 天有联系。微信最长一次通话是 11 小时 40 分 08 秒。超长通话里可能是有人忘挂或者挂着睡，这些数字我都按记录写。</p>
+          <div class="table-wrap">
+            <table class="stats-table">
+              <thead>
+                <tr>
+                  <th>宝宝、老婆、老公、我爱你、想你</th>
+                  <th>条数</th>
+                  <th>怎么算的</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>我发出</strong></td><td>2,543 条</td><td rowspan="2">两个平台的文字消息里，明确带着这 5 个词</td></tr>
+                <tr><td><strong>你发出</strong></td><td>869 条</td></tr>
+                <tr><td><strong>合计</strong></td><td><strong>3,412 条</strong></td><td>还没算语音、图片和其他甜话</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="table-hint">第一张表里抖音的 33 条事件，有 1 条是点亮徽章的系统消息，另有 1 条没有显示通话结果，所以只有 31 条明确写着“通话成功”。我不想把数字说大。</p>
+          <p class="stats-note">这些不是拿来跟你算账，也不是说我陪了你多久，你就应该怎么样。我只是想承认，这段时间不是假的，你给我的也不是假的。</p>
         </section>
       </div>
 
       <div class="wrap">
         <section class="panel reveal">
-          <div class="chapter-no">05 / 如果能再靠近</div>
-          <h2 class="section-title">我不会再只把“我爱你”挂在嘴边。</h2>
+          <div class="chapter-no">08 / 我想明白了</div>
+          <h2 class="section-title">喜欢一个人，不能老让她证明自己不会走。</h2>
+          <blockquote>以前我总想问你会不会一直在。后来发现，我越问，你越累。你愿意留下，靠的是在一起能安心说话、能喘口气，不是靠我一遍遍要保证。</blockquote>
+          <p>我不能用一句我会改，把前面的问题全抹了。可如果还有以后，要改的是我一不安就追、一难受就逼你的毛病。</p>
+          <p>我得先停一下，先听你说，先尊重你的节奏，再说我自己。你说不合适，我也不能再只想着自己不愿意。</p>
+        </section>
+      </div>
+
+      <div class="wrap">
+        <section class="panel reveal">
+          <div class="chapter-no">09 / 如果能再靠近</div>
+          <h2 class="section-title">这次不是嘴上说「我会改」。</h2>
           <div class="changes">
-            <div class="change"><strong>你暂时不回，我不再连环追问。</strong><span>我会先照顾好自己的情绪，而不是把安抚自己的责任交给你。</span></div>
-            <div class="change"><strong>你说累了，我会先停。</strong><span>不把沉默理解成不爱，不把空间当成关系变坏的证据。</span></div>
-            <div class="change"><strong>有不安，我说感受，不查岗。</strong><span>说“我有点难过”，而不是逼你交代、证明、哄好我。</span></div>
-            <div class="change"><strong>边界一起谈，不再单方面要求。</strong><span>你的朋友、生活和个人空间，不会因为恋爱就被拿走。</span></div>
-            <div class="change"><strong>不再用转账、外卖和礼物修补冲突。</strong><span>也不会再说“我给了你多少”。感情不是账单，付出不是索要回应的凭证。</span></div>
-            <div class="change"><strong>不再把过去的伤痛拿出来比较。</strong><span>不提前任，不拿经历刺激你，更不把责任推给你的家庭和过去。</span></div>
-            <div class="change"><strong>不用“永远”堵住你。</strong><span>我不要求你现在给承诺，只把每一次沟通认真处理好。</span></div>
+            <div class="change"><strong>你不想说话，我就先停。</strong><span>我自己难受就自己缓一会，不再电话一个接一个。</span></div>
+            <div class="change"><strong>不把你的安静当成不爱。</strong><span>也不拿「你变了」逼你解释。你需要空间，我就给空间。</span></div>
+            <div class="change"><strong>我有情绪就直说。</strong><span>说「我心里难受」，而不是翻你的在线、战绩和朋友。</span></div>
+            <div class="change"><strong>朋友和边界，咱们商量。</strong><span>我不再单方面给你定规矩，也不让你为了证明爱我，把正常生活都丢掉。</span></div>
+            <div class="change"><strong>别再拿钱说事。</strong><span>给你点什么是我愿意，不是因为给了就要求你必须留下。</span></div>
+            <div class="change"><strong>不再拿你的过去刺痛你。</strong><span>不提前任，不比较，不把你的家庭和受过的伤当成我争赢的理由。</span></div>
+            <div class="change"><strong>不再用「永远」堵你。</strong><span>我现在不跟你要承诺，先把每次说话好好说完。</span></div>
           </div>
         </section>
       </div>
 
       <div class="wrap">
         <section class="respect reveal">
-          <div class="eyebrow" style="color:#f3cbd3">06 / 最后</div>
+          <div class="eyebrow" style="color:#f3cbd3">10 / 最后</div>
           <h2>我不想要你因为愧疚回来。</h2>
-          <p>如果你愿意，我们可以从一次不设结论的聊天开始；如果你还需要时间，我就安静地给你时间；如果你已经决定不再继续，我也会学着尊重，不再用联系、钱或承诺打扰你的生活。</p>
-          <p>你不需要为了照顾我的情绪马上回复。比起一句敷衍的“没事”，我更希望你是真的舒服、真的愿意。</p>
-          <div class="choices" role="group" aria-label="如果你愿意，可以记下你的答案">
-            <button class="choice" data-reply="好，等你准备好，我们认真聊聊。">我想再聊聊<small>不预设结果</small></button>
-            <button class="choice" data-reply="我先需要一点时间，等我想清楚了再说。">我需要时间<small>先把空间留给你</small></button>
-            <button class="choice" data-reply="我不打算继续了，但谢谢你把这些话说清楚。">我想到这里<small>我会尊重你的决定</small></button>
-          </div>
-          <div class="response" id="response">你不需要在这里回答。这只是提醒：你的选择会被看见，也应该被尊重。</div>
+          <p>你要是愿意，咱们找个不吵架的时候说几句话。你要是还需要时间，我就安静地给你时间。你要是已经决定不继续，我也会学着接受，不再拿联系、钱或者承诺去烦你。</p>
+          <p>你不用为了照顾我的情绪马上回。比起一句敷衍的「没事」，我更希望你是真的舒服、真的愿意。</p>
+          <p>这一页不回也行。哪天你想说了，我先听；要是不想说，我也知道了。</p>
         </section>
       </div>
 
-      <footer class="ending wrap reveal">
-        <p>我还是会记得你。</p>
-        <h2>但这一次，我想先学会不让想念变成你的负担。</h2>
-        <div class="signature">—— 圣杰</div>
-        <p class="privacy">私密链接 · 未设置搜索引擎索引 · 请勿转发</p>
+      <footer class="ending wrap reveal" id="ending">
+        <p>小婷，我还是会想起你。</p>
+        <h2>但这次，我不会再拿想念去烦你了。</h2>
+        <div class="signature">圣杰</div>
+        <p class="privacy">链接没有密码，拿到的人都能打开。页面不让搜索引擎收录，但请别转发。</p>
       </footer>
     </article>
 
     <nav class="nav" id="quickNav" aria-label="快速导航">
-      <a href="#cover">开头</a><a href="#letter">道歉</a><a href="#ending">结尾</a>
+      <a href="#cover">开头</a><a href="#letter">听我说</a><a href="#ending">最后</a>
     </nav>
   </main>
 
@@ -425,13 +565,6 @@
     };
     openButton.addEventListener('click', openLetter);
     if (new URLSearchParams(location.search).get('open') === '1') openLetter();
-    const choices = [...document.querySelectorAll('.choice')];
-    const response = document.getElementById('response');
-    choices.forEach(button => button.addEventListener('click', () => {
-      choices.forEach(item => item.classList.remove('active'));
-      button.classList.add('active');
-      response.textContent = button.dataset.reply + '（这句话只显示在本页，不会自动发送。）';
-    }));
   </script>
 </body>
 </html>
