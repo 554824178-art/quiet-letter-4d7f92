@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="robots" content="noindex,nofollow,noarchive,noimageindex">
   <meta name="theme-color" content="#f7ece9">
-  <meta property="og:title" content="有些话我想慢慢跟你说">
-  <meta property="og:description" content="不催你回复，也不拿过去逼你做决定。">
-  <title>有些话我想慢慢跟你说</title>
+  <meta property="og:title" content="小婷与圣杰的 2026 年度报告">
+  <meta property="og:description" content="127 天，31,603 条记录，23 天 16 小时电话。好的坏的，都在这里。">
+  <title>小婷与圣杰的 2026 年度报告</title>
   <style>
     :root {
       --paper: #fffaf6;
@@ -203,6 +203,146 @@
     }
     .memory-summary p { margin: 0 0 8px; color: var(--rose-deep); font-size: 15px; }
     .memory-summary span { color: var(--muted); font-size: 14px; }
+    .year-intro {
+      margin: 0 0 26px;
+      padding: 20px 22px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(238, 212, 217, .56), rgba(239, 227, 211, .5));
+      border: 1px solid var(--line);
+    }
+    .year-intro p:last-child { margin-bottom: 0; }
+    .year-stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 20px 0 24px;
+    }
+    .year-stat {
+      min-height: 132px;
+      padding: 18px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .58);
+    }
+    .year-stat strong {
+      display: block;
+      color: var(--rose-deep);
+      font-family: "Songti SC", "STSong", "SimSun", serif;
+      font-size: clamp(27px, 5vw, 38px);
+      font-weight: 600;
+      line-height: 1.15;
+      margin-bottom: 7px;
+    }
+    .year-stat span { display: block; color: var(--muted); font-size: 13px; line-height: 1.5; }
+    .month-list { display: grid; gap: 14px; margin-top: 20px; }
+    .month-card {
+      position: relative;
+      overflow: hidden;
+      padding: 22px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: linear-gradient(145deg, rgba(255, 255, 255, .68), rgba(248, 235, 232, .64));
+    }
+    .month-card:after {
+      content: attr(data-month);
+      position: absolute;
+      right: 12px;
+      top: 0;
+      color: rgba(168, 78, 101, .07);
+      font-family: "Songti SC", "STSong", "SimSun", serif;
+      font-size: 88px;
+      font-weight: 700;
+      line-height: 1;
+      pointer-events: none;
+    }
+    .month-card > * { position: relative; z-index: 1; }
+    .month-card h3 { margin: 0 0 5px; font-size: 22px; }
+    .month-card .month-lead { color: var(--muted); margin-bottom: 12px; }
+    .month-facts { display: flex; flex-wrap: wrap; gap: 7px; margin: 12px 0; }
+    .month-facts span {
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .64);
+      border: 1px solid var(--line);
+      font-size: 12px;
+      color: var(--rose-deep);
+    }
+    .month-card blockquote { margin: 12px 0 0; font-size: 17px; }
+    .rank-list { display: grid; gap: 10px; margin-top: 18px; }
+    .rank-item {
+      display: grid;
+      grid-template-columns: 34px 1fr auto;
+      gap: 11px;
+      align-items: center;
+      padding: 14px 15px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, .54);
+      border: 1px solid var(--line);
+    }
+    .rank-item > span:first-child {
+      width: 29px;
+      height: 29px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--rose-soft);
+      color: var(--rose-deep);
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .rank-item strong { display: block; font-size: 15px; line-height: 1.5; }
+    .rank-item small { display: block; color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .rank-item > b { color: var(--rose-deep); font-size: 14px; white-space: nowrap; }
+    .word-cloud { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 12px; margin: 22px 0; }
+    .word-cloud span {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 4px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      color: var(--rose-deep);
+      background: rgba(238, 212, 217, .38);
+      line-height: 1.45;
+    }
+    .word-cloud b { font-weight: 800; }
+    .word-cloud small { color: var(--muted); font-size: 10px; }
+    .word-cloud .xl { font-size: 28px; }
+    .word-cloud .lg { font-size: 22px; }
+    .word-cloud .md { font-size: 18px; }
+    .word-cloud .sm { font-size: 15px; }
+    .word-table { margin-top: 18px; }
+    .timeline { position: relative; display: grid; gap: 0; margin-top: 22px; padding-left: 24px; }
+    .timeline:before {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 7px;
+      bottom: 7px;
+      width: 1px;
+      background: linear-gradient(var(--rose-soft), var(--line));
+    }
+    .timeline-item { position: relative; padding: 0 0 25px 16px; }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-item:before {
+      content: "";
+      position: absolute;
+      left: -23px;
+      top: 8px;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--rose);
+      box-shadow: 0 0 0 5px rgba(238, 212, 217, .54);
+    }
+    .timeline-item time { color: var(--rose); font-size: 12px; font-weight: 800; letter-spacing: .08em; }
+    .timeline-item h3 { margin: 5px 0 5px; font-size: 18px; }
+    .timeline-item p { margin: 0; color: var(--muted); }
+    .call-split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 18px 0; }
+    .call-card { padding: 18px; border-radius: 19px; background: rgba(255,255,255,.58); border: 1px solid var(--line); }
+    .call-card strong { display: block; color: var(--rose-deep); font-size: 23px; line-height: 1.3; }
+    .call-card span { color: var(--muted); font-size: 13px; }
+    .call-card b { display: block; margin-top: 8px; font-size: 16px; }
+    .year-ending-note { margin-top: 18px; color: var(--muted); font-size: 14px; }
     .stats-note { margin: 14px 0 0; color: var(--muted); font-size: 14px; }
     .table-wrap {
       margin-top: 18px;
@@ -315,6 +455,7 @@
     }
     .nav.visible { display: flex; }
     .nav a { color: rgba(255,255,255,.8); text-decoration: none; padding: 7px 10px; border-radius: 999px; font-size: 12px; }
+    .nav a { white-space: nowrap; }
     .nav a:hover { color: #fff; background: rgba(255,255,255,.12); }
     @media (max-width: 620px) {
       .wrap { width: calc(100% - 24px); }
@@ -322,6 +463,12 @@
       .memory-grid { grid-template-columns: 1fr; }
       .memory { min-height: 0; }
       .duo-grid { grid-template-columns: 1fr; }
+      .year-stats { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .year-stat { min-height: 116px; padding: 14px; }
+      .year-stat strong { font-size: 24px; }
+      .call-split { grid-template-columns: 1fr; }
+      .rank-item { grid-template-columns: 30px 1fr; }
+      .rank-item > b { grid-column: 2; }
       .stats-table { font-size: 12px; }
       .stats-table th, .stats-table td { padding: 9px 6px; }
       blockquote { font-size: 18px; padding: 18px; }
@@ -337,185 +484,286 @@
   <main>
     <section class="cover" id="cover">
       <div class="envelope">
-        <div class="eyebrow">A LETTER FOR YOU</div>
-        <h1>有些话<br>想认真跟你说</h1>
-        <p class="subtitle">小婷，不是来争对错，也不催你现在给答案。你看完就行，回不回都行。</p>
-        <button class="open-btn" id="openLetter">打开看看</button>
-        <p class="tiny">有点长，慢慢看。</p>
+        <div class="eyebrow">2026 · 关于我们</div>
+        <h1>我们的<br>年度报告</h1>
+        <p class="subtitle">小婷，从 6 月 24 日的第一句话，到 10 月 28 日最后一次联系。127 天，我都还记得。</p>
+        <button class="open-btn" id="openLetter">翻开这一年</button>
+        <p class="tiny">会有点长。慢慢看，回不回都行。</p>
       </div>
     </section>
 
     <article class="letter" id="letter">
       <header class="letter-head wrap reveal">
-        <div class="eyebrow">写给 小婷</div>
-        <h2>小婷，这些话我憋了很久了，还是想跟你好好说一遍。</h2>
+        <div class="eyebrow">2026.06.24 — 10.28</div>
+        <h2>这一年不算长，可咱们真的过得很满。</h2>
         <p class="lead">我知道你现在看到这些，可能第一反应就是，咋又来了。</p>
-        <p class="lead">这次我不跟你争，也不跟你犟。你短信里说的那些，我又看了一遍，我知道自己哪儿让你难受了。</p>
+        <p class="lead">这次我不跟你争，也不跟你犟。就是有些日子真的发生过，好的坏的都在里面。我不想最后只剩一句“咱们没成”。</p>
+        <div class="year-intro">
+          <p>这不是拿数字来证明我付出得多，也不是跟你算账。</p>
+          <p>这些数字对我来说，就是咱们每天从“到公司了吗”聊到“早点睡”，是电话那边有人应我，是我真真切切喜欢过你的证据。</p>
+        </div>
       </header>
 
       <div class="wrap">
         <section class="panel reveal">
-          <div class="chapter-no">01 / 你说的，我都认</div>
-          <h2 class="section-title">你说的问题，我不犟了。</h2>
-          <p>你说，见面以后觉得咱们不合适。这个我听到了，我不想硬说不是。</p>
-          <p>你说离得太远，叔叔阿姨想让你找个本地人，不想你嫁那么远。这个现实我知道，不是我嘴上说两句就能解决的。</p>
-          <p>你还说我太犟，老想争个谁对谁错，爱讲大道理。有时候让你下不来台，觉得自己被我放得很低。你跟我说过好几次不喜欢这样，我还只顾自己那点不安。这就是我没做好。</p>
-          <div class="pill-row">
-            <span class="pill">见面后的不合适</span><span class="pill">异地距离</span><span class="pill">父母意见</span><span class="pill">沟通方式</span><span class="pill">被消耗的感受</span>
+          <div class="chapter-no">01 / 全年总览</div>
+          <h2 class="section-title">先看看，这一年到底有多少个“我们”。</h2>
+          <div class="year-stats">
+            <div class="year-stat"><strong>127 天</strong><span>从第一次联系到最后一次记录</span></div>
+            <div class="year-stat"><strong>99 天</strong><span>真的有说过话的日子</span></div>
+            <div class="year-stat"><strong>31,603</strong><span>微信和抖音的消息、分享与事件记录</span></div>
+            <div class="year-stat"><strong>607 条</strong><span>两个平台的通话记录</span></div>
+            <div class="year-stat"><strong>462 次</strong><span>微信里真正接通的电话</span></div>
+            <div class="year-stat"><strong>23 天 16 小时</strong><span>微信电话累计连接时长</span></div>
+          </div>
+          <p>微信一共 29,006 条，抖音一共 2,597 条。把它们放在一起，差不多是 99 天里每天都在说话。</p>
+          <p>有联系的那些天，平均每天大约 319 条消息和事件。听上去像一串很夸张的数字，可我往下翻的时候，看见的不是数字，是你骂领导、我说先吃饭，是你困了还等我电话，是咱俩谁也不先挂。</p>
+          <p>记录里的最后一通电话是 10 月 28 日，14 分 03 秒。那天很不好受，可它也是这一年真实的一部分。</p>
+          <div class="pill-row"><span class="pill">6/24 第一句</span><span class="pill">7/22 真正聊起来</span><span class="pill">7/27 在一起</span><span class="pill">8/9 赛博生日</span><span class="pill">10/23 第一次见面</span><span class="pill">10/28 最后一次电话</span></div>
+        </section>
+      </div>
+
+      <div class="wrap">
+        <section class="panel reveal">
+          <div class="chapter-no">02 / 月度年报</div>
+          <h2 class="section-title">一个月一个月翻过去，都是日子。</h2>
+          <div class="month-list">
+            <div class="month-card" data-month="06">
+              <h3>6 月：故事只写了 24 条</h3>
+              <p class="month-lead">抖音 22 条，微信刚刚加上，只有 2 条系统消息。那一天，你在抖音把边界说得很清楚：“微信不聊天，纯扩列”。</p>
+              <div class="month-facts"><span>1 个联系日</span><span>合计 24 条</span><span>还没有电话</span></div>
+              <p>那时候谁能想到，后来会聊成这样。</p>
+            </div>
+            <div class="month-card" data-month="07">
+              <h3>7 月：从“大美女”到“我的小婷”</h3>
+              <p class="month-lead">7 月 22 日，咱们真正开始聊。我问你“怎么啦大美女”，你回我“在骂领导呀”。后来你说，叫你小婷就行。</p>
+              <div class="month-facts"><span>1,727 条</span><span>8 次接通</span><span>8 小时 35 分 58 秒</span></div>
+              <p>7 月 24 日，我说“因为是真的喜欢你呀”。7 月 27 日 00:00，记录里出现一句“我们在一起啦”。早上你叫我“老公呀”，我叫你“老婆”。那天第一通电话打了 2 小时 09 分 39 秒。</p>
+              <blockquote>关系发生得很快，快到我们都没来得及学会怎么好好相处。</blockquote>
+            </div>
+            <div class="month-card" data-month="08">
+              <h3>8 月：说得最多，也最像过日子</h3>
+              <p class="month-lead">这是咱们最密的一个月。微信 13,980 条，抖音 1,482 条，31 天每天都有联系。</p>
+              <div class="month-facts"><span>15,462 条</span><span>140 次接通</span><span>4 天 18 小时 34 分 49 秒</span><span>78 次分享</span></div>
+              <p>8 月 9 日是赛博生日，你点着蜡烛跟我说“祝圣杰老公生日快乐呀～”，还说咱们“世界正数第一般配”。8 月 10 日是记录里最热闹的一天，两个平台一共有 898 条消息和事件。</p>
+              <p>这个月我出现“宝宝”很多次，你回我“老公”很多次。我们真的把手机过成了两个人的小屋子。</p>
+            </div>
+            <div class="month-card" data-month="09">
+              <h3>9 月：电话最多，陪伴最长</h3>
+              <p class="month-lead">微信 8,273 条，抖音 705 条。这个月接通了 175 次，是全年电话次数和连接时长最多的一个月。</p>
+              <div class="month-facts"><span>8,978 条</span><span>175 次接通</span><span>9 天 20 小时 51 分 33 秒</span><span>135 次分享</span></div>
+              <p>9 月的电话加起来，比整整 9 天还多。也有难受的时候，9 月 19 日你说过“太多不合适、太多隔阂，感觉磨合不了”。那不是一句轻飘飘的话，我后来才真正听进去。</p>
+              <p>9 月 30 日，你又说“永远不离开你”“我要永远和你谈”。那时候的你是真的想和我走下去，我也是真的相信。</p>
+            </div>
+            <div class="month-card" data-month="10">
+              <h3>10 月：真的见面，也真的走散了</h3>
+              <p class="month-lead">微信 5,054 条，抖音 358 条。前面全是在准备见面，后面几天却成了我最不敢翻的部分。</p>
+              <div class="month-facts"><span>5,412 条</span><span>139 次接通</span><span>8 天 16 小时 14 分 03 秒</span><span>75 次分享</span></div>
+              <p>10 月 21 日，我还在问你喜欢什么、想怎么布置酒店，想让你过一个最好的生日。10 月 22 日，我们打了最长的一通电话，11 小时 40 分 08 秒。</p>
+              <p>10 月 23 日终于见到了你。25 日分开时，我说“我舍不得你呀”，你说“我们还会再见的呀”。27 日下午，你说“我们还是到此为止吧”。28 日又加回来，可关系已经不像从前了。</p>
+            </div>
           </div>
         </section>
       </div>
 
       <div class="wrap">
         <section class="panel reveal">
-          <div class="chapter-no">02 / 对不起</div>
-          <h2 class="section-title">本来是想让你开心，结果让你谈得这么累。</h2>
-          <div class="honest-list">
-            <div class="honest-item"><span>01</span><p><strong>我老想争个对错。</strong>有时候你就是想让我听两句，我却急着讲道理。最后你更难受了，我还光顾着证明自己没错。</p></div>
-            <div class="honest-item"><span>02</span><p><strong>你越不回，我越追。</strong>电话一个接一个，消息一条接一条。我总觉得这是在乎，其实就是我自己慌了，全压你身上了。</p></div>
-            <div class="honest-item"><span>03</span><p><strong>分开以后，我还提钱、提补偿。</strong>这个最不该。感情不是算账，你也不是收了我多少东西，就必须留下。</p></div>
-            <div class="honest-item"><span>04</span><p><strong>我拿你的过去刺痛过你。</strong>这个错得最厉害。你受过的伤，不该被我拿来比较，也不该拿来逼你给我答案。</p></div>
-            <div class="honest-item"><span>05</span><p><strong>你难受的时候，我还在解释自己。</strong>我那时候该说「我知道了，对不起」，而不是一直问你怎么又生气了。</p></div>
-            <div class="honest-item"><span>06</span><p><strong>我总说我会改、不会离开。</strong>可说多了，跟空话一样。我现在不敢再拿这句话跟你要原谅。</p></div>
+          <div class="chapter-no">03 / 年度之最</div>
+          <h2 class="section-title">这一年里，最夸张的有这么几件。</h2>
+          <div class="rank-list">
+            <div class="rank-item"><span>01</span><div><strong>最密的一天：8 月 10 日</strong><small>微信加抖音共 898 条消息和事件记录，全年第一。</small></div><b>898 条</b></div>
+            <div class="rank-item"><span>02</span><div><strong>单次最长电话：10 月 22 日</strong><small>你发起，从 08:11 一直连到晚上。</small></div><b>11:40:08</b></div>
+            <div class="rank-item"><span>03</span><div><strong>单日通话最久：9 月 14 日</strong><small>那天接了 9 次电话，累计连接 15 小时 48 分 34 秒。</small></div><b>9 次</b></div>
+            <div class="rank-item"><span>04</span><div><strong>消息最多的月份：8 月</strong><small>两个平台 15,462 条，整个月一天没断。</small></div><b>15,462 条</b></div>
+            <div class="rank-item"><span>05</span><div><strong>电话最多的月份：9 月</strong><small>接通 175 次，累计 9 天 20 小时 51 分 33 秒。</small></div><b>175 次</b></div>
+            <div class="rank-item"><span>06</span><div><strong>分享最多：9 月</strong><small>你给我发了 135 个抖音视频、猫和短剧。</small></div><b>135 次</b></div>
+            <div class="rank-item"><span>07</span><div><strong>最常开始打电话的时间</strong><small>早上 8 点有 55 次，晚上 8 点有 51 次。</small></div><b>08:00</b></div>
+            <div class="rank-item"><span>08</span><div><strong>回消息其实都很快</strong><small>你发完以后，我回你的中位时间约 14 秒；我发完以后，你回我的中位时间约 24 秒。</small></div><b>14 / 24 秒</b></div>
           </div>
-        </section>
-      </div>
-
-      <div class="wrap">
-        <section class="reveal">
-          <div class="chapter-no">03 / 小事我都记得</div>
-          <h2 class="section-title">你别觉得我只会说想你、爱你。</h2>
-          <div class="memory-grid">
-            <div class="memory"><time>6 月 24 日 · 抖音</time><h3>你跟我说，微信不聊天，纯扩列</h3><p>一开始你还把边界说得清清楚楚。后来从一句句闲话聊起来，我真没想到会这么喜欢你。</p></div>
-            <div class="memory"><time>7 月 22 日</time><h3>从大美女，到我的小婷</h3><p>那天第一句是我问你，怎么啦大美女。你回我，在骂领导呀。后来你让我叫你小婷，这个名字我一直记着。</p></div>
-            <div class="memory"><time>8 月 1 日</time><h3>看到好笑的，先发给你</h3><p>猫、综艺、短剧、离谱视频。你给我发，我也给你发。没什么正事，但那就是咱们每天的日子。</p></div>
-            <div class="memory"><time>10 月 23 日</time><h3>终于真的见到你</h3><p>我五点就出门，紧张到手都划破了。在大堂等你的时候，又紧张又高兴。隔着屏幕喜欢那么久的人，终于站我面前了。</p></div>
+          <h3 style="margin-top:26px">聊天里还留下了这些</h3>
+          <div class="table-wrap">
+            <table class="stats-table">
+              <thead><tr><th>留下什么</th><th>微信</th><th>抖音</th><th>合计</th></tr></thead>
+              <tbody>
+                <tr><td>图片</td><td>1,604 条</td><td>16 条</td><td>1,620 条</td></tr>
+                <tr><td>语音</td><td>336 条</td><td>48 条</td><td>384 条</td></tr>
+                <tr><td>视频</td><td>72 条</td><td>2 条</td><td>74 条</td></tr>
+                <tr><td>分享</td><td>—</td><td>292 次</td><td>292 次</td></tr>
+              </tbody>
+            </table>
           </div>
+          <p class="table-hint">这里按消息记录计数，同一次分享或同一条媒体可能对应多个资源文件。</p>
         </section>
       </div>
 
       <div class="wrap">
         <section class="panel reveal">
-          <div class="chapter-no">04 / 我们真的一起过</div>
-          <h2 class="section-title">咱们不是只有吵架，好的时候也是真的好。</h2>
+          <div class="chapter-no">04 / 年度高频词</div>
+          <h2 class="section-title">咱们说得最多的，其实都是很短的话。</h2>
+          <div class="word-cloud" aria-label="年度高频词">
+            <span class="xl"><b>呀</b><small>2,235</small></span>
+            <span class="lg"><b>宝宝</b><small>1,307</small></span>
+            <span class="lg"><b>老婆</b><small>895</small></span>
+            <span class="lg"><b>老公</b><small>840</small></span>
+            <span class="md"><b>爱你</b><small>412</small></span>
+            <span class="md"><b>想你</b><small>382</small></span>
+            <span class="md"><b>喜欢你</b><small>262</small></span>
+            <span class="md"><b>电话</b><small>226</small></span>
+            <span class="sm"><b>吃饭</b><small>89</small></span>
+            <span class="sm"><b>见面</b><small>67</small></span>
+            <span class="sm"><b>猫</b><small>66</small></span>
+            <span class="sm"><b>游戏</b><small>63</small></span>
+          </div>
+          <p>按“一条消息里出现一次就算一次”来算，“呀”出现在 2,235 条消息里，是我 1,072 条，你 1,163 条。你看，连说话的尾音，咱俩都一样多。</p>
+          <p>我叫了你 1,297 条“宝宝”、890 条“老婆”。你叫了我 722 条“老公”。你说过 165 条“想你”、131 条“爱你”、69 条“喜欢你”。这些我都不是凭印象写，是一条一条数出来的。</p>
+          <div class="table-wrap word-table">
+            <table class="stats-table">
+              <thead><tr><th>最常出现</th><th>合计</th><th>我发出</th><th>你发出</th></tr></thead>
+              <tbody>
+                <tr><td>呀</td><td>2,235</td><td>1,072</td><td>1,163</td></tr>
+                <tr><td>宝宝</td><td>1,307</td><td>1,297</td><td>10</td></tr>
+                <tr><td>老婆</td><td>895</td><td>890</td><td>5</td></tr>
+                <tr><td>老公</td><td>840</td><td>118</td><td>722</td></tr>
+                <tr><td>爱你</td><td>412</td><td>281</td><td>131</td></tr>
+                <tr><td>想你</td><td>382</td><td>217</td><td>165</td></tr>
+                <tr><td>喜欢你</td><td>262</td><td>193</td><td>69</td></tr>
+                <tr><td>电话</td><td>226</td><td>179</td><td>47</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="table-hint">统计范围是微信和抖音的文字消息，同一句里重复出现只按一条计。</p>
+        </section>
+      </div>
+
+      <div class="wrap">
+        <section class="panel reveal">
+          <div class="chapter-no">05 / 这一年发生的事</div>
+          <h2 class="section-title">从第一句到最后一句，我按时间都记下来了。</h2>
+          <div class="timeline">
+            <div class="timeline-item"><time>6 月 24 日</time><h3>第一句话</h3><p>“可以开始聊天了。”你说微信不聊天，纯扩列。那时候咱俩还只是列表里的陌生人。</p></div>
+            <div class="timeline-item"><time>7 月 22 日</time><h3>真正聊起来</h3><p>我问“怎么啦大美女”，你回“在骂领导呀”。后来你告诉我，叫你小婷就行。这个名字从那天一直叫到现在。</p></div>
+            <div class="timeline-item"><time>7 月 24 日</time><h3>我说，因为是真的喜欢你呀</h3><p>那不是一句准备好的套话。那时候我刚发现，自己已经每天盼着你的消息了。</p></div>
+            <div class="timeline-item"><time>7 月 27 日 00:00</time><h3>“我们在一起啦”</h3><p>早上你叫我“老公呀”，我叫你“老婆”。那晚第一通电话就打了 2 小时 09 分 39 秒。</p></div>
+            <div class="timeline-item"><time>8 月 9 日</time><h3>隔着屏幕一起过生日</h3><p>你说蜡烛也点上了，说“祝圣杰老公生日快乐呀～”“世界正数第一般配”。你说那是赛博一起过生日，我记得特别清楚。</p></div>
+            <div class="timeline-item"><time>8 月 10 日</time><h3>全年消息最密的一天</h3><p>两个平台共 898 条记录。你说“我超级喜欢你”，我也说“我爱你呀宝宝”。那天手机几乎就没放下过。</p></div>
+            <div class="timeline-item"><time>8 月 26 日</time><h3>你胃疼</h3><p>凌晨你说“老公我胃疼”，早上我让你去诊所。你一句“我喜欢你呀宝宝”，我就能记到现在。</p></div>
+            <div class="timeline-item"><time>9 月 19 日</time><h3>第一次很认真地说不合适</h3><p>你连着说了太多隔阂、太多不开心、感觉磨合不了。你不是突然变的，是很多情绪已经堆在那里了。那时候我没有真的接住。</p></div>
+            <div class="timeline-item"><time>9 月 30 日</time><h3>你一遍遍说不会离开</h3><p>你回了“永远不离开你”“我要永远和你谈”。我当时以为，只要听见这些，关系就稳了。后来才知道，保证说再多，也替代不了好好相处。</p></div>
+            <div class="timeline-item"><time>10 月 21—22 日</time><h3>为了见面准备的那些小事</h3><p>你挑酒店和衣服，我问你喜欢什么、提前给你布置；你说“我们明天就见面了”。那天最长的一通电话连了 11 小时 40 分 08 秒。</p></div>
+            <div class="timeline-item"><time>10 月 23 日</time><h3>我真的见到你了</h3><p>五点出门，七点五十到机场，在酒店大堂一直等。那天也是你生日。隔着屏幕喜欢了那么久的人，终于真的站在我面前。</p></div>
+            <div class="timeline-item"><time>10 月 25 日</time><h3>分开的时候，咱俩都不舍得</h3><p>我说“我舍不得你呀”，你说“我们还会再见的呀”“不离开呀”。那几句话我是真的信了。</p></div>
+            <div class="timeline-item"><time>10 月 27 日 15:45</time><h3>“我们还是到此为止吧”</h3><p>这句话我看了很多遍。见完面以后，你觉得不合适，也有异地、父母和相处感受的问题。再难受，我也不能装作没听见。</p></div>
+            <div class="timeline-item"><time>10 月 28 日</time><h3>加回来，不代表那些问题就没了</h3><p>你说不要给你发消息，也说过已经把我删了。后来还是通了几次电话，最后一条是 14 分 03 秒。关系没有因为一次加回，就自动回到从前。</p></div>
+          </div>
+        </section>
+      </div>
+
+      <div class="wrap">
+        <section class="panel reveal" id="calls">
+          <div class="chapter-no">06 / 电话年报</div>
+          <h2 class="section-title">咱们到底打了多久电话，这回我给你列清楚。</h2>
+          <p>微信共有 574 条通话记录，其中 462 次接通。累计连接时长是 23 天 16 小时 16 分 23 秒，平均一次 1 小时 13 分 48 秒。</p>
+          <p>抖音那边还有 33 条通话事件，其中 31 条明确写着“通话成功”。抖音导出的文件没有给时长，所以这 31 次只能算发生过的电话，不能硬加进 23 天里。</p>
+          <div class="call-split">
+            <div class="call-card"><strong>我发起</strong><b>240 次</b><span>累计 10 天 4 小时 33 分 45 秒</span></div>
+            <div class="call-card"><strong>你发起</strong><b>222 次</b><span>累计 13 天 11 小时 42 分 38 秒</span></div>
+          </div>
+          <p>你看，不是我一个人在打。你主动打了 222 次，连起来的时长比我还长。那些电话不是我拿来感动自己的，是你也真的在里面。</p>
+          <div class="table-wrap">
+            <table class="stats-table">
+              <thead><tr><th>名次</th><th>日期</th><th>谁发起</th><th>连接时长</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>10 月 22 日 08:11</td><td>你</td><td><strong>11:40:08</strong></td></tr>
+                <tr><td>2</td><td>10 月 2 日 10:02</td><td>你</td><td>11:28:09</td></tr>
+                <tr><td>3</td><td>9 月 22 日 08:11</td><td>我</td><td>10:28:24</td></tr>
+                <tr><td>4</td><td>10 月 9 日 08:11</td><td>你</td><td>10:22:12</td></tr>
+                <tr><td>5</td><td>9 月 9 日 07:13</td><td>你</td><td>10:21:20</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="table-hint">462 次接通的电话里，10 分钟以内 112 次，10 分钟至 1 小时 226 次，1 至 2 小时 65 次，2 至 6 小时 32 次，超过 6 小时 27 次。超长记录可能包含忘挂或挂着睡，所以我把它写成“连接时长”，不写成咱俩一直说了这么久。</p>
+        </section>
+      </div>
+
+      <div class="wrap">
+        <section class="panel reveal">
+          <div class="chapter-no">07 / 一起做过的事</div>
+          <h2 class="section-title">不是只有甜话，咱们真的在一起过很多普通日子。</h2>
           <div class="story-list">
-            <div class="story-item"><time>每天</time><div><h3>从「到公司了吗」聊到「早点睡」</h3><p>你骂领导、讲工作，我让你先吃饭。你头疼，我催你吹头发。都是特别普通的话，后来却成了我每天最习惯的事。</p></div></div>
-            <div class="story-item"><time>吃饭时</time><div><h3>奶茶、肯德基，还有你嘴硬地让我别乱花钱</h3><p>你肚子疼的时候，说贴暖宝宝就行，不让我天天点饮品。我还总想一股脑给你点。现在我知道了，先问你要不要，比我自作主张强。</p></div></div>
-            <div class="story-item"><time>打游戏时</time><div><h3>「你辅助打得太好了」不是哄你</h3><p>我是真觉得你厉害。那段时间我最盼的就是晚上开一局，能一直跟你说话，能听见你回我。</p></div></div>
-            <div class="story-item"><time>刷抖音时</time><div><h3>292 次分享，猫和短剧占了一大半</h3><p>很多就是几秒钟的视频。可我看到好笑的，第一反应还是「给她看看」。你发给我，我也会认真看。</p></div></div>
-            <div class="story-item"><time>打电话时</time><div><h3>下班打，快睡了还打</h3><p>最长一次挂了 11 小时 40 分。后来有时候都不说话了，我也还想让电话挂着，因为知道你在那边。</p></div></div>
-            <div class="story-item"><time>8 月 9 日</time><div><h3>隔着屏幕过的生日</h3><p>你说「祝圣杰老公生日快乐呀～」，还说蜡烛也点上了。那时候我是真的很开心。不是礼物多重要，是你记得我。</p></div></div>
-            <div class="story-item"><time>10 月 23 日</time><div><h3>见面那天，我真的紧张坏了</h3><p>在机场、在大堂，我都一直在等你。后来看到你，我才真觉得，咱们不是在手机里谈恋爱。</p></div></div>
+            <div class="story-item"><time>每天</time><div><h3>从“到公司了吗”聊到“早点睡”</h3><p>你骂领导、讲工作，我让你先吃饭。你头疼，我催你吹头发。后来这些普通得不能再普通的话，成了我每天最习惯的事。</p></div></div>
+            <div class="story-item"><time>吃饭时</time><div><h3>奶茶、肯德基、外卖和暖宝宝</h3><p>你肚子疼的时候，说贴暖宝宝就行，不让我天天点饮品。我总想一股脑给你点。现在我知道了，先问你要不要，比我自作主张强。</p></div></div>
+            <div class="story-item"><time>聊天里</time><div><h3>“宝宝”和“老公”</h3><p>我叫了你 1,297 次“宝宝”，你叫了我 722 次“老公”。这些称呼看多了好像不稀奇，可真停下来以后，最想念的就是有人这样叫。</p></div></div>
+            <div class="story-item"><time>打游戏时</time><div><h3>“你辅助打得太好了”不是哄你</h3><p>我是真觉得你厉害。那段时间我最盼的就是晚上开一局，能一直跟你说话，能听见你回我。</p></div></div>
+            <div class="story-item"><time>刷抖音时</time><div><h3>292 次分享，猫和短剧占了一大半</h3><p>很多就是几秒钟的视频。可我看到好笑的，第一反应还是“给她看看”。你发给我，我也会认真看，哪怕当时没回，后来也会翻。</p></div></div>
+            <div class="story-item"><time>生病时</time><div><h3>胃疼、头痛、让你买药</h3><p>8 月 26 日你说胃疼，我让你去诊所；10 月 26 日你头痛，我问要不要买药。关心不该只停在嘴上，这也是我后来才明白的。</p></div></div>
+            <div class="story-item"><time>8 月 9 日</time><div><h3>赛博生日</h3><p>你点了蜡烛，祝我生日快乐，还说咱们是第一般配。不是礼物多贵，是你明明不在我身边，还愿意让我觉得那天有人惦记。</p></div></div>
+            <div class="story-item"><time>10 月 21 日</time><div><h3>想给你布置酒店、过最好的生日</h3><p>我问你喜欢什么，问要不要提前布置，问裙子什么时候到。那时候我满脑子都是，见到你以后要让你开心。</p></div></div>
+            <div class="story-item"><time>10 月 23 日</time><div><h3>第一次真的见面</h3><p>在机场、在大堂，我一直等你。紧张到手划破了，见到你以后才知道，原来手机里的人真的会有温度。</p></div></div>
+            <div class="story-item"><time>10 月 24—25 日</time><div><h3>相处、拍照、说再见</h3><p>记录里那两天消息很少，因为人在身边。分开时我开始慌，反复问你会不会离开。那是我最舍不得的时候，也是我把情绪压到你身上的时候。</p></div></div>
+            <div class="story-item"><time>那些以后</time><div><h3>来北京、住新房、养猫、去迪士尼</h3><p>我们不是只聊今天吃什么。你聊过机票高铁，我认真看过新房，咱们说过一起住、一起养猫、去上海或日本迪士尼。</p></div></div>
           </div>
           <p class="stats-note">都不是什么惊天动地的大事。可我现在最舍不得的，偏偏就是这些小事。</p>
         </section>
       </div>
 
       <div class="wrap">
-        <section class="reveal">
-          <div class="chapter-no">05 / 以后那些事</div>
-          <h2 class="section-title">那些以后，我是真想过。</h2>
-          <p>咱们聊过机票、高铁，聊过你来北京以后租哪儿、吃什么。我还认真看过新房，想着咱们一起住、一起养猫。那些事不是我顺口哄你，我是真的想过。</p>
-          <p>我舍不得的，不只是那几句甜话。是咱们认认真真想过的以后，最后没能过成日子。</p>
-          <div class="pill-row">
-            <span class="pill">结束异地</span><span class="pill">你来北京</span><span class="pill">以后每天都能见到</span><span class="pill">一起住新房</span><span class="pill">养一只猫</span><span class="pill">去上海或日本迪士尼</span>
-          </div>
-        </section>
-      </div>
-
-      <div class="wrap">
         <section class="panel reveal">
-          <div class="chapter-no">06 / 甜也是真的</div>
+          <div class="chapter-no">08 / 年度甜话</div>
           <h2 class="section-title">你跟我说过的话，我到现在都记得。</h2>
           <div class="duo-grid">
+            <div class="bubble-card"><time>7 月 24 日 · 微信</time><div class="bubble me">因为是真的喜欢你呀</div></div>
             <div class="bubble-card"><time>7 月 27 日 · 微信</time><div class="bubble them">老公呀</div><div class="bubble me">晚安啦老婆</div></div>
             <div class="bubble-card"><time>8 月 6 日 · 微信</time><div class="bubble them">我超级喜欢圣杰老公呀</div></div>
             <div class="bubble-card"><time>8 月 9 日 · 微信</time><div class="bubble them">我把蜡烛也点上了</div><div class="bubble them">祝圣杰老公生日快乐呀～</div><div class="bubble them">世界正数第一般配</div></div>
-            <div class="bubble-card"><time>8 月 26 日 · 微信</time><div class="bubble them">在等你给我打电话呀</div></div>
-            <div class="bubble-card"><time>9 月 1 日 · 微信</time><div class="bubble them">老公呀我好想你呀</div></div>
+            <div class="bubble-card"><time>8 月 10 日 · 微信</time><div class="bubble them">我超级喜欢你</div><div class="bubble me">我也爱你呀</div></div>
+            <div class="bubble-card"><time>8 月 26 日 · 微信</time><div class="bubble them">我喜欢你呀宝宝</div><div class="bubble me">那我太爱你了呀老婆</div></div>
+            <div class="bubble-card"><time>9 月 19 日 · 微信</time><div class="bubble me">现在你有老公了</div><div class="bubble them">有老公真好呀</div></div>
+            <div class="bubble-card"><time>9 月 25 日 · 微信</time><div class="bubble them">不分开呀老公</div><div class="bubble me">我也很想你呀老婆</div></div>
             <div class="bubble-card"><time>9 月 25 日 · 微信</time><div class="bubble them">我将用最直白，最直接，最不绕弯子，最客观，最正确，最系统，最真实，最简洁，最容易理解，最不卖关子的方式告诉你，我想你了。</div></div>
-            <div class="bubble-card"><time>10 月 21 日 · 微信</time><div class="bubble them">老公呀我只想和你过</div></div>
-            <div class="bubble-card"><time>10 月 25 日 · 微信</time><div class="bubble them">这是很正常的戒断反应，没有关系的，老公</div></div>
+            <div class="bubble-card"><time>9 月 30 日 · 微信</time><div class="bubble me">我超级超级爱你</div><div class="bubble them">我要永远和你谈</div></div>
+            <div class="bubble-card"><time>10 月 21 日 · 微信</time><div class="bubble me">你是蟑螂我都爱你</div><div class="bubble them">老公呀我只想和你过</div></div>
+            <div class="bubble-card"><time>10 月 25 日 · 微信</time><div class="bubble me">我舍不得你呀</div><div class="bubble them">我们还会再见的呀</div><div class="bubble them">不离开呀</div></div>
           </div>
           <div class="memory-summary">
             <p>这些原话我都留着，没有拿来跟你算感情。</p>
-            <span>我就是想告诉你，你那时候喜欢我，不是假的，我一直都记得。</span>
+            <span>按“宝宝、老婆、老公、我爱你、想你”五个词统计，一共有 3,412 条消息命中：我 2,543 条，你 869 条。</span>
           </div>
         </section>
       </div>
 
       <div class="wrap">
-        <section class="panel reveal">
-          <div class="chapter-no">07 / 我们打过多少电话</div>
-          <h2 class="section-title">咱们一起说过多久，我想好好记住。</h2>
-          <p>我知道你可能会觉得，这有啥好数的。可我就是怕自己把这些日子说轻了，才认真数了一遍。</p>
-          <div class="table-wrap">
-            <table class="stats-table">
-              <thead>
-                <tr>
-                  <th>渠道</th>
-                  <th>消息</th>
-                  <th>电话</th>
-                  <th>接通和总长</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>微信</strong></td>
-                  <td>29,006 条</td>
-                  <td>574 条记录</td>
-                  <td>接通 462 次<br><strong>23 天 16 小时<br>16 分 23 秒</strong></td>
-                </tr>
-                <tr>
-                  <td><strong>抖音</strong></td>
-                  <td>2,597 条</td>
-                  <td>33 条事件</td>
-                  <td>31 条写了“通话成功”<br>没记录到时长</td>
-                </tr>
-                <tr>
-                  <td><strong>合计</strong></td>
-                  <td>31,603 条</td>
-                  <td>607 条记录</td>
-                  <td>有明确时长的是微信</td>
-                </tr>
-              </tbody>
-            </table>
+        <section class="reveal">
+          <div class="chapter-no">09 / 我们想过的以后</div>
+          <h2 class="section-title">那些以后，我是真想过。</h2>
+          <p>咱们聊过机票、高铁，聊过你来北京以后租哪儿、吃什么。我还认真看过新房，想着咱们一起住、一起养猫。你生日那次，本来还计划 24 号玩一天、25 号去看新房。</p>
+          <p>我舍不得的，不只是那几句甜话。是咱们认认真真想过的以后，最后没能过成日子。</p>
+          <div class="pill-row">
+            <span class="pill">结束异地</span><span class="pill">你来北京</span><span class="pill">以后每天都能见到</span><span class="pill">一起住新房</span><span class="pill">养一只猫</span><span class="pill">去上海或日本迪士尼</span><span class="pill">一起过生日</span><span class="pill">不再隔着屏幕说晚安</span>
           </div>
-          <p class="table-hint">抖音里还有 292 次分享，92 天有联系。微信最长一次通话是 11 小时 40 分 08 秒。超长通话里可能是有人忘挂或者挂着睡，这些数字我都按记录写。</p>
-          <div class="table-wrap">
-            <table class="stats-table">
-              <thead>
-                <tr>
-                  <th>宝宝、老婆、老公、我爱你、想你</th>
-                  <th>条数</th>
-                  <th>怎么算的</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td><strong>我发出</strong></td><td>2,543 条</td><td rowspan="2">两个平台的文字消息里，明确带着这 5 个词</td></tr>
-                <tr><td><strong>你发出</strong></td><td>869 条</td></tr>
-                <tr><td><strong>合计</strong></td><td><strong>3,412 条</strong></td><td>还没算语音、图片和其他甜话</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="table-hint">第一张表里抖音的 33 条事件，有 1 条是点亮徽章的系统消息，另有 1 条没有显示通话结果，所以只有 31 条明确写着“通话成功”。我不想把数字说大。</p>
-          <p class="stats-note">这些真不是拿来跟你算账，也不是说我陪了你多久，你就应该怎么样。我就是想承认，这段时间不是假的，你那时候喜欢我，也不是假的。</p>
-        </section>
-      </div>
-
-      <div class="wrap">
-        <section class="panel reveal">
-          <div class="chapter-no">08 / 我想明白了</div>
-          <h2 class="section-title">喜欢一个人，不能老让她证明自己不会走。</h2>
           <blockquote>以前我总想问你会不会一直在。后来发现，我越问，你越累。能不能在一起，不是靠我一遍遍问你要保证，是在一起的时候能不能好好说话，能不能喘口气。</blockquote>
-          <p>我不能用一句我会改，把前面的问题全抹了。可如果还有以后，要改的是我一不安就追、一难受就逼你的毛病。</p>
-          <p>我得先停一下，先听你说，先尊重你的节奏，再说我自己。你说不合适，我也不能再只想着自己不愿意。</p>
         </section>
       </div>
 
       <div class="wrap">
         <section class="panel reveal">
-          <div class="chapter-no">09 / 如果能再靠近</div>
+          <div class="chapter-no">10 / 这一年我做错的事</div>
+          <h2 class="section-title">年度报告不能只写好的，我也得写我做得有多差。</h2>
+          <div class="honest-list">
+            <div class="honest-item"><span>01</span><p><strong>我老想争个对错。</strong>有时候你就是想让我听两句，我却急着讲道理。最后你更难受了，我还光顾着证明自己没错。</p></div>
+            <div class="honest-item"><span>02</span><p><strong>你越不回，我越追。</strong>电话一个接一个，消息一条接一条。我总觉得这是在乎，其实就是我自己慌了，全压你身上了。</p></div>
+            <div class="honest-item"><span>03</span><p><strong>我拿你的过去刺痛过你。</strong>这个错得很厉害。你受过的伤，不该被我拿来比较，也不该拿来逼你给我答案。</p></div>
+            <div class="honest-item"><span>04</span><p><strong>分开以后，我还提钱、提补偿。</strong>这个最不该。感情不是算账，你也不是收了我多少东西，就必须留下。</p></div>
+            <div class="honest-item"><span>05</span><p><strong>你难受的时候，我还在解释自己。</strong>我那时候该说“我知道了，对不起”，而不是一直问你怎么又生气了。</p></div>
+            <div class="honest-item"><span>06</span><p><strong>我总说我会改、不会离开。</strong>可说多了，跟空话一样。我现在不敢再拿这句话跟你要原谅。</p></div>
+          </div>
+          <blockquote>如果要选一段重写，我想改的不是见面那天，也不是你给我过生日那天。我想改的是你不想回消息的时候，我还一遍遍追问的那些晚上。</blockquote>
+          <p>你说见面以后觉得不合适，说异地、父母意见，说我让你没面子、总觉得被我放低。这些我都听到了，不该再犟着说不是。</p>
+        </section>
+      </div>
+
+      <div class="wrap">
+        <section class="panel reveal">
+          <div class="chapter-no">11 / 如果明年还有一份报告</div>
           <h2 class="section-title">这次不是嘴上说「我会改」。</h2>
           <div class="changes">
             <div class="change"><strong>你不想说话，我就先停。</strong><span>我自己难受就自己缓一会，不再电话一个接一个。</span></div>
@@ -526,29 +774,31 @@
             <div class="change"><strong>不再拿你的过去刺痛你。</strong><span>不提前任，不比较，不把你的家庭和受过的伤当成我争赢的理由。</span></div>
             <div class="change"><strong>不再用「永远」堵你。</strong><span>我现在不跟你要承诺，先把每次说话好好说完。</span></div>
           </div>
+          <p class="year-ending-note">这一年教会我的，不是“多做多少就能留住谁”。是喜欢一个人，也不能让她一直证明自己不会走。</p>
         </section>
       </div>
 
       <div class="wrap">
         <section class="respect reveal">
-          <div class="eyebrow" style="color:#f3cbd3">10 / 最后</div>
-          <h2>我不想要你因为愧疚回来。</h2>
-          <p>你要是愿意，咱们找个不吵架的时候说几句话。你要是还需要时间，我就安静地给你时间。你要是已经决定不继续，我也会学着接受，不再拿联系、钱或者承诺去烦你。</p>
+          <div class="eyebrow" style="color:#f3cbd3">12 / 写在年报最后</div>
+          <h2>好的坏的都写完了，接下来该听你的。</h2>
+          <p>这份报告不是为了证明咱们打了多少电话、说了多少句想你。它只是告诉我，127 天不是空的，你给过我的开心也不是假的。</p>
+          <p>你要是愿意，等哪天不累了，咱们就找个不吵架的时候说几句话。你要是还需要时间，我就安静地给你时间。你要是已经决定不继续，我也会学着接受，不再拿联系、钱或者承诺去烦你。</p>
           <p>你不用为了照顾我的情绪马上回。比起一句敷衍的「没事」，我更希望你是真的舒服、真的愿意。</p>
-          <p>这一页不回也行。哪天你想说了，我先听；要是不想说，我也知道了。</p>
+          <p>这一页不回也行。小婷，这一年谢谢你，也对不起。</p>
         </section>
       </div>
 
       <footer class="ending wrap reveal" id="ending">
-        <p>小婷，我还是会想起你。</p>
-        <h2>但这次，我不会再拿想念去烦你了。</h2>
+        <p>《2026 关于我们的年度报告》</p>
+        <h2>到这里，全部写完了。</h2>
         <div class="signature">圣杰</div>
         <p class="privacy">链接没有密码，拿到的人都能打开。页面不让搜索引擎收录，但请别转发。</p>
       </footer>
     </article>
 
     <nav class="nav" id="quickNav" aria-label="快速导航">
-      <a href="#cover">开头</a><a href="#letter">听我说</a><a href="#ending">最后</a>
+      <a href="#cover">封面</a><a href="#letter">总览</a><a href="#calls">电话</a><a href="#ending">最后</a>
     </nav>
   </main>
 
