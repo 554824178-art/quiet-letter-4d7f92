@@ -181,6 +181,15 @@
     .memory time { color: var(--rose); font-size: 12px; font-weight: 750; letter-spacing: .08em; }
     .memory h3 { font-size: 19px; margin: 10px 0 9px; }
     .memory p { margin: 0; color: var(--muted); font-size: 15px; }
+    .memory-summary {
+      margin-top: 16px;
+      padding: 20px 22px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: rgba(255, 250, 247, .72);
+    }
+    .memory-summary p { margin: 0 0 8px; color: var(--rose-deep); font-size: 15px; }
+    .memory-summary span { color: var(--muted); font-size: 14px; }
     blockquote {
       margin: 28px 0;
       padding: 22px 24px;
@@ -291,7 +300,7 @@
       <div class="envelope">
         <div class="eyebrow">A LETTER FOR YOU</div>
         <h1>有一封信<br>想交给你</h1>
-        <p class="subtitle">不催你做决定，也不想让我的情绪再成为你的负担。只是想把这些天真正想明白的话，认真说完。</p>
+        <p class="subtitle">你说过的原因我都听见了。这一次，不解释、不辩解，也不催你立刻给我答案。</p>
         <button class="open-btn" id="openLetter">打开这封信</button>
         <p class="tiny">建议戴上耳机之外的安静，只需要几分钟。</p>
       </div>
@@ -301,56 +310,74 @@
       <header class="letter-head wrap reveal">
         <div class="eyebrow">写给 小婷</div>
         <h2>见字如面。</h2>
-        <p class="lead">我重新看了一遍我们走过的这些天，才慢慢明白：有些问题不是你不够爱我，而是我没有在爱里给你足够的安全和轻松。</p>
+        <p class="lead">我重新看了我们留在微信、短信和抖音里的那些话。记录下来的不只有快乐，也有我让你累、让你委屈、让你一次次失望的地方。</p>
       </header>
 
       <div class="wrap">
         <section class="panel reveal">
-          <div class="chapter-no">01 / 先道歉</div>
-          <h2 class="section-title">对不起，我把自己的不安交给你处理。</h2>
-          <p>以前我总以为，只要不停确认“你还在”“你不会走”，我就会安心一点。可那些反复追问、电话和信息，最后变成的不是爱，而是让你必须随时回应我的压力。</p>
-          <p>我也承认，在你累、想安静、需要自己的空间时，我没有先照顾好你，只顾着证明自己没有被忽略。我把“我需要你”说成了爱，却忽略了你也需要被理解、被尊重。</p>
+          <div class="chapter-no">01 / 我听见了</div>
+          <h2 class="section-title">你不是突然离开，是很多次没有被好好听见。</h2>
+          <p>短信里，你已经把理由说得很清楚：见面之后发现我们不合适；异地太远；父母不愿意你远嫁，希望你在本地生活。这些不是我能用一句“我会改”轻轻带过的事。</p>
+          <p>你说我态度强硬，总想争出谁对谁错，爱讲大道理，有时还让你觉得没有面子、被放在很低的位置。我认。你明明说过不喜欢那样，我却还是把自己的不安和胜负心放在你的感受前面。</p>
+          <div class="pill-row">
+            <span class="pill">见面后的不合适</span><span class="pill">异地距离</span><span class="pill">父母意见</span><span class="pill">沟通方式</span><span class="pill">被消耗的感受</span>
+          </div>
+        </section>
+      </div>
+
+      <div class="wrap">
+        <section class="panel reveal">
+          <div class="chapter-no">02 / 先道歉</div>
+          <h2 class="section-title">对不起，我把自己的不安变成了你的负担。</h2>
           <div class="honest-list">
-            <div class="honest-item"><span>01</span><p><strong>我把想念变成了追问。</strong>你不回时，我没有先想到你可能在忙、在累，而是急着要一个能让我安心的答案。</p></div>
-            <div class="honest-item"><span>02</span><p><strong>我把边界谈成了服从。</strong>关于朋友、游戏和异性交往，我更多是在要求你，而不是和你商量怎样都舒服。</p></div>
-            <div class="honest-item"><span>03</span><p><strong>我把付出当成了证明。</strong>转账、外卖和礼物可以表达在意，却不能替代倾听、信任，也不能拿来要求你回应。</p></div>
-            <div class="honest-item"><span>04</span><p><strong>在我最该停下来的时候，我还在解释。</strong>你已经有情绪了，我却急着讲自己的道理，没有先问一句：你现在希望我怎样陪着你？</p></div>
+            <div class="honest-item"><span>01</span><p><strong>我把每一次分歧都变成了输赢。</strong>我急着证明自己是对的，却忘了感情里更重要的是听懂你，而不是把你辩到无话可说。</p></div>
+            <div class="honest-item"><span>02</span><p><strong>我把担心变成了要求。</strong>你不回消息、需要空间时，我用连续的信息和电话逼你回应，把自己的不安交给了你处理。</p></div>
+            <div class="honest-item"><span>03</span><p><strong>我把付出说成了筹码。</strong>分开时我提到自己给过什么，还说到补偿。那些话很不体面，也否定了感情本来应该是自愿的。</p></div>
+            <div class="honest-item"><span>04</span><p><strong>我不该提起你的过去。</strong>拿你和前任的经历作比较，只会让你再次受伤，也很不公平。</p></div>
+            <div class="honest-item"><span>05</span><p><strong>在我最该停下来的时候，我还在解释。</strong>你已经有情绪了，我却急着讲自己的道理，没有先问一句：你希望我现在怎么听你？</p></div>
+            <div class="honest-item"><span>06</span><p><strong>我把边界谈成了服从。</strong>朋友、游戏、公开关系和个人空间，本该一起商量，而不是由我单方面定规则。</p></div>
           </div>
         </section>
       </div>
 
       <div class="wrap">
         <section class="reveal">
-          <div class="chapter-no">02 / 我记得</div>
+          <div class="chapter-no">03 / 我记得</div>
           <h2 class="section-title">我记得的不只是爱，还有你给过我的耐心。</h2>
           <div class="memory-grid">
+            <div class="memory"><time>6 月 24 日</time><h3>“可以开始聊天了”</h3><p>抖音里第一句普通的招呼，后来变成了一整段真实发生过的生活。</p></div>
             <div class="memory"><time>7 月 22 日</time><h3>从一句“小婷”开始</h3><p>你让我叫你小婷。那时候我总觉得来日很长，没想到后来每一句普通的话，都成了我反复想起的细节。</p></div>
-            <div class="memory"><time>7 月 27 日</time><h3>我们都很勇敢</h3><p>从互相试探到认真靠近，快乐是真的，我对你的喜欢也是真的。</p></div>
-            <div class="memory"><time>8 月 9 日</time><h3>那句生日快乐</h3><p>隔着屏幕的生日不热闹，但你的祝福让我觉得，那天有人认真地记得我。</p></div>
+            <div class="memory"><time>8 月 1 日</time><h3>一起点亮聊天火花</h3><p>你给我分享猫咪、综艺、短剧和好笑的视频。那些零碎日常，是我认真喜欢过你的证据。</p></div>
             <div class="memory"><time>10 月 23 日</time><h3>终于真正见到你</h3><p>所有隔着屏幕的紧张，在真正见到你的时候才有了落点。那些画面我到现在都记得。</p></div>
+          </div>
+          <div class="memory-summary">
+            <p><strong>2,597</strong> 条抖音私信 · <strong>292</strong> 次视频分享 · <strong>33</strong> 次通话 · <strong>92</strong> 天有联系</p>
+            <span>我把这些写下来，不是拿数量证明感情，也不是把过去变成筹码。只是提醒自己：我们确实认真陪过彼此，我更应该认真对待这段关系留下的问题。</span>
           </div>
         </section>
       </div>
 
       <div class="wrap">
         <section class="panel reveal">
-          <div class="chapter-no">03 / 我想明白的</div>
+          <div class="chapter-no">04 / 我想明白的</div>
           <h2 class="section-title">喜欢一个人，不该让她一直证明自己不会离开。</h2>
           <blockquote>以前我总想知道“你会不会一直在”。后来才发现，真正让人愿意留下来的，不是被反复问住，而是在一起时能呼吸、能安心，也能做自己。</blockquote>
           <p>我不能用一句“我会改”把所有问题抹掉。可我知道，如果还有以后，我想改的不是说话好听一点，而是我面对不安时的反应：先停一下，先听你，先尊重你的节奏，再表达我自己。</p>
+          <p>你在抖音问过我：“你是不是真的认定我了呀？”现在我才明白，认定不是反复要你给一个答案，而是在你告诉我“不合适”之后，仍然尊重你的感受和选择。</p>
         </section>
       </div>
 
       <div class="wrap">
         <section class="panel reveal">
-          <div class="chapter-no">04 / 如果能再靠近</div>
+          <div class="chapter-no">05 / 如果能再靠近</div>
           <h2 class="section-title">我不会再只把“我爱你”挂在嘴边。</h2>
           <div class="changes">
             <div class="change"><strong>你暂时不回，我不再连环追问。</strong><span>我会先照顾好自己的情绪，而不是把安抚自己的责任交给你。</span></div>
             <div class="change"><strong>你说累了，我会先停。</strong><span>不把沉默理解成不爱，不把空间当成关系变坏的证据。</span></div>
             <div class="change"><strong>有不安，我说感受，不查岗。</strong><span>说“我有点难过”，而不是逼你交代、证明、哄好我。</span></div>
             <div class="change"><strong>边界一起谈，不再单方面要求。</strong><span>你的朋友、生活和个人空间，不会因为恋爱就被拿走。</span></div>
-            <div class="change"><strong>不再用转账、外卖和礼物修补冲突。</strong><span>关心仍然会有，但不会把付出变成你欠我的理由。</span></div>
+            <div class="change"><strong>不再用转账、外卖和礼物修补冲突。</strong><span>也不会再说“我给了你多少”。感情不是账单，付出不是索要回应的凭证。</span></div>
+            <div class="change"><strong>不再把过去的伤痛拿出来比较。</strong><span>不提前任，不拿经历刺激你，更不把责任推给你的家庭和过去。</span></div>
             <div class="change"><strong>不用“永远”堵住你。</strong><span>我不要求你现在给承诺，只把每一次沟通认真处理好。</span></div>
           </div>
         </section>
@@ -358,9 +385,9 @@
 
       <div class="wrap">
         <section class="respect reveal">
-          <div class="eyebrow" style="color:#f3cbd3">05 / 最后</div>
+          <div class="eyebrow" style="color:#f3cbd3">06 / 最后</div>
           <h2>我不想要你因为愧疚回来。</h2>
-          <p>如果你愿意，我们可以从一次不设结论的聊天开始；如果你还需要时间，我就安静地给你时间；如果你已经决定不再继续，我也会学着尊重，不再用联系打扰你的生活。</p>
+          <p>如果你愿意，我们可以从一次不设结论的聊天开始；如果你还需要时间，我就安静地给你时间；如果你已经决定不再继续，我也会学着尊重，不再用联系、钱或承诺打扰你的生活。</p>
           <p>你不需要为了照顾我的情绪马上回复。比起一句敷衍的“没事”，我更希望你是真的舒服、真的愿意。</p>
           <div class="choices" role="group" aria-label="如果你愿意，可以记下你的答案">
             <button class="choice" data-reply="好，等你准备好，我们认真聊聊。">我想再聊聊<small>不预设结果</small></button>
