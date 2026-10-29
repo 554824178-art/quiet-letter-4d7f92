@@ -459,20 +459,51 @@
     .nav a { white-space: nowrap; }
     .nav a:hover { color: #fff; background: rgba(255,255,255,.12); }
     @media (max-width: 620px) {
+      body { line-height: 1.8; }
       .wrap { width: calc(100% - 24px); }
       .envelope { border-radius: 24px; padding: 28px 22px 30px; }
+      section { padding: 18px 0; }
+      .letter { padding-top: 8px; }
+      .panel { border-radius: 21px; padding: 20px 17px; }
+      .chapter-no {
+        display: inline-flex;
+        padding: 4px 8px;
+        border-radius: 999px;
+        background: rgba(238, 212, 217, .35);
+        letter-spacing: .12em;
+        margin-bottom: 10px;
+      }
+      .section-title { margin-bottom: 15px; }
       .memory-grid { grid-template-columns: 1fr; }
       .memory { min-height: 0; }
       .duo-grid { grid-template-columns: 1fr; }
       .year-stats { grid-template-columns: 1fr 1fr; gap: 8px; }
-      .year-stat { min-height: 116px; padding: 14px; }
+      .year-stat { min-height: 112px; padding: 14px 13px; border-radius: 17px; }
       .year-stat strong { font-size: 24px; }
+      .year-stat span { font-size: 12px; }
+      .month-card { padding: 18px 17px; border-radius: 19px; }
+      .month-card h3 { font-size: 20px; }
+      .month-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+      .month-facts span { justify-content: center; text-align: center; padding: 7px 6px; }
       .call-split { grid-template-columns: 1fr; }
-      .rank-item { grid-template-columns: 30px 1fr; }
-      .rank-item > b { grid-column: 2; }
+      .rank-item { grid-template-columns: 30px minmax(0, 1fr) auto; align-items: start; padding: 13px 12px; }
+      .rank-item > b { grid-column: auto; align-self: start; padding-top: 1px; font-size: 12px; }
+      .story-item { grid-template-columns: 1fr; gap: 6px; padding: 15px 0; }
+      .story-item time {
+        justify-self: start;
+        padding: 3px 8px;
+        border-radius: 999px;
+        background: rgba(238, 212, 217, .34);
+        font-size: 12px;
+      }
+      .timeline { padding-left: 20px; }
+      .timeline-item { padding-left: 14px; }
+      .timeline-item:before { left: -19px; }
       .stats-table { font-size: 12px; }
       .stats-table th, .stats-table td { padding: 9px 6px; }
+      .stats-table th { font-size: 11px; }
       blockquote { font-size: 18px; padding: 18px; }
+      .ending { padding-bottom: 124px; }
       .nav { bottom: 10px; }
     }
     @media (prefers-reduced-motion: reduce) {
