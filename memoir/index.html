@@ -299,6 +299,10 @@
     .photo-wide img { height: auto; max-height: 430px; object-fit: cover; }
     .chapter-page .photo-grid { width: min(100%, 560px); margin: 24px auto 4px; }
     .chapter-page .photo-card img { height: 150px; }
+    .page-card:not(.photo-album) .photo-grid,
+    .page-card:not(.photo-album) .photo-wide {
+      display: none;
+    }
     .toc-list { display: grid; gap: 8px; margin-top: 20px; }
     .toc-item {
       display: grid;
@@ -569,7 +573,9 @@
           <p>以前觉得两个小时很长。和你打的时候，时间像是不见了。</p>
           <p>后来我们打过 462 次接通的电话，可这一通一直是最特别的那一通。</p>
           <p>我记得电话里舍不得挂的那种感觉。第二天还要上班，嘴上说着晚安，没过几分钟又会想再听你说一句。</p>
-          <figure class="photo-wide photo-card"><img src="assets/photos/portrait-cafe.jpg" alt="一张日常照片"><figcaption>那时候，照片和声音一起把远方的人变得具体。</figcaption></figure>
+          <p>挂掉以后，房间一下子安静下来。那种反差让我第一次很具体地感觉到，原来手机里的人已经能影响我一整天的心情。</p>
+          <p>从这一晚开始，“给你打电话”不再是一件要鼓起勇气的事，而是每天下班以后最先想到的事。</p>
+          <p>后来每次电话接通，我都会先听见你那边的一点小声音：翻被子、关门、吹风机，或者你刚刚洗完澡的一声“喂”。这些背景音比任何情话都更像生活。</p>
         `
       },
       {
@@ -578,10 +584,10 @@
         title: "普通日子",
         html: `
           <p>真正留在记忆里的，大多是每天都会发生的小事。</p>
-          <div class="photo-grid">
-            <figure class="photo-card"><img src="assets/photos/bouquet.jpg" alt="聊天里收到的一束花"><figcaption>8 月 1 日，你发来的花。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/portrait-cafe.jpg" alt="日常照片"><figcaption>普通的一天，也有想保存的照片。</figcaption></figure>
-          </div>
+          <p>不是每次都要去哪里，也不是每天都有礼物。更多时候，是你告诉我今天领导又说了什么，我问你饭吃没有，你洗完澡回来叫我一声。</p>
+          <p>这些事放在别人眼里可能很普通。可当它们连续发生了一个月，连一句“我先去吹头发”都变成了习惯。</p>
+          <p>普通日子也有它自己的顺序：你先到家，我还在忙；我去点外卖，你说不用；等你洗完澡，我们的电话才真正开始。</p>
+          <p>后来我发现，记住一个人不一定靠大事。记住她用哪个杯子、几点会困、洗完头会不会吹干，已经足够说明她在生活里占了位置。</p>
         `
       },
       {
@@ -597,7 +603,7 @@
           </div>
           <p>这些事情单独拿出一件都不值得写进故事。可当它们连续发生了几十天，就慢慢变成了一种默契：我知道你什么时候忙，你知道我什么时候会等电话。</p>
           <p>后来我最怀念的，就是这种不用特别安排的一天。没有节日，没有礼物，只有你一直在我的消息列表里。</p>
-          <figure class="photo-wide photo-card"><img src="assets/photos/meal.jpg" alt="一份饭"><figcaption>一天里最先发生的，常常是吃饭这样的小事。</figcaption></figure>
+          <figure class="photo-wide photo-card"><img src="assets/photos/meal.jpg" alt="老板做的饭"><figcaption>9 月 19 日，老板做的一顿饭。我当时的原话是：这也能吃。</figcaption></figure>
           <figure class="chat-shot"><img src="assets/chat-morning.png" alt="早晨问候的原始聊天记录节选"></figure>
         `
       },
@@ -616,7 +622,7 @@
           <p>后来我们也反过来。你会问我吃饭没有，会提醒我感冒了要多喝水。</p>
           <div class="photo-grid">
             <figure class="photo-card"><img src="assets/photos/dinner.jpg" alt="聊天里分享的一桌饭"><figcaption>8 月 30 日，你发来的饭菜。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/meal.jpg" alt="聊天里分享的一顿饭"><figcaption>一起吃了很多顿“隔着屏幕”的饭。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/meal.jpg" alt="老板做的饭"><figcaption>这张是我发给你的老板工作餐，不是我们一起吃的。</figcaption></figure>
           </div>
         `
       },
@@ -754,7 +760,8 @@
           <p>下班打、吃饭前打、洗完澡打、快睡了还打。</p>
           <p>有时我们一直说话，有时什么都不说，电话就挂着。可只要知道你在那边，一个人也没那么像一个人。</p>
           <p>我发起 240 次，你发起 222 次。这个数字我特别喜欢，因为它说明不是只有我一个人在往前走。你也一次次打过来，也一次次等过我接电话。</p>
-          <figure class="photo-wide photo-card"><img src="assets/photos/portrait-cafe.jpg" alt="日常照片"><figcaption>电话那头的人，就在这些普通照片里。</figcaption></figure>
+          <p>最长的一次连了 11 小时 40 分。里面肯定有沉默，有各做各的事，也可能有一个人先睡着了。可电话没挂，就像屋子里一直留着另一个人的呼吸。</p>
+          <p>你难受的时候会打过来，想我的时候也会打过来。那些电话不全是开心的，但每一次接通，都说明你愿意让我知道你的当下。</p>
         `
       },
       {
@@ -887,7 +894,7 @@
           <p>能一起过漂亮日子，也能一起在路边随便吃一顿，这样的以后我想过。</p>
           <div class="photo-grid">
             <figure class="photo-card"><img src="assets/photos/barbecue.jpg" alt="烤肉照片"><figcaption>8 月 27 日，烤肉。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/meal.jpg" alt="一份饭"><figcaption>不用多正式，吃到一起就很好。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/meal.jpg" alt="老板做的工作餐"><figcaption>我发给你的老板工作餐，当时吐槽“这也能吃”。</figcaption></figure>
           </div>
         `
       },
@@ -911,7 +918,9 @@
         chapter: "第三幕附录",
         title: "照片簿",
         html: `
-          <p>光有文字还不够。你发给我的那些照片，也占了这本回忆录很重要的一部分。</p>
+          <p>光有文字还不够。聊天里真实出现过的照片，也占了这本回忆录很重要的一部分。</p>
+          <p>我只保留有上下文的图片：收到的花、吃过的饭、猫、裙子、礼物、旅途和见面。相同图片只出现一次；不是小婷本人的图，不会冒充她。</p>
+          <p>有些画面是开心的，有些是当时随手拍的普通一餐。它们不能代替文字，但能把那一天重新拉回来。</p>
         `
       },
       {
@@ -919,10 +928,8 @@
         title: "照片簿 01：刚熟悉的时候",
         html: `
           <div class="photo-grid">
-            <figure class="photo-card"><img src="assets/photos/first-photo.jpg" alt="早期照片"><figcaption>7 月 24 日，聊天里的第一组照片之一。</figcaption></figure>
             <figure class="photo-card"><img src="assets/photos/bouquet.jpg" alt="花束"><figcaption>8 月 1 日，花。</figcaption></figure>
             <figure class="photo-card"><img src="assets/photos/hand-ring.jpg" alt="手和戒指"><figcaption>8 月 2 日，手上的戒指。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/selfie-message.jpg" alt="自拍"><figcaption>8 月 3 日，自拍。</figcaption></figure>
             <figure class="photo-card"><img src="assets/photos/cosplay-selfie-1.jpg" alt="近照"><figcaption>8 月 3 日，另一张照片。</figcaption></figure>
             <figure class="photo-card"><img src="assets/photos/cosplay-blue.jpg" alt="蓝色穿搭"><figcaption>8 月 6 日，蓝色穿搭。</figcaption></figure>
           </div>
@@ -947,12 +954,8 @@
         title: "照片簿 03：游戏和生活",
         html: `
           <div class="photo-grid">
-            <figure class="photo-card"><img src="assets/photos/portrait-cafe.jpg" alt="日常照片"><figcaption>9 月 6 日，安安静静的一张照片。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/workspace.jpg" alt="室内照片"><figcaption>8 月 23 日，你发来的室内照片。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/gaming-setup.jpg" alt="游戏工位"><figcaption>8 月 24 日，游戏工位。</figcaption></figure>
             <figure class="photo-card"><img src="assets/photos/game-match-1.jpg" alt="游戏对局"><figcaption>8 月 18 日，游戏对局。</figcaption></figure>
             <figure class="photo-card"><img src="assets/photos/game-match-2.jpg" alt="游戏战绩"><figcaption>9 月 5 日，游戏战绩。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/game-list.jpg" alt="游戏列表"><figcaption>9 月 25 日，游戏列表。</figcaption></figure>
           </div>
         `
       },
@@ -976,7 +979,7 @@
         html: `
           <div class="photo-grid">
             <figure class="photo-card"><img src="assets/photos/dinner.jpg" alt="晚餐"><figcaption>8 月 30 日，一桌饭。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/meal.jpg" alt="饭菜"><figcaption>8 月 29 日，普通的一餐。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/meal.jpg" alt="老板做的饭"><figcaption>9 月 19 日，老板做的饭。</figcaption></figure>
             <figure class="photo-card"><img src="assets/photos/barbecue.jpg" alt="烤肉"><figcaption>8 月 27 日，烤肉。</figcaption></figure>
             <figure class="photo-card"><img src="assets/photos/soup.jpg" alt="热汤"><figcaption>9 月 5 日，热汤。</figcaption></figure>
             <figure class="photo-card"><img src="assets/photos/watermelon.jpg" alt="西瓜"><figcaption>10 月 4 日，切好的西瓜。</figcaption></figure>
@@ -994,7 +997,6 @@
             <figure class="photo-card"><img src="assets/photos/school-style.jpg" alt="学院风照片"><figcaption>9 月 2 日，学院风照片。</figcaption></figure>
             <figure class="photo-card"><img src="assets/photos/swing-beach.jpg" alt="海边秋千"><figcaption>9 月 14 日，海边秋千。</figcaption></figure>
             <figure class="photo-card"><img src="assets/photos/seaside-blue.jpg" alt="海边蓝裙"><figcaption>8 月 29 日，海边蓝裙。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/room.jpg" alt="房间"><figcaption>8 月 27 日，房间一角。</figcaption></figure>
           </div>
         `
       },
@@ -1102,7 +1104,9 @@
             <div class="quote-card"><time>9 月 19 日 · 小婷</time><p>有老公真好呀。</p></div>
           </div>
           <p>你夸我的时候一点都不敷衍。“有老公真好”这种话对我来说，比一百句泛泛的喜欢都具体。因为那说明我真的在你生活里，帮你挡住了一点什么。</p>
-          <figure class="photo-wide photo-card"><img src="assets/photos/portrait-cafe.jpg" alt="日常照片"><figcaption>被人需要的感觉，很具体，也很珍贵。</figcaption></figure>
+          <p>你说没有老公不知道怎么办，说天塌下来有老公顶着。后来我想，那些话不是在夸我有多厉害，是你愿意把一点脆弱交给我。</p>
+          <p>我也想把这种感觉还给你：你被工作烦到不想说话的时候，可以有个人接着；你胃疼、头痛、懒得吹头发的时候，有人惦记。</p>
+          <p>我后来才明白，“有老公”不是一句好听的称呼，是你希望难过的时候有人站在你这边。这个分量比被叫多少声都重。</p>
         `
       },
       {
@@ -1278,7 +1282,9 @@
           <p>可能是兴奋，也可能是紧张。明天就能见到屏幕里的人，连电话都舍不得挂。</p>
           <p>后来这成了我们最长的一通电话。</p>
           <p>挂电话之前我还在想，明天见到你第一句话要说什么。结果真正见到的时候，准备的话全忘了。</p>
-          <figure class="photo-wide photo-card"><img src="assets/photos/portrait-cafe.jpg" alt="一张近照"><figcaption>见面前一天，我盯着你的照片看了很久。</figcaption></figure>
+          <p>现在想起来，那十一个小时像是把之前所有隔着屏幕的想念都预支了。第二天真的要见到你，反而紧张得不知道该把手放哪里。</p>
+          <p>那一晚之后，我们终于不用在电话里猜对方今天穿什么、住在哪间房、见面会不会尴尬。所有隔着的距离，只剩最后十几个小时。</p>
+          <p>我记得挂电话之前还反复确认时间，怕自己起晚、怕路上堵、怕让你一个人在酒店等。越接近见面，越像第一次约会。</p>
         `
       },
       {
@@ -1449,6 +1455,118 @@
       }
     ];
 
+    const photoBookPhotos = [
+      ["bouquet.jpg", "8 月 1 日，你收到花后拍给我看。"],
+      ["hand-ring.jpg", "8 月 2 日，你发来的手和戒指。"],
+      ["birthday-cake.jpg", "8 月 9 日，生日蛋糕。"],
+      ["cosplay-selfie-1.jpg", "8 月 3 日，聊天里的一张照片。"],
+      ["cosplay-blue.jpg", "8 月 6 日，你发来的裙装照。"],
+      ["cosplay-outdoor.jpg", "8 月 12 日，出门时拍的裙装照。"],
+      ["dolls.jpg", "8 月 19 日，一整柜娃娃。"],
+      ["red-bouquet.jpg", "8 月 13 日，红白色花束。"],
+      ["headpiece-selfie.jpg", "8 月 12 日，戴着头饰的自拍。"],
+      ["teddy.jpg", "8 月 20 日，我发给你的小熊。"],
+      ["doll-display.jpg", "8 月 14 日，娃娃和摆件。"],
+      ["plush-cat.jpg", "9 月 14 日，猫咪玩偶。"],
+      ["plush-corner.jpg", "8 月 20 日，玩偶角落。"],
+      ["cosplay-room.jpg", "8 月 23 日，你认真打扮后的照片。"],
+      ["barbecue.jpg", "8 月 27 日，我发给你的烤肉照片。"],
+      ["dinner.jpg", "8 月 30 日，你发来的饭菜。"],
+      ["meal.jpg", "9 月 19 日，老板做的饭。我当时吐槽：这也能吃。"],
+      ["porridge.jpg", "8 月 1 日，一碗粥。"],
+      ["home-meal.jpg", "8 月 29 日，家里的一碗饭。"],
+      ["soup.jpg", "9 月 5 日，热汤。"],
+      ["watermelon.jpg", "10 月 4 日，切好的西瓜。"],
+      ["game-match-1.jpg", "8 月 18 日，游戏对局截图。"],
+      ["game-match-2.jpg", "9 月 5 日，另一张游戏截图。"],
+      ["cat-orange.jpg", "9 月 15 日，橘猫。"],
+      ["cat-bed.jpg", "9 月 24 日，窝在床上的猫。"],
+      ["cat-orange-2.jpg", "9 月 27 日，又一只橘猫。"],
+      ["cat-floor.jpg", "9 月 25 日，地板上的小猫。"],
+      ["cat-close.jpg", "9 月 29 日，凑近镜头的猫。"],
+      ["cat-green.jpg", "9 月 28 日，我发给你的猫猫照片。"],
+      ["cat-last.jpg", "10 月 25 日，那天拍到的猫。"],
+      ["portrait-close.jpg", "9 月 12 日，聊天里的近照。"],
+      ["portrait-outfit.jpg", "10 月 13 日，我发给你的穿搭参考图。"],
+      ["dress-mirror.jpg", "10 月 12 日，试衣镜前的照片。"],
+      ["pink-dress.jpg", "9 月 10 日，你发来的粉色裙子。"],
+      ["gift-box.jpg", "9 月 10 日，礼盒和娃娃。"],
+      ["gift-set.jpg", "9 月 24 日，礼盒和小物。"],
+      ["seaside-blue.jpg", "9 月 2 日，海边蓝裙。"],
+      ["ocean-view.jpg", "8 月 30 日，海边的风景。"],
+      ["swing-beach.jpg", "9 月 14 日，白色秋千。"],
+      ["summer-selfie.jpg", "8 月 28 日，夏天的一张照片。"],
+      ["school-style.jpg", "9 月 2 日，学院风照片。"],
+      ["city-dress.jpg", "9 月 28 日，城市里的裙装照。"],
+      ["sunset.jpg", "9 月 30 日，晚霞。"],
+      ["living-room.jpg", "8 月 25 日，房间里的一角。"],
+      ["hotel-room.jpg", "10 月 11 日，提前看过的酒店房间。"],
+      ["hotel-flower.jpg", "10 月 23 日，酒店里的花。"],
+      ["hotel-bouquet.jpg", "10 月 23 日，房间里的生日花束。"],
+      ["farewell-flowers.jpg", "10 月 25 日，离开前的花。"],
+      ["last-meal.jpg", "10 月 25 日，一起吃的一顿饭。"],
+      ["holding-hands.jpg", "10 月 25 日，牵过的手。"],
+      ["airport-hall.jpg", "10 月 23 日 07:29，机场大厅。"],
+      ["bunny-selfie.jpg", "9 月 26 日，兔子耳造型。"]
+    ];
+
+    for (let index = pages.length - 1; index >= 0; index -= 1) {
+      if (pages[index].title === "照片簿" || pages[index].title.startsWith("照片簿 ")) {
+        pages.splice(index, 1);
+      }
+    }
+
+    const photoBookPages = [];
+    const photoPageSizes = [7, 7, 7, 7, 6, 6, 6, 6];
+    const photoPageTitles = [
+      "照片簿 01：花、生日和裙子",
+      "照片簿 02：玩偶和一起吃饭",
+      "照片簿 03：饭桌、游戏和猫",
+      "照片簿 04：猫猫频道",
+      "照片簿 05：裙子、礼物和海",
+      "照片簿 06：风景和普通一天",
+      "照片簿 07：见面那天",
+      "照片簿 08：日常碎片"
+    ];
+    let photoOffset = 0;
+    for (const [pageOffset, photoSize] of photoPageSizes.entries()) {
+      const photos = photoBookPhotos.slice(photoOffset, photoOffset + photoSize);
+      photoOffset += photoSize;
+      const pageNumber = String(pageOffset + 1).padStart(2, "0");
+      photoBookPages.push({
+        type: "photo-album",
+        chapter: "第三幕附录 · 照片簿",
+        title: photoPageTitles[pageOffset],
+        html: `
+          <div class="photo-grid">
+            ${photos.map(([file, caption]) => `
+              <figure class="photo-card">
+                <img src="assets/photos/${file}" alt="${caption}">
+                <figcaption>${caption}</figcaption>
+              </figure>
+            `).join("")}
+          </div>
+        `
+      });
+    }
+    const sweetChapterIndex = pages.findIndex(
+      (page) => page.type === "chapter-page" && page.title === "甜话"
+    );
+    pages.splice(
+      sweetChapterIndex,
+      0,
+      {
+        type: "chapter-page",
+        chapter: "第三幕附录",
+        title: "照片簿",
+        html: `
+          <p>这些照片都是聊天里真实出现过的。每张只放一次，按当时聊到的事情来写。</p>
+          <p>有的是你发来的，有的是我发给你的。不是小婷本人的照片，我不会再写成她；聊天里吐槽的饭、参考图和猫猫，也按当时的上下文分开说明。</p>
+        `
+      },
+      ...photoBookPages
+    );
+
     const pageCard = document.getElementById("pageCard");
     const pageCounter = document.getElementById("pageCounter");
     const pageChapter = document.getElementById("pageChapter");
@@ -1481,6 +1599,9 @@
         ${page.type === "title" ? "" : `<h2>${page.title}</h2>`}
         ${page.html}
       `;
+      if (page.type !== "photo-album") {
+        pageCard.querySelectorAll(".photo-grid, .photo-wide").forEach((element) => element.remove());
+      }
       pageCounter.textContent = `${currentPage + 1} / ${pages.length}`;
       pageChapter.textContent = page.chapter || "给小婷的回忆录";
       prevButton.disabled = currentPage === 0;
