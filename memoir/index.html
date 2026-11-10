@@ -260,6 +260,45 @@
       background: rgba(238, 212, 217, .38);
       font-size: 12px;
     }
+    .chat-shot {
+      display: block;
+      width: min(100%, 390px);
+      margin: 22px auto;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #f4f3f2;
+      box-shadow: 0 12px 34px rgba(70, 47, 55, .13);
+    }
+    .chat-shot img { display: block; width: 100%; height: auto; }
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 20px 0;
+    }
+    .photo-card {
+      margin: 0;
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .6);
+    }
+    .photo-card img {
+      display: block;
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .photo-card figcaption {
+      padding: 8px 10px 10px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+    .photo-wide img { height: auto; max-height: 430px; object-fit: cover; }
+    .chapter-page .photo-grid { width: min(100%, 560px); margin: 24px auto 4px; }
+    .chapter-page .photo-card img { height: 150px; }
     .toc-list { display: grid; gap: 8px; margin-top: 20px; }
     .toc-item {
       display: grid;
@@ -360,6 +399,7 @@
       .quote-grid { grid-template-columns: 1fr; }
       .stat-row { grid-template-columns: 1fr 1fr; }
       .stat:last-child:nth-child(odd) { grid-column: 1 / -1; }
+      .photo-card img { height: 150px; }
       .page-nav { grid-template-columns: 82px 1fr 82px; }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -405,6 +445,7 @@
           <h1>给小婷的<br>回忆录</h1>
           <p class="lead">从我认识你的第一句话，写到我们一起见过面以后。</p>
           <p>这里只放我记得的好日子、你说过的话，还有我们认真聊过的以后。</p>
+          <p>会有聊天原文，也会有那些你发给我的照片。慢慢翻，不着急。</p>
         `
       },
       {
@@ -421,6 +462,7 @@
             <div class="memory-item"><strong>第六幕 · 见面</strong><p>机场、酒店大堂，还有终于看到你的那一刻。</p></div>
           </div>
           <p class="small">可以用下面的按钮翻页，也可以直接打开目录。手机可以左右滑。</p>
+          <p>每张聊天截图都来自我们当时的记录，照片也都是聊天里真实发过的。它们和文字放在一起，才是我们过过的日子。</p>
         `
       },
       {
@@ -442,6 +484,8 @@
           <p>那天你说得很清楚：“微信不聊天，纯扩列。”</p>
           <div class="quote">微信不聊天，纯扩列。<small>小婷 · 2026.06.24</small></div>
           <p>我记住了这句话。因为后来我们聊了那么久，反而显得最开始那句边界特别可爱。</p>
+          <p>那天抖音第一条是“可以开始聊天了”，像所有普通网友故事一样平常。我们谁也没说以后会每天打电话，更没想到两个月后会认真聊起住哪里、养什么猫。</p>
+          <figure class="chat-shot"><img src="assets/chat-first-douyin.png" alt="6月24日抖音的第一段聊天记录"></figure>
         `
       },
       {
@@ -453,6 +497,8 @@
           <div class="quote">在骂领导呀。<small>小婷 · 2026.07.22</small></div>
           <p>那天我们一共产下了 140 条消息。从工作、收入、喜欢什么样的人，一直聊到生活里那些细碎的事。</p>
           <p>我当时不知道，这个说在骂领导的女孩，后来会变成我每天最想找的人。</p>
+          <p>后来我才慢慢知道，你上班很累，常常遇到让人无语的安排。你跟我讲这些的时候，我一边陪你吐槽，一边记住了你不喜欢什么、累的时候会怎么说。</p>
+          <figure class="chat-shot"><img src="assets/chat-first-chat.png" alt="7月22日第一次认真聊天的原始记录"></figure>
         `
       },
       {
@@ -464,6 +510,8 @@
           <div class="quote">小婷。<small>后来我在心里叫了你很多很多遍</small></div>
           <p>它出现在消息里、电话接通的第一句里，也出现在我不舍得删的聊天记录里。</p>
           <p>一个名字很短，可它把一个人的生活，慢慢放进了另一个人的日常。</p>
+          <p>后来我会在早上问“小婷到公司了吗”，晚上说“小婷早点睡”。同一句称呼重复得越多，越像生活里真的有了一个人。</p>
+          <figure class="photo-wide photo-card"><img src="assets/photos/bouquet.jpg" alt="一束花"><figcaption>从“大美女”到“小婷”，称呼变了，距离也变了。</figcaption></figure>
         `
       },
       {
@@ -474,6 +522,8 @@
           <div class="quote">因为是真的喜欢你呀。<small>圣杰 · 2026.07.24 13:55</small></div>
           <p>不是提前准备好的情话，也不是为了让你快点答应。</p>
           <p>就是聊着聊着，突然发现，你的消息来了我会开心，没来我会一直看手机。那种喜欢，藏不住。</p>
+          <p>那天的聊天已经不只是轻松的玩笑。我们开始认真地聊生活、聊怎么相处，也会有一点紧张，怕自己说错话，又忍不住想把真实的喜欢告诉你。</p>
+          <figure class="chat-shot"><img src="assets/chat-confession.png" alt="7月24日喜欢你的原始聊天记录"></figure>
         `
       },
       {
@@ -487,6 +537,8 @@
             <div class="stat"><strong>2:09:39</strong><span>那天第一通电话的时长</span></div>
           </div>
           <p>从那天起，我们不再只是聊天的人了。你开始叫我老公，我开始叫你老婆。</p>
+          <p>那晚我们聊名字、聊打电话，也聊以后每天都想听见对方。现在再回头看，那一刻其实没有多盛大，就是两个已经很喜欢对方的人，终于把“我们”说出口。</p>
+          <figure class="chat-shot"><img src="assets/chat-together.png" alt="7月27日原始聊天记录节选"></figure>
         `
       },
       {
@@ -500,6 +552,8 @@
             <div class="quote-card"><time>7 月 27 日 07:31 · 圣杰</time><p>今天也最最喜欢你啦</p></div>
           </div>
           <p>后来这两个称呼出现了太多次。可第一次看见“老公呀”的时候，我还是高兴得像个傻子。</p>
+          <p>那几天我们几乎每句都带着称呼。你叫“老公呀”，我叫“老婆”，像是在反复确认：这不是做梦，我们真的一起了。</p>
+          <figure class="photo-wide photo-card"><img src="assets/photos/bouquet.jpg" alt="聊天里收到的一束花"><figcaption>8 月 1 日，你发来的花，也是那段日子里很小的一份浪漫。</figcaption></figure>
         `
       },
       {
@@ -514,13 +568,21 @@
           </div>
           <p>以前觉得两个小时很长。和你打的时候，时间像是不见了。</p>
           <p>后来我们打过 462 次接通的电话，可这一通一直是最特别的那一通。</p>
+          <p>我记得电话里舍不得挂的那种感觉。第二天还要上班，嘴上说着晚安，没过几分钟又会想再听你说一句。</p>
+          <figure class="photo-wide photo-card"><img src="assets/photos/portrait-cafe.jpg" alt="一张日常照片"><figcaption>那时候，照片和声音一起把远方的人变得具体。</figcaption></figure>
         `
       },
       {
         type: "chapter-page",
         chapter: "第二幕",
         title: "普通日子",
-        html: `<p>真正留在记忆里的，大多是每天都会发生的小事。</p>`
+        html: `
+          <p>真正留在记忆里的，大多是每天都会发生的小事。</p>
+          <div class="photo-grid">
+            <figure class="photo-card"><img src="assets/photos/bouquet.jpg" alt="聊天里收到的一束花"><figcaption>8 月 1 日，你发来的花。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/portrait-cafe.jpg" alt="日常照片"><figcaption>普通的一天，也有想保存的照片。</figcaption></figure>
+          </div>
+        `
       },
       {
         chapter: "第二幕 · 普通日子",
@@ -533,6 +595,9 @@
             <div class="timeline-item"><time>晚上</time><h3>洗澡、吹头发、打电话</h3><p>等你收拾好，我们再一直聊到困。</p></div>
             <div class="timeline-item"><time>睡前</time><h3>晚安啦老婆</h3><p>有时候说完晚安，还会舍不得真的挂。</p></div>
           </div>
+          <p>这些事情单独拿出一件都不值得写进故事。可当它们连续发生了几十天，就慢慢变成了一种默契：我知道你什么时候忙，你知道我什么时候会等电话。</p>
+          <p>后来我最怀念的，就是这种不用特别安排的一天。没有节日，没有礼物，只有你一直在我的消息列表里。</p>
+          <figure class="photo-wide photo-card"><img src="assets/photos/meal.jpg" alt="一份饭"><figcaption>一天里最先发生的，常常是吃饭这样的小事。</figcaption></figure>
         `
       },
       {
@@ -548,6 +613,10 @@
           </div>
           <p>有时候我知道自己像在唠叨。可你不按时吃饭，我是真的会惦记。</p>
           <p>后来我们也反过来。你会问我吃饭没有，会提醒我感冒了要多喝水。</p>
+          <div class="photo-grid">
+            <figure class="photo-card"><img src="assets/photos/dinner.jpg" alt="聊天里分享的一桌饭"><figcaption>8 月 30 日，你发来的饭菜。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/meal.jpg" alt="聊天里分享的一顿饭"><figcaption>一起吃了很多顿“隔着屏幕”的饭。</figcaption></figure>
+          </div>
         `
       },
       {
@@ -562,6 +631,8 @@
             <div class="memory-item"><strong>10 月 28 日</strong><p>还是会问一句：“吃不吃肯德基呀。”</p></div>
           </div>
           <p>后来我才知道，喜欢一个人，真的会把“你吃了吗”问很多很多遍。</p>
+          <p>肯德基不是多了不起的东西，奶茶也不是。可当一个人愿意记住你爱喝什么、今天有没有吃，连普通外卖都像是被认真对待过。</p>
+          <figure class="photo-wide photo-card"><img src="assets/photos/dinner.jpg" alt="一桌饭菜"><figcaption>那些问过的“吃了吗”，后来都变成具体的饭菜。</figcaption></figure>
         `
       },
       {
@@ -572,6 +643,7 @@
           <p>你嘴上总说不用，可我还是会问你要不要奶茶、要不要热水、外卖到了没有。</p>
           <div class="quote">你肚子疼的时候，说贴暖宝宝就行，不让我天天点饮品。<small>后来才懂，照顾不是一股脑给你塞东西</small></div>
           <p>所以现在再说关心，我会先问一句：你要不要。不是我觉得你需要什么，就替你决定。</p>
+          <figure class="photo-wide photo-card"><img src="assets/photos/soup.jpg" alt="一碗热汤的照片"><figcaption>那些热汤、热水和暖宝宝，都是“照顾好自己”的具体样子。</figcaption></figure>
         `
       },
       {
@@ -582,6 +654,8 @@
           <div class="quote">老公我胃疼。<small>小婷 · 2026.08.26 00:16</small></div>
           <p>第二天早上，我第一反应就是让你去诊所。后面又一直催你吃饭、休息。</p>
           <p>你说自己有时候姨妈痛、没好好吃饭就会胃痛。那种时候我帮不上太多，只能隔着手机一遍遍问你好点没有。</p>
+          <figure class="chat-shot"><img src="assets/chat-care.png" alt="胃疼那天的原始聊天记录节选"></figure>
+          <p>现在再看这些消息，我最在意的不是自己说了多少句关心，而是你凌晨一个人疼醒，只能在手机里告诉我。那种隔着距离帮不上忙的感觉，我一直记得。</p>
         `
       },
       {
@@ -596,6 +670,8 @@
             <div class="quote-card"><time>10 月 28 日</time><p>记得吹头发呀，你容易头疼。</p></div>
           </div>
           <p>我也有偏头痛。所以后来你说头痛，我不会只回一句“多喝热水”，会问你有没有吃药、有没有休息。</p>
+          <p>你说过“我最近真的总是在头疼，我也不知道为什么”。我听得出那不是撒娇，是你真的被折腾烦了。隔着手机能做的事情不多，所以我总想把能提醒的都提醒一遍。</p>
+          <figure class="photo-wide photo-card"><img src="assets/photos/cosplay-room.jpg" alt="一张准备出门的照片"><figcaption>你每次认真收拾自己，我其实都希望你能先舒服一点。</figcaption></figure>
         `
       },
       {
@@ -611,6 +687,8 @@
           </div>
           <p>你有时嫌麻烦，我又总怕你顶着一头湿发吹空调。我的关心有时候听起来像唠叨，可那里面装的全是你。</p>
           <p>我甚至还说过，买一个洗头椅包。不是觉得你洗不好，是我真的觉得你每次洗头发都很辛苦。</p>
+          <p>所以这一页不只是一句“记得吹头发”。它后面接着热汤、早点睡、别熬夜，也接着那句“等你来了以后我给你吹吧”。</p>
+          <figure class="chat-shot"><img src="assets/chat-hair.png" alt="吹头发相关原始聊天记录节选"></figure>
         `
       },
       {
@@ -625,6 +703,10 @@
             <div class="memory-item"><strong>10 月 13 日</strong><p>你说原生头发会炸，可照片里还是很 cute。</p></div>
           </div>
           <p>你说等头发再长一点，我也记住了。头发的长度会变，颜色会变，你还是小婷。</p>
+          <div class="photo-grid">
+            <figure class="photo-card"><img src="assets/photos/cosplay-selfie-1.jpg" alt="一张日常自拍"><figcaption>8 月 3 日，聊天里留下的照片。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/cosplay-outdoor.jpg" alt="外出时拍的照片"><figcaption>8 月 12 日，出去玩时发给我的照片。</figcaption></figure>
+          </div>
         `
       },
       {
@@ -636,6 +718,8 @@
           <div class="quote">以后我帮你吹头发吧。<small>圣杰 · 2026.07.31</small></div>
           <p>后来我又说，想买一个洗头椅包，因为我觉得你每次洗头发都好辛苦。</p>
           <p>这些约定很小，小到不像什么大事。可真正想一起生活，不就是从吹头发、吃饭、等你回家这些小事开始的吗。</p>
+          <p>我还想过，等你来北京以后，不用每次洗完都自己折腾。你躺着，我帮你把头发吹干。这个画面我想过不止一次。</p>
+          <figure class="photo-wide photo-card"><img src="assets/photos/cosplay-selfie-1.jpg" alt="一张近照"><figcaption>头发长短会变，那个人还是小婷。</figcaption></figure>
         `
       },
       {
@@ -650,6 +734,8 @@
             <div class="quote-card"><time>9 月 23 日</time><p>以后你有任何事情，都可以半夜喊我起来。</p></div>
           </div>
           <p>你也不是只会被我催。你会让我感冒了多喝水、好好吃饭，会让我别太累。</p>
+          <p>有时候我们已经聊到很晚，我还是舍不得挂。可第二天想到你要早起，又会后悔没有早点让你睡。关心一个人，大概就是在这种舍不得和不忍心之间来回。</p>
+          <figure class="photo-wide photo-card"><img src="assets/photos/teddy.jpg" alt="一只玩偶"><figcaption>夜里说完晚安，手机放下以后还剩下一点舍不得。</figcaption></figure>
         `
       },
       {
@@ -664,6 +750,8 @@
           </div>
           <p>下班打、吃饭前打、洗完澡打、快睡了还打。</p>
           <p>有时我们一直说话，有时什么都不说，电话就挂着。可只要知道你在那边，一个人也没那么像一个人。</p>
+          <p>我发起 240 次，你发起 222 次。这个数字我特别喜欢，因为它说明不是只有我一个人在往前走。你也一次次打过来，也一次次等过我接电话。</p>
+          <figure class="photo-wide photo-card"><img src="assets/photos/portrait-cafe.jpg" alt="日常照片"><figcaption>电话那头的人，就在这些普通照片里。</figcaption></figure>
         `
       },
       {
@@ -678,13 +766,22 @@
             <div class="timeline-item"><time>20:00</time><h3>洗完澡</h3><p>提醒你吹头发，然后打电话。</p></div>
             <div class="timeline-item"><time>23:30</time><h3>晚安</h3><p>一句晚安以后，常常还舍不得挂。</p></div>
           </div>
+          <p>如果把某一天完整写下来，大概就是几十个很短的句子：到公司了吗、吃了吗、今天忙不忙、洗澡没有、头发吹了吗、什么时候回来、电话打吗。</p>
+          <p>这些话没有任何文学性，可它们合在一起，就是我们那几个月的生活。</p>
+          <figure class="photo-wide photo-card"><img src="assets/photos/dinner.jpg" alt="一桌饭"><figcaption>很多日子，就是从一句“吃饭没有”走到一句“晚安”。</figcaption></figure>
         `
       },
       {
         type: "chapter-page",
         chapter: "第三幕",
         title: "我们一起喜欢的东西",
-        html: `<p>很多快乐都很小，但足够把一天照亮。</p>`
+        html: `
+          <p>很多快乐都很小，但足够把一天照亮。</p>
+          <div class="photo-grid">
+            <figure class="photo-card"><img src="assets/photos/cosplay-room.jpg" alt="一套喜欢的裙子"><figcaption>喜欢的裙子和认真打扮的日子。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/cat-orange.jpg" alt="一只橘猫"><figcaption>聊天里出现次数很多的猫猫。</figcaption></figure>
+          </div>
+        `
       },
       {
         chapter: "第三幕 · 小事",
@@ -698,6 +795,11 @@
             <div class="quote-card"><time>9 月 13 日</time><p>给你打王者。</p></div>
             <div class="quote-card"><time>10 月 13 日</time><p>我们一起玩呀。</p></div>
           </div>
+          <div class="photo-grid">
+            <figure class="photo-card"><img src="assets/photos/game-match-1.jpg" alt="游戏对局截图"><figcaption>8 月 18 日，游戏里的记录。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/game-match-2.jpg" alt="王者荣耀对局截图"><figcaption>9 月 5 日，又一起打了一局。</figcaption></figure>
+          </div>
+          <p>输赢其实记得不多了，记得的是你开着麦笑、我等你上线，还有打完一局以后说“再来一把”。</p>
         `
       },
       {
@@ -708,6 +810,8 @@
           <p>你说自己一般般，还会担心游戏打得不好我会不高兴。可我是真的觉得你厉害。</p>
           <div class="quote">你辅助打得太好了。<small>圣杰</small></div>
           <p>那段时间我最盼的就是晚上开一局。赢了当然开心，但更开心的是，一戴上耳机就能听见你。</p>
+          <p>你说怕自己玩得不好，我会不高兴。可对我来说，你操作得怎么样根本不重要。你能来、愿意陪我玩，这件事本身就已经很好。</p>
+          <figure class="chat-shot"><img src="assets/chat-game.png" alt="约你打游戏的原始聊天记录节选"></figure>
         `
       },
       {
@@ -722,6 +826,12 @@
             <div class="memory-item"><strong>9 月 29 日</strong><p>你说“我也想你啊，我还想我的小猫”。</p></div>
           </div>
           <p>所以我们后来认真约定，要一起养一只小猫。</p>
+          <div class="photo-grid">
+            <figure class="photo-card"><img src="assets/photos/cat-bed.jpg" alt="一只待在床上的猫"><figcaption>猫猫趴在软软的地方。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/cat-orange-2.jpg" alt="一只橘猫"><figcaption>你发来的猫猫照片。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/cat-floor.jpg" alt="地板上的小猫"><figcaption>走到哪里都能遇到猫。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/cat-close.jpg" alt="小猫近距离照片"><figcaption>这张看起来像在等摸摸。</figcaption></figure>
+          </div>
         `
       },
       {
@@ -737,6 +847,8 @@
             <div class="quote-card"><time>10 月 28 日</time><p>还是想看到好笑的就先给你看。</p></div>
           </div>
           <p>分享东西看起来没什么，可“看到好笑的第一个想到你”，本身就是喜欢。</p>
+          <p>292 次分享里，很多视频我后来都不记得内容了，但我记得输入框上面那句“分享给 小婷”，也记得看到猫和短剧时下意识就想点发送。</p>
+          <figure class="photo-wide photo-card"><img src="assets/photos/cat-green.jpg" alt="一只猫"><figcaption>猫猫大概是 292 次分享里出现最多的一类。</figcaption></figure>
         `
       },
       {
@@ -751,6 +863,12 @@
             <div class="quote-card"><time>9 月 25 日</time><p>我想看你拍照片。</p></div>
             <div class="quote-card"><time>10 月 13 日</time><p>粉色裙子、柴犬女仆、鞋子要怎么搭配。</p></div>
           </div>
+          <div class="photo-grid">
+            <figure class="photo-card"><img src="assets/photos/pink-dress.jpg" alt="粉色裙子的照片"><figcaption>9 月 10 日，粉色裙子。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/cosplay-blue.jpg" alt="蓝色裙子照片"><figcaption>8 月 6 日，cos 照片。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/gift-box.jpg" alt="礼盒和娃娃"><figcaption>9 月 10 日，礼盒和娃娃。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/teddy.jpg" alt="一只小熊玩偶"><figcaption>8 月 20 日，小熊。</figcaption></figure>
+          </div>
         `
       },
       {
@@ -761,6 +879,10 @@
           <div class="quote">你也愿意陪我吃路边摊啊。<small>圣杰</small></div>
           <p>我喜欢的就是这种不端着的样子。不是每天都精致，是偶尔乱糟糟、困兮兮，也愿意跟对方说今天发生了什么。</p>
           <p>能一起过漂亮日子，也能一起在路边随便吃一顿，这样的以后我想过。</p>
+          <div class="photo-grid">
+            <figure class="photo-card"><img src="assets/photos/barbecue.jpg" alt="烤肉照片"><figcaption>8 月 27 日，烤肉。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/meal.jpg" alt="一份饭"><figcaption>不用多正式，吃到一起就很好。</figcaption></figure>
+          </div>
         `
       },
       {
@@ -774,13 +896,21 @@
             <div class="quote-card"><time>8 月 20 日 · 小婷</time><p>我现在头发好浅，我像奶奶。</p></div>
           </div>
           <p>后来我最想念的，不是某个特别浪漫的大场面，是这些看起来没有营养、只有我们两个人懂的话。</p>
+          <p>比如我发“发了个日常嘿嘿”，你回一张照片；你问猫可爱还是你可爱，我立刻说你更可爱。日子就是在这种一来一回里，慢慢有了只属于我们的语气。</p>
+          <figure class="photo-wide photo-card"><img src="assets/photos/teddy.jpg" alt="一只小熊玩偶"><figcaption>有些照片没有故事，看到就会想起那阵子。</figcaption></figure>
         `
       },
       {
         type: "chapter-page",
         chapter: "第四幕",
         title: "甜话",
-        html: `<p>有些话你早就忘了，我还留在聊天记录里。</p>`
+        html: `
+          <p>有些话你早就忘了，我还留在聊天记录里。</p>
+          <div class="photo-grid">
+            <figure class="photo-card"><img src="assets/photos/bouquet.jpg" alt="一束花"><figcaption>花会枯萎，那天发来照片时的开心没有。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/cosplay-selfie-1.jpg" alt="一张喜欢的照片"><figcaption>你发给我的照片，我都存着。</figcaption></figure>
+          </div>
+        `
       },
       {
         chapter: "第四幕 · 甜话",
@@ -794,6 +924,8 @@
             <div class="quote-card"><time>8 月 12 日 · 圣杰</time><p>我喜欢你的灵魂。</p></div>
             <div class="quote-card"><time>10 月 20 日 · 圣杰</time><p>就是特别特别爱你呀。</p></div>
           </div>
+          <p>“喜欢你”这三个字被我们说得很轻，有时候夹在一句晚安里，有时候前一句还在聊外卖。可轻不代表假，恰恰因为说得自然，才像真的每天都在喜欢。</p>
+          <figure class="photo-wide photo-card"><img src="assets/photos/bouquet.jpg" alt="一束花"><figcaption>喜欢不只在文字里，也在你发来的花和日常照片里。</figcaption></figure>
         `
       },
       {
@@ -808,6 +940,9 @@
             <div class="quote-card"><time>9 月 22 日 · 小婷</time><p>我爱你啊老公，特别特别爱你啊。</p></div>
             <div class="quote-card"><time>9 月 29 日 · 圣杰</time><p>老婆，无论发生什么，我都陪着你。</p></div>
           </div>
+          <div class="quote">我们要在一起一辈子呀。<small>圣杰 · 2026.08.19</small></div>
+          <figure class="chat-shot"><img src="assets/chat-sweet.png" alt="8月19日原始聊天记录节选"></figure>
+          <p>你说我们有老公之后，好像生活里多了一层兜底。那种“有人接着我”的感觉，是我最想给你的东西。</p>
         `
       },
       {
@@ -823,6 +958,8 @@
             <div class="quote-card"><time>10 月 12 日 · 小婷</time><p>老公我特别特别爱你呀。</p></div>
           </div>
           <div class="quote">我将用最直白，最直接，最不绕弯子，最客观，最正确，最系统，最真实，最简洁，最容易理解，最不卖关子的方式告诉你：我想你了。<small>小婷 · 2026.09.25</small></div>
+          <p>那句绕着大圈子的“我想你了”，我每次看到都会笑。它不像网上抄来的情话，很像你会发给我的东西。</p>
+          <figure class="photo-wide photo-card"><img src="assets/photos/seaside-blue.jpg" alt="海边照片"><figcaption>想一个人时，连你发给我的风景都像在替我说话。</figcaption></figure>
         `
       },
       {
@@ -837,6 +974,8 @@
             <div class="quote-card"><time>9 月 19 日 · 圣杰</time><p>现在你有老公了。</p></div>
             <div class="quote-card"><time>9 月 19 日 · 小婷</time><p>有老公真好呀。</p></div>
           </div>
+          <p>你夸我的时候一点都不敷衍。“有老公真好”这种话对我来说，比一百句泛泛的喜欢都具体。因为那说明我真的在你生活里，帮你挡住了一点什么。</p>
+          <figure class="photo-wide photo-card"><img src="assets/photos/portrait-cafe.jpg" alt="日常照片"><figcaption>被人需要的感觉，很具体，也很珍贵。</figcaption></figure>
         `
       },
       {
@@ -845,8 +984,10 @@
         html: `
           <p class="lead">8 月 9 日是我生日。</p>
           <div class="quote">我把蜡烛也点上了。<br>祝圣杰老公生日快乐呀～<br>世界正数第一般配。<small>小婷 · 2026.08.09</small></div>
+          <figure class="chat-shot"><img src="assets/chat-birthday.png" alt="8月9日生日聊天记录节选"></figure>
           <p>那天我们隔着屏幕一起过生日。你说这叫赛博一起过生日。</p>
           <p>没有真的蛋糕，没有坐在对面的人，可我还是觉得那天特别完整。</p>
+          <p>我把那几张聊天截图一直留着。因为屏幕上的蜡烛、祝福和“世界正数第一般配”，就是那天全部的仪式感。</p>
         `
       },
       {
@@ -862,13 +1003,20 @@
             <div class="quote-card"><time>10 月 25 日 · 小婷</time><p>不离开呀。</p></div>
           </div>
           <p>这些话我写在这里，只是因为你当时真的说过，我也真的相信过。</p>
+          <figure class="photo-wide photo-card"><img src="assets/photos/dolls.jpg" alt="一排娃娃"><figcaption>有些未来聊得很远，有些收藏却很小。</figcaption></figure>
         `
       },
       {
         type: "chapter-page",
         chapter: "第五幕",
         title: "约定",
-        html: `<p>我们聊过的以后，不是一句“有空再说”。</p>`
+        html: `
+          <p>我们聊过的以后，不是一句“有空再说”。</p>
+          <div class="photo-grid">
+            <figure class="photo-card"><img src="assets/photos/pink-dress.jpg" alt="一条粉色裙子"><figcaption>为见面准备过的裙子。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/hotel-flower.jpg" alt="酒店里的花"><figcaption>后来真的住进了那间酒店。</figcaption></figure>
+          </div>
+        `
       },
       {
         chapter: "第五幕 · 约定",
@@ -881,6 +1029,8 @@
             <div class="stat"><strong>一起住</strong><span>不是见一面就走</span></div>
           </div>
           <p>我们聊过机票、高铁，聊过你来了以后先吃什么、去哪里。你说怕自己来了以后不习惯，我说有我在。</p>
+          <p>我还认真想过去机场接你。不是只在手机上说“你来吧”，而是想在你落地以后，第一眼就能看到我。</p>
+          <figure class="photo-wide photo-card"><img src="assets/photos/airport-hall.jpg" alt="机场大厅照片"><figcaption>后来真的到了机场，也真的等到了你。</figcaption></figure>
         `
       },
       {
@@ -892,6 +1042,8 @@
           <div class="quote">我们一起住新房呀。<small>圣杰 · 2026.09.26</small></div>
           <p>后来我们连见面的行程都规划好了：23 号在酒店给你过生日，24 号一起玩，25 号去看新房。</p>
           <p>那些计划最后变成了我手机里记得特别清楚的一段。不是随口说说，是我们真的往一起生活的样子去想过。</p>
+          <figure class="chat-shot"><img src="assets/chat-home.png" alt="一起看房、养猫的原始聊天记录节选"></figure>
+          <p>看房、搬进去、买日用品、给猫起名字，这些事一件件排下来，才像真正的生活。不是你来找我住几天，是我们要把两个人的东西放到同一个家里。</p>
         `
       },
       {
@@ -906,6 +1058,10 @@
             <div class="quote-card"><time>9 月 29 日 · 小婷</time><p>我也想你啊，我还想我的小猫。</p></div>
           </div>
           <p>我连以后家里有猫、有鱼缸的样子都想过。你负责抱猫，我负责收拾被它弄乱的东西。</p>
+          <div class="photo-grid">
+            <figure class="photo-card"><img src="assets/photos/cat-green.jpg" alt="一只猫"><figcaption>以后家里也想有一只这样的猫。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/cat-orange-2.jpg" alt="橘猫"><figcaption>你发来的猫，我一张张都看过。</figcaption></figure>
+          </div>
         `
       },
       {
@@ -919,6 +1075,8 @@
             <div class="memory-item"><strong>圣诞节、跨年</strong><p>你说以后还可以再去一次迪士尼。</p></div>
             <div class="memory-item"><strong>拍照</strong><p>我负责给你拍很多照片，你负责说我拍得还不错。</p></div>
           </div>
+          <p>迪士尼和环球不只是两个地名。我们想到的是排队时有人陪、吃东西有人分、拍照的时候有人帮你拿包，还有玩累了以后一起回酒店。</p>
+          <figure class="photo-wide photo-card"><img src="assets/photos/seaside-blue.jpg" alt="海边的照片"><figcaption>那时我们已经在聊要一起去哪里拍照。</figcaption></figure>
         `
       },
       {
@@ -929,6 +1087,8 @@
           <div class="tags"><span>北京烤鸭</span><span>杭州</span><span>上海</span><span>苏州</span><span>迪士尼</span><span>环球影城</span><span>天台酒吧</span></div>
           <p>你想吃烤鸭，想看风景；我想带你去好玩的地方，想看你穿喜欢的裙子拍照。</p>
           <p>旅行还没走完，目的地我已经记了一长串。</p>
+          <p>我甚至想过先去哪里、住哪里、哪天拍照。计划写得越细，越像是在认真准备一段共同的以后。</p>
+          <figure class="photo-wide photo-card"><img src="assets/photos/cosplay-outdoor.jpg" alt="户外照片"><figcaption>你说想去玩，我脑子里已经有拍照的画面了。</figcaption></figure>
         `
       },
       {
@@ -943,6 +1103,8 @@
             <div class="quote-card"><time>9 月 12 日 · 小婷</time><p>我只会晚上睡不着，醒来要跟你结婚。</p></div>
           </div>
           <p>这些都是当时真实说出口的愿望。写下来，是为了承认它发生过，不是为了拿它要求谁兑现。</p>
+          <p>你说怕太快，我也说可以先同居试试。我们并不是毫无顾虑，只是愿意坐下来把这些顾虑一件件说出来。</p>
+          <figure class="photo-wide photo-card"><img src="assets/photos/bouquet.jpg" alt="花束"><figcaption>真心想过的以后，不应该被装作没发生。</figcaption></figure>
         `
       },
       {
@@ -957,6 +1119,8 @@
             <div class="stat"><strong>10.25</strong><span>原本计划看新房</span></div>
           </div>
           <p>后来这三天的计划，真的在我的记忆里一格一格地发生了。</p>
+          <p>23 号是生日和见面，24 号是在一起待着，25 号是原计划去看房。那几天消息少了很多，因为终于不用靠消息证明彼此在不在。</p>
+          <figure class="photo-wide photo-card"><img src="assets/photos/hotel-flower.jpg" alt="酒店里的花"><figcaption>生日那天，房间里真的有花。</figcaption></figure>
         `
       },
       {
@@ -971,6 +1135,8 @@
             <div class="memory-item"><strong>吃什么</strong><p>到了以后先一起点奶茶，再去吃饭。</p></div>
             <div class="memory-item"><strong>几点到</strong><p>你让我到了大堂就告诉你，我一直在等。</p></div>
           </div>
+          <p>倒计时那几天，连一条裙子、一双鞋、头发要不要卷都值得讨论。现在看很可爱，因为那些小小的准备里，全都是“我想让你更喜欢我一点”。</p>
+          <figure class="photo-wide photo-card"><img src="assets/photos/pink-dress.jpg" alt="粉色裙子的照片"><figcaption>为见面挑过、试过的衣服。</figcaption></figure>
         `
       },
       {
@@ -982,13 +1148,21 @@
           <div class="quote">我们明天就见面了。<small>圣杰 · 2026.10.22 09:20</small></div>
           <p>可能是兴奋，也可能是紧张。明天就能见到屏幕里的人，连电话都舍不得挂。</p>
           <p>后来这成了我们最长的一通电话。</p>
+          <p>挂电话之前我还在想，明天见到你第一句话要说什么。结果真正见到的时候，准备的话全忘了。</p>
+          <figure class="photo-wide photo-card"><img src="assets/photos/portrait-cafe.jpg" alt="一张近照"><figcaption>见面前一天，我盯着你的照片看了很久。</figcaption></figure>
         `
       },
       {
         type: "chapter-page",
         chapter: "第六幕",
         title: "见面",
-        html: `<p>隔着屏幕喜欢了那么久，终于有一天，不用再猜你在哪一边。</p>`
+        html: `
+          <p>隔着屏幕喜欢了那么久，终于有一天，不用再猜你在哪一边。</p>
+          <div class="photo-grid">
+            <figure class="photo-card"><img src="assets/photos/airport-hall.jpg" alt="机场大厅"><figcaption>10 月 23 日，机场。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/hotel-flower.jpg" alt="酒店里的花"><figcaption>等你的时候，酒店里已经摆好了花。</figcaption></figure>
+          </div>
+        `
       },
       {
         chapter: "第六幕 · 见面",
@@ -1002,6 +1176,8 @@
             <div class="quote-card"><time>07:58 · 圣杰</time><p>要老婆揉揉。</p></div>
           </div>
           <p>我紧张到手划破了。不是一路上有多辛苦，是终于要见到你了。</p>
+          <p>那天的机场很亮、人很多，我在大厅里走，脑子里却只有一句：你会不会认不出我。</p>
+          <figure class="photo-wide photo-card"><img src="assets/photos/airport-hall.jpg" alt="机场大厅照片"><figcaption>10 月 23 日 07:29，我拍下的机场大厅。</figcaption></figure>
         `
       },
       {
@@ -1013,6 +1189,8 @@
           <div class="quote">我真的好想你呀。<small>圣杰 · 2026.10.23 14:56</small></div>
           <p>酒店里有水，我想着一会儿和你点奶茶。房间里还想提前放一点你喜欢的东西。</p>
           <p>等待的时候，时间特别慢。</p>
+          <figure class="chat-shot"><img src="assets/chat-meeting.png" alt="见面当天原始聊天记录节选"></figure>
+          <figure class="photo-wide photo-card"><img src="assets/photos/hotel-flower.jpg" alt="酒店里的花和礼物"><figcaption>等你到酒店时拍下的花。</figcaption></figure>
         `
       },
       {
@@ -1027,6 +1205,10 @@
             <div class="stat"><strong>终于</strong><span>不用只看照片和视频了</span></div>
           </div>
           <p>我没写什么“那一刻世界都亮了”的大话。就是很紧张，也很高兴。</p>
+          <div class="photo-grid">
+            <figure class="photo-card"><img src="assets/photos/hotel-bouquet.jpg" alt="酒店房间里的花"><figcaption>生日和见面都在这间房里。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/cosplay-room.jpg" alt="见面那天穿的衣服"><figcaption>你为这天准备的衣服。</figcaption></figure>
+          </div>
         `
       },
       {
@@ -1037,6 +1219,10 @@
           <p>不是没话说了，是因为人在身边。</p>
           <p>不用再问“你在干嘛”，不用等回复，也不用靠一串消息猜对方的表情。</p>
           <p>那天的空白，我后来再看，反而觉得很珍贵。</p>
+          <div class="photo-grid">
+            <figure class="photo-card"><img src="assets/photos/last-meal.jpg" alt="一起吃饭的照片"><figcaption>一起吃的饭，比聊天框里的外卖更有温度。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/cat-last.jpg" alt="猫猫照片"><figcaption>那天也没有忘记拍猫。</figcaption></figure>
+          </div>
         `
       },
       {
@@ -1051,13 +1237,24 @@
             <div class="quote-card"><time>小婷</time><p>不离开呀。</p></div>
           </div>
           <p>那天之后，我还是会提醒你吹头发，还是会问你吃饭没有。只是这些话从“以后见面”变成了“我们真的见过以后”。</p>
+          <figure class="chat-shot"><img src="assets/chat-goodbye.png" alt="10月25日原始聊天记录节选"></figure>
+          <div class="photo-grid">
+            <figure class="photo-card"><img src="assets/photos/farewell-flowers.jpg" alt="分别那天拍的花"><figcaption>10 月 25 日，花和房间。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/holding-hands.jpg" alt="牵手的照片"><figcaption>那天拍到的手。</figcaption></figure>
+          </div>
         `
       },
       {
         type: "chapter-page",
         chapter: "尾声",
         title: "我记得的我们",
-        html: `<p>不是每一天都惊天动地，但每一天都有过你。</p>`
+        html: `
+          <p>不是每一天都惊天动地，但每一天都有过你。</p>
+          <div class="photo-grid">
+            <figure class="photo-card"><img src="assets/photos/pink-dress.jpg" alt="粉色裙子"><figcaption>认真打扮的你。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/holding-hands.jpg" alt="牵手的照片"><figcaption>真的牵到的手。</figcaption></figure>
+          </div>
+        `
       },
       {
         chapter: "尾声",
@@ -1072,6 +1269,11 @@
             <div class="stat"><strong>384</strong><span>语音消息</span></div>
           </div>
           <p>这些数字不是用来交换什么。只是证明那些日子真的发生过。</p>
+          <p>数字不会记得事情是怎么发生的，但我会记得：电话是你先打来的，照片是你随手发来的，甜话也不是复制粘贴。</p>
+          <div class="photo-grid">
+            <figure class="photo-card"><img src="assets/photos/cat-green.jpg" alt="猫猫"><figcaption>猫猫占了很多页。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/hotel-flower.jpg" alt="酒店里的花"><figcaption>最后，我们真的见到了。</figcaption></figure>
+          </div>
         `
       },
       {
@@ -1088,6 +1290,7 @@
             <div class="memory-item"><strong>难过也别憋太久。</strong><p>想说话的时候有人听，不想说话就先安静待一会儿。</p></div>
           </div>
           <div class="quote">我不是要管你。就是希望你以后不管在哪儿、身边是谁，都能把自己照顾好。<small>这些是很普通的希望，也是我真心希望你过得舒服</small></div>
+          <figure class="photo-wide photo-card"><img src="assets/photos/last-meal.jpg" alt="一起吃饭的照片"><figcaption>所以还是要好好吃饭，认真过每一天。</figcaption></figure>
         `
       },
       {
@@ -1098,6 +1301,10 @@
           <p>谢谢你在我胃疼、头痛的时候问我怎么了。谢谢你愿意叫我老公，愿意跟我聊以后，愿意让一个人走进你的日常。</p>
           <p>也谢谢那些特别普通的晚上：你刚洗完澡，头发还湿着；我隔着屏幕催你吹干；然后电话接通，你说：“我先吹个头发。”</p>
           <p>这些小事，我会记得很久。</p>
+          <div class="photo-grid">
+            <figure class="photo-card"><img src="assets/photos/cat-last.jpg" alt="猫猫"><figcaption>谢谢你愿意和我分享喜欢的东西。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/holding-hands.jpg" alt="牵手照片"><figcaption>也谢谢那次真的见面。</figcaption></figure>
+          </div>
         `
       },
       {
