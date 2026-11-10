@@ -1,0 +1,1205 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow,noarchive,noimageindex">
+  <meta name="theme-color" content="#f7ece9">
+  <meta name="og:title" content="给小婷的回忆录">
+  <meta name="og:description" content="从第一句话，到第一次见面。">
+  <link rel="icon" href="data:,">
+  <title>给小婷的回忆录</title>
+  <style>
+    :root {
+      --paper: #fffaf6;
+      --paper-deep: #f5e5e3;
+      --ink: #382d31;
+      --muted: #78686c;
+      --rose: #a84e65;
+      --rose-deep: #743446;
+      --rose-soft: #eed4d9;
+      --sage: #56796f;
+      --line: rgba(88, 58, 68, .14);
+      --shadow: 0 22px 70px rgba(89, 51, 60, .12);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100svh;
+      padding: 58px 0 92px;
+      overflow-x: hidden;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 3%, #f8dde2 0, transparent 27rem),
+        radial-gradient(circle at 92% 22%, #f2e3d2 0, transparent 28rem),
+        linear-gradient(180deg, #fbf3ef, #fffaf6 52%, #f5ebe7);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      font-size: 16px;
+      line-height: 1.85;
+      -webkit-font-smoothing: antialiased;
+    }
+    button { font: inherit; }
+    .bookbar {
+      position: fixed;
+      z-index: 30;
+      top: 0;
+      left: 0;
+      right: auto;
+      width: 100%;
+      height: 54px;
+      padding: 0 max(14px, env(safe-area-inset-left)) 0 max(14px, env(safe-area-inset-right));
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 12px;
+      color: var(--ink);
+      background: rgba(255, 250, 246, .9);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(16px);
+    }
+    .bookbar-title {
+      min-width: 0;
+      font-family: "Songti SC", "STSong", "SimSun", serif;
+      font-size: 16px;
+      font-weight: 600;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .toc-btn {
+      min-height: 34px;
+      border: 1px solid rgba(168, 78, 101, .25);
+      border-radius: 999px;
+      padding: 5px 12px;
+      color: var(--rose-deep);
+      background: rgba(238, 212, 217, .38);
+      cursor: pointer;
+    }
+    .progress {
+      position: fixed;
+      z-index: 31;
+      top: 53px;
+      left: 0;
+      right: auto;
+      width: 100%;
+      height: 2px;
+      background: rgba(168, 78, 101, .08);
+    }
+    .progress > span {
+      display: block;
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--rose), #c88591);
+      transition: width .3s ease;
+    }
+    main { width: min(820px, calc(100% - 26px)); margin: 0 auto; }
+    .page-card {
+      position: relative;
+      min-height: calc(100svh - 178px);
+      padding: clamp(24px, 6vw, 52px);
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, .88), rgba(255, 249, 245, .82)),
+        var(--paper);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      animation: pageIn .42s ease both;
+    }
+    .page-card:before {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border: 1px solid rgba(168, 78, 101, .08);
+      border-radius: 19px;
+      pointer-events: none;
+    }
+    .page-card > * { position: relative; z-index: 1; }
+    @keyframes pageIn {
+      from { opacity: 0; transform: translateX(12px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .chapter {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      margin-bottom: 12px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      color: var(--rose-deep);
+      background: rgba(238, 212, 217, .46);
+      font-size: 12px;
+      font-weight: 750;
+      letter-spacing: .12em;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2 {
+      font-family: "Songti SC", "STSong", "SimSun", serif;
+      font-weight: 550;
+      line-height: 1.25;
+      letter-spacing: -.025em;
+    }
+    h1 { margin: 18px 0 24px; font-size: clamp(46px, 12vw, 76px); }
+    h2 { margin: 6px 0 22px; font-size: clamp(30px, 7vw, 44px); }
+    h3 { margin: 24px 0 8px; font-size: 19px; }
+    p { margin: 0 0 1.05em; }
+    .lead { color: var(--muted); font-size: clamp(17px, 3.8vw, 20px); line-height: 1.8; }
+    .small { color: var(--muted); font-size: 13px; }
+    .quote {
+      margin: 20px 0;
+      padding: 17px 19px;
+      border-left: 3px solid var(--rose);
+      border-radius: 0 16px 16px 0;
+      color: var(--rose-deep);
+      background: rgba(255, 250, 247, .8);
+      font-family: "Songti SC", "STSong", "SimSun", serif;
+      font-size: 19px;
+      line-height: 1.7;
+    }
+    .quote small {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", sans-serif;
+      font-size: 11px;
+      font-style: normal;
+      letter-spacing: .04em;
+    }
+    .quote-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .quote-card {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      background: rgba(255, 255, 255, .62);
+    }
+    .quote-card time { display: block; color: var(--rose); font-size: 11px; font-weight: 750; margin-bottom: 7px; }
+    .quote-card p { margin: 0; font-size: 15px; line-height: 1.72; }
+    .bubble {
+      width: fit-content;
+      max-width: 100%;
+      margin: 6px 0;
+      padding: 8px 12px;
+      border-radius: 14px;
+      font-size: 14px;
+    }
+    .bubble.them { background: #f1e5e4; color: #49373d; border-top-left-radius: 4px; }
+    .bubble.me { margin-left: auto; background: #e2eee8; color: #27443b; border-top-right-radius: 4px; }
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 9px;
+      margin: 20px 0;
+    }
+    .stat {
+      min-height: 102px;
+      padding: 14px 12px;
+      border-radius: 17px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .58);
+    }
+    .stat strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--rose-deep);
+      font-family: "Songti SC", "STSong", "SimSun", serif;
+      font-size: 25px;
+      line-height: 1.15;
+    }
+    .stat span { color: var(--muted); font-size: 11px; line-height: 1.5; }
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: 15px;
+      margin-top: 20px;
+      padding-left: 23px;
+    }
+    .timeline:before {
+      content: "";
+      position: absolute;
+      left: 5px;
+      top: 6px;
+      bottom: 5px;
+      width: 1px;
+      background: var(--rose-soft);
+    }
+    .timeline-item { position: relative; padding-left: 12px; }
+    .timeline-item:before {
+      content: "";
+      position: absolute;
+      left: -20px;
+      top: 8px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--rose);
+      box-shadow: 0 0 0 4px rgba(238, 212, 217, .5);
+    }
+    .timeline-item time { color: var(--rose); font-size: 11px; font-weight: 750; }
+    .timeline-item h3 { margin: 3px 0 3px; font-size: 16px; }
+    .timeline-item p { margin: 0; color: var(--muted); font-size: 14px; }
+    .memory-list { display: grid; gap: 11px; margin-top: 17px; }
+    .memory-item {
+      padding: 14px 15px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, .54);
+    }
+    .memory-item strong { color: var(--rose-deep); }
+    .memory-item p { margin: 4px 0 0; color: var(--muted); font-size: 14px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; margin: 18px 0 0; }
+    .tags span {
+      padding: 4px 10px;
+      border-radius: 999px;
+      color: var(--rose-deep);
+      background: rgba(238, 212, 217, .38);
+      font-size: 12px;
+    }
+    .toc-list { display: grid; gap: 8px; margin-top: 20px; }
+    .toc-item {
+      display: grid;
+      grid-template-columns: 32px 1fr;
+      gap: 10px;
+      align-items: center;
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      color: var(--ink);
+      background: rgba(255, 255, 255, .56);
+      text-align: left;
+      cursor: pointer;
+    }
+    .toc-item b { color: var(--rose); font-size: 12px; }
+    .toc-item span { font-size: 14px; line-height: 1.45; }
+    .title-page { display: flex; flex-direction: column; justify-content: center; }
+    .title-page .date { color: var(--rose); font-size: 13px; font-weight: 750; letter-spacing: .18em; }
+    .title-page h1 { margin-top: 22px; }
+    .chapter-page { display: flex; flex-direction: column; justify-content: center; text-align: center; }
+    .chapter-page .chapter { align-self: center; }
+    .chapter-page p { color: var(--muted); }
+    .end-page { display: flex; flex-direction: column; justify-content: center; text-align: center; }
+    .end-page h1 { font-size: clamp(36px, 9vw, 58px); }
+    .page-nav {
+      position: fixed;
+      z-index: 32;
+      left: 50%;
+      bottom: max(12px, env(safe-area-inset-bottom));
+      transform: translateX(-50%);
+      width: min(520px, calc(100% - 24px));
+      min-height: 56px;
+      display: grid;
+      grid-template-columns: 92px 1fr 92px;
+      gap: 8px;
+      align-items: center;
+      padding: 7px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(54, 41, 46, .9);
+      box-shadow: 0 12px 34px rgba(0,0,0,.18);
+      backdrop-filter: blur(16px);
+    }
+    .page-nav button {
+      min-height: 40px;
+      border: 0;
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(255,255,255,.11);
+      cursor: pointer;
+    }
+    .page-nav button:disabled { opacity: .3; cursor: default; }
+    .page-indicator { text-align: center; font-size: 12px; line-height: 1.3; }
+    .page-indicator b { display: block; font-size: 14px; }
+    .toc-overlay {
+      position: fixed;
+      z-index: 60;
+      inset: 0;
+      display: none;
+      padding: 70px 14px 90px;
+      background: rgba(42, 30, 35, .42);
+      backdrop-filter: blur(8px);
+    }
+    .toc-overlay.open { display: block; }
+    .toc-panel {
+      width: min(680px, 100%);
+      max-height: calc(100svh - 160px);
+      margin: 0 auto;
+      overflow: auto;
+      padding: 22px;
+      border-radius: 24px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+    .toc-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .toc-head h2 { margin: 0; font-size: 27px; }
+    .toc-close {
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      color: var(--rose-deep);
+      background: rgba(238, 212, 217, .38);
+      cursor: pointer;
+    }
+    .toc-list { max-height: none; }
+    @media (max-width: 620px) {
+      body { padding-top: 52px; padding-bottom: 82px; font-size: 16px; line-height: 1.8; }
+      .bookbar { height: 50px; }
+      .progress { top: 49px; }
+      main { width: calc(100% - 20px); }
+      .page-card { min-height: calc(100svh - 158px); padding: 22px 17px 28px; border-radius: 22px; }
+      .page-card:before { inset: 10px; border-radius: 16px; }
+      h2 { font-size: 29px; }
+      h1 { font-size: 45px; }
+      .quote-grid { grid-template-columns: 1fr; }
+      .stat-row { grid-template-columns: 1fr 1fr; }
+      .stat:last-child:nth-child(odd) { grid-column: 1 / -1; }
+      .page-nav { grid-template-columns: 82px 1fr 82px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *:before, *:after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="bookbar">
+    <div class="bookbar-title">给小婷的回忆录</div>
+    <button class="toc-btn" id="tocButton" type="button">目录</button>
+  </header>
+  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+  <main>
+    <article class="page-card" id="pageCard" aria-live="polite"></article>
+  </main>
+
+  <nav class="page-nav" aria-label="翻页">
+    <button id="prevButton" type="button">上一页</button>
+    <div class="page-indicator"><b id="pageCounter"></b><span id="pageChapter"></span></div>
+    <button id="nextButton" type="button">下一页</button>
+  </nav>
+
+  <div class="toc-overlay" id="tocOverlay">
+    <section class="toc-panel" aria-label="回忆录目录">
+      <div class="toc-head">
+        <h2>目录</h2>
+        <button class="toc-close" id="tocClose" type="button" aria-label="关闭目录">×</button>
+      </div>
+      <div class="toc-list" id="tocList"></div>
+    </section>
+  </div>
+
+  <script>
+    const pages = [
+      {
+        type: "title",
+        chapter: "",
+        title: "给小婷的回忆录",
+        html: `
+          <div class="date">2026.06.24 — 10.25</div>
+          <h1>给小婷的<br>回忆录</h1>
+          <p class="lead">从我认识你的第一句话，写到我们一起见过面以后。</p>
+          <p>这里只放我记得的好日子、你说过的话，还有我们认真聊过的以后。</p>
+        `
+      },
+      {
+        chapter: "翻阅说明",
+        title: "这本里写了什么",
+        html: `
+          <p class="lead">不是一份数据报告。是一本很长的回忆录。</p>
+          <div class="memory-list">
+            <div class="memory-item"><strong>第一幕 · 认识你</strong><p>从第一条消息，到“我们在一起啦”。</p></div>
+            <div class="memory-item"><strong>第二幕 · 普通日子</strong><p>吃饭、洗澡、吹头发、睡觉、电话和每天的小事。</p></div>
+            <div class="memory-item"><strong>第三幕 · 我们一起喜欢的东西</strong><p>游戏、猫、短剧、照片、裙子和路边的夜宵。</p></div>
+            <div class="memory-item"><strong>第四幕 · 甜话</strong><p>你叫我老公，我叫你宝宝，还有那些我舍不得删掉的原话。</p></div>
+            <div class="memory-item"><strong>第五幕 · 约定</strong><p>北京、新房、小猫、迪士尼和生日。</p></div>
+            <div class="memory-item"><strong>第六幕 · 见面</strong><p>机场、酒店大堂，还有终于看到你的那一刻。</p></div>
+          </div>
+          <p class="small">可以用下面的按钮翻页，也可以直接打开目录。手机可以左右滑。</p>
+        `
+      },
+      {
+        type: "chapter-page",
+        chapter: "第一幕",
+        title: "认识你",
+        html: `<p>故事最开始，我们只是各自手机里的一个名字。</p>`
+      },
+      {
+        chapter: "第一幕 · 认识你",
+        title: "第一句话",
+        html: `
+          <p class="lead">2026 年 6 月 24 日，抖音里出现了一句：“可以开始聊天了。”</p>
+          <div class="stat-row">
+            <div class="stat"><strong>6 月 24 日</strong><span>第一次出现在彼此的消息里</span></div>
+            <div class="stat"><strong>22 条</strong><span>那天在抖音留下的消息</span></div>
+            <div class="stat"><strong>2 条</strong><span>微信里只有刚加上时的系统提示</span></div>
+          </div>
+          <p>那天你说得很清楚：“微信不聊天，纯扩列。”</p>
+          <div class="quote">微信不聊天，纯扩列。<small>小婷 · 2026.06.24</small></div>
+          <p>我记住了这句话。因为后来我们聊了那么久，反而显得最开始那句边界特别可爱。</p>
+        `
+      },
+      {
+        chapter: "第一幕 · 认识你",
+        title: "大美女，怎么啦",
+        html: `
+          <p class="lead">真正开始聊天，是 7 月 22 日。</p>
+          <div class="quote">怎么啦大美女<small>圣杰 · 2026.07.22 13:44</small></div>
+          <div class="quote">在骂领导呀。<small>小婷 · 2026.07.22</small></div>
+          <p>那天我们一共产下了 140 条消息。从工作、收入、喜欢什么样的人，一直聊到生活里那些细碎的事。</p>
+          <p>我当时不知道，这个说在骂领导的女孩，后来会变成我每天最想找的人。</p>
+        `
+      },
+      {
+        chapter: "第一幕 · 认识你",
+        title: "小婷",
+        html: `
+          <p class="lead">你说：“叫我小婷就行。”</p>
+          <p>从那以后，“大美女”是我的玩笑，“小婷”才是我认真叫你的名字。</p>
+          <div class="quote">小婷。<small>后来我在心里叫了你很多很多遍</small></div>
+          <p>它出现在消息里、电话接通的第一句里，也出现在我不舍得删的聊天记录里。</p>
+          <p>一个名字很短，可它把一个人的生活，慢慢放进了另一个人的日常。</p>
+        `
+      },
+      {
+        chapter: "第一幕 · 认识你",
+        title: "因为是真的喜欢你呀",
+        html: `
+          <p class="lead">7 月 24 日，我第一次很直白地说喜欢。</p>
+          <div class="quote">因为是真的喜欢你呀。<small>圣杰 · 2026.07.24 13:55</small></div>
+          <p>不是提前准备好的情话，也不是为了让你快点答应。</p>
+          <p>就是聊着聊着，突然发现，你的消息来了我会开心，没来我会一直看手机。那种喜欢，藏不住。</p>
+        `
+      },
+      {
+        chapter: "第一幕 · 认识你",
+        title: "我们在一起啦",
+        html: `
+          <p class="lead">7 月 27 日 00:00，记录里留下了一句：“我们在一起啦。”</p>
+          <div class="stat-row">
+            <div class="stat"><strong>00:00</strong><span>关系有了名字的那一分钟</span></div>
+            <div class="stat"><strong>391 条</strong><span>那天微信里的消息</span></div>
+            <div class="stat"><strong>2:09:39</strong><span>那天第一通电话的时长</span></div>
+          </div>
+          <p>从那天起，我们不再只是聊天的人了。你开始叫我老公，我开始叫你老婆。</p>
+        `
+      },
+      {
+        chapter: "第一幕 · 认识你",
+        title: "第一声老公，第一声老婆",
+        html: `
+          <div class="quote-grid">
+            <div class="quote-card"><time>7 月 27 日 07:47 · 小婷</time><p>老公呀</p></div>
+            <div class="quote-card"><time>7 月 27 日 07:48 · 圣杰</time><p>老婆</p></div>
+            <div class="quote-card"><time>7 月 27 日 07:48 · 圣杰</time><p>我好喜欢你呀</p></div>
+            <div class="quote-card"><time>7 月 27 日 07:31 · 圣杰</time><p>今天也最最喜欢你啦</p></div>
+          </div>
+          <p>后来这两个称呼出现了太多次。可第一次看见“老公呀”的时候，我还是高兴得像个傻子。</p>
+        `
+      },
+      {
+        chapter: "第一幕 · 认识你",
+        title: "第一通电话",
+        html: `
+          <p class="lead">2026 年 7 月 27 日 00:50，我们开始第一次很长的电话。</p>
+          <div class="stat-row">
+            <div class="stat"><strong>2:09:39</strong><span>第一通长电话</span></div>
+            <div class="stat"><strong>我发起</strong><span>那天是我先打给你的</span></div>
+            <div class="stat"><strong>舍不得挂</strong><span>当时最真实的感觉</span></div>
+          </div>
+          <p>以前觉得两个小时很长。和你打的时候，时间像是不见了。</p>
+          <p>后来我们打过 462 次接通的电话，可这一通一直是最特别的那一通。</p>
+        `
+      },
+      {
+        type: "chapter-page",
+        chapter: "第二幕",
+        title: "普通日子",
+        html: `<p>真正留在记忆里的，大多是每天都会发生的小事。</p>`
+      },
+      {
+        chapter: "第二幕 · 普通日子",
+        title: "一天从“到公司了吗”开始",
+        html: `
+          <div class="timeline">
+            <div class="timeline-item"><time>早上</time><h3>到公司了吗</h3><p>问你有没有睡够、路上冷不冷、到公司没有。</p></div>
+            <div class="timeline-item"><time>上班时</time><h3>听你骂领导</h3><p>你讲工作里烦人的事，我一边听一边哄你。</p></div>
+            <div class="timeline-item"><time>中午</time><h3>吃饭没有</h3><p>提醒你别空腹，别只喝奶茶，别忙到忘了吃饭。</p></div>
+            <div class="timeline-item"><time>晚上</time><h3>洗澡、吹头发、打电话</h3><p>等你收拾好，我们再一直聊到困。</p></div>
+            <div class="timeline-item"><time>睡前</time><h3>晚安啦老婆</h3><p>有时候说完晚安，还会舍不得真的挂。</p></div>
+          </div>
+        `
+      },
+      {
+        chapter: "第二幕 · 普通日子",
+        title: "吃饭了没有",
+        html: `
+          <p class="lead">“吃饭”两个字，在我们的聊天里出现过 89 条消息。</p>
+          <div class="quote-grid">
+            <div class="quote-card"><time>8 月 26 日</time><p>宝宝你快吃饭。</p></div>
+            <div class="quote-card"><time>9 月 5 日</time><p>中午好好吃一顿。</p></div>
+            <div class="quote-card"><time>9 月 20 日</time><p>你快点外卖。</p></div>
+            <div class="quote-card"><time>9 月 24 日</time><p>你现在点外卖，好好吃东西然后回家休息。</p></div>
+          </div>
+          <p>有时候我知道自己像在唠叨。可你不按时吃饭，我是真的会惦记。</p>
+          <p>后来我们也反过来。你会问我吃饭没有，会提醒我感冒了要多喝水。</p>
+        `
+      },
+      {
+        chapter: "第二幕 · 普通日子",
+        title: "肯德基和奶茶",
+        html: `
+          <p class="lead">我们聊过太多遍“今天吃什么”。</p>
+          <div class="memory-list">
+            <div class="memory-item"><strong>8 月 27 日</strong><p>我连着问你吃肯德基没有，还让你自己去买杯奶茶。</p></div>
+            <div class="memory-item"><strong>9 月 3 日</strong><p>一句“喝不喝奶茶”，能把普通一天变得有点期待。</p></div>
+            <div class="memory-item"><strong>9 月 24 日</strong><p>你拿“疯狂星期四”的发疯文案逗我，我在认真给你挑饭。</p></div>
+            <div class="memory-item"><strong>10 月 28 日</strong><p>还是会问一句：“吃不吃肯德基呀。”</p></div>
+          </div>
+          <p>后来我才知道，喜欢一个人，真的会把“你吃了吗”问很多很多遍。</p>
+        `
+      },
+      {
+        chapter: "第二幕 · 普通日子",
+        title: "暖宝宝和热水",
+        html: `
+          <p class="lead">你说肚子疼的时候，会告诉我贴个暖宝宝就行，不让我天天给你点饮品。</p>
+          <p>你嘴上总说不用，可我还是会问你要不要奶茶、要不要热水、外卖到了没有。</p>
+          <div class="quote">你肚子疼的时候，说贴暖宝宝就行，不让我天天点饮品。<small>后来才懂，照顾不是一股脑给你塞东西</small></div>
+          <p>所以现在再说关心，我会先问一句：你要不要。不是我觉得你需要什么，就替你决定。</p>
+        `
+      },
+      {
+        chapter: "第二幕 · 普通日子",
+        title: "那个凌晨，你说胃疼",
+        html: `
+          <p class="lead">8 月 26 日 00:16，你发来一句：“老公我胃疼。”</p>
+          <div class="quote">老公我胃疼。<small>小婷 · 2026.08.26 00:16</small></div>
+          <p>第二天早上，我第一反应就是让你去诊所。后面又一直催你吃饭、休息。</p>
+          <p>你说自己有时候姨妈痛、没好好吃饭就会胃痛。那种时候我帮不上太多，只能隔着手机一遍遍问你好点没有。</p>
+        `
+      },
+      {
+        chapter: "第二幕 · 普通日子",
+        title: "你说头痛的时候",
+        html: `
+          <p class="lead">9 月 24 日，你说：“我最近真的总是在头疼，我也不知道为什么。”</p>
+          <div class="quote-grid">
+            <div class="quote-card"><time>9 月 24 日</time><p>我有点头疼。</p></div>
+            <div class="quote-card"><time>9 月 24 日</time><p>老公我真头痛，不开玩笑的。</p></div>
+            <div class="quote-card"><time>10 月 26 日</time><p>头痛。</p></div>
+            <div class="quote-card"><time>10 月 28 日</time><p>记得吹头发呀，你容易头疼。</p></div>
+          </div>
+          <p>我也有偏头痛。所以后来你说头痛，我不会只回一句“多喝热水”，会问你有没有吃药、有没有休息。</p>
+        `
+      },
+      {
+        chapter: "第二幕 · 普通日子",
+        title: "洗完澡以后，头发还湿着",
+        html: `
+          <p class="lead">有时候你洗完澡就出来，头发也没吹干。我隔着屏幕看不见，只能一遍遍问。</p>
+          <div class="quote-grid">
+            <div class="quote-card"><time>7 月 27 日</time><p>宝宝我知道你吹头发不方便。以后我帮你洗头发、吹头发。</p></div>
+            <div class="quote-card"><time>8 月 19 日</time><p>你早点洗完澡，我们就可以多打电话啦。</p></div>
+            <div class="quote-card"><time>10 月 8 日</time><p>我说过了，你一定洗完澡要吹头发。</p></div>
+            <div class="quote-card"><time>10 月 28 日</time><p>记得吹头发呀，你容易头疼。</p></div>
+          </div>
+          <p>你有时嫌麻烦，我又总怕你顶着一头湿发吹空调。我的关心有时候听起来像唠叨，可那里面装的全是你。</p>
+          <p>我甚至还说过，买一个洗头椅包。不是觉得你洗不好，是我真的觉得你每次洗头发都很辛苦。</p>
+        `
+      },
+      {
+        chapter: "第二幕 · 普通日子",
+        title: "头发长一点，短一点，都是你",
+        html: `
+          <p class="lead">你不止一次和我聊起头发。</p>
+          <div class="memory-list">
+            <div class="memory-item"><strong>8 月 9 日</strong><p>你说原本到腰的头发被剪到肩下，语气里有一点舍不得。</p></div>
+            <div class="memory-item"><strong>8 月 20 日</strong><p>你染完头发说自己“像奶奶”，我听了只想笑。</p></div>
+            <div class="memory-item"><strong>8 月 29 日</strong><p>你自己卷了头发，拍了照片。</p></div>
+            <div class="memory-item"><strong>10 月 13 日</strong><p>你说原生头发会炸，可照片里还是很 cute。</p></div>
+          </div>
+          <p>你说等头发再长一点，我也记住了。头发的长度会变，颜色会变，你还是小婷。</p>
+        `
+      },
+      {
+        chapter: "第二幕 · 普通日子",
+        title: "以后我来洗，也我来吹",
+        html: `
+          <p class="lead">这不是一句临时想到的甜话。</p>
+          <div class="quote">以后我帮你洗头发，吹头发。<small>圣杰 · 2026.07.27</small></div>
+          <div class="quote">以后我帮你吹头发吧。<small>圣杰 · 2026.07.31</small></div>
+          <p>后来我又说，想买一个洗头椅包，因为我觉得你每次洗头发都好辛苦。</p>
+          <p>这些约定很小，小到不像什么大事。可真正想一起生活，不就是从吹头发、吃饭、等你回家这些小事开始的吗。</p>
+        `
+      },
+      {
+        chapter: "第二幕 · 普通日子",
+        title: "早点睡，别熬夜",
+        html: `
+          <p class="lead">我总催你早点睡，你总说做不到。</p>
+          <div class="quote-grid">
+            <div class="quote-card"><time>8 月 25 日</time><p>你给我早点睡。</p></div>
+            <div class="quote-card"><time>9 月 8 日</time><p>你不要熬夜了。</p></div>
+            <div class="quote-card"><time>9 月 21 日</time><p>我要让你每天醒来都特别幸福。</p></div>
+            <div class="quote-card"><time>9 月 23 日</time><p>以后你有任何事情，都可以半夜喊我起来。</p></div>
+          </div>
+          <p>你也不是只会被我催。你会让我感冒了多喝水、好好吃饭，会让我别太累。</p>
+        `
+      },
+      {
+        chapter: "第二幕 · 普通日子",
+        title: "电话一接通，屋子就不空了",
+        html: `
+          <p class="lead">微信一共留下 574 条通话记录，462 次接通。</p>
+          <div class="stat-row">
+            <div class="stat"><strong>23天16小时</strong><span>累计连接时长</span></div>
+            <div class="stat"><strong>222 次</strong><span>你主动打给我的通话</span></div>
+            <div class="stat"><strong>11:40:08</strong><span>最长的一次</span></div>
+          </div>
+          <p>下班打、吃饭前打、洗完澡打、快睡了还打。</p>
+          <p>有时我们一直说话，有时什么都不说，电话就挂着。可只要知道你在那边，一个人也没那么像一个人。</p>
+        `
+      },
+      {
+        chapter: "第二幕 · 普通日子",
+        title: "我们的一天",
+        html: `
+          <div class="timeline">
+            <div class="timeline-item"><time>07:00</time><h3>早安</h3><p>问你睡得好不好，催你吃早餐。</p></div>
+            <div class="timeline-item"><time>09:00</time><h3>到公司</h3><p>你说领导又怎么了，我负责听你吐槽。</p></div>
+            <div class="timeline-item"><time>12:00</time><h3>午饭</h3><p>研究外卖，肯德基、奶茶或者随便吃点。</p></div>
+            <div class="timeline-item"><time>18:30</time><h3>下班</h3><p>问你到家没有，今天累不累。</p></div>
+            <div class="timeline-item"><time>20:00</time><h3>洗完澡</h3><p>提醒你吹头发，然后打电话。</p></div>
+            <div class="timeline-item"><time>23:30</time><h3>晚安</h3><p>一句晚安以后，常常还舍不得挂。</p></div>
+          </div>
+        `
+      },
+      {
+        type: "chapter-page",
+        chapter: "第三幕",
+        title: "我们一起喜欢的东西",
+        html: `<p>很多快乐都很小，但足够把一天照亮。</p>`
+      },
+      {
+        chapter: "第三幕 · 小事",
+        title: "王者荣耀",
+        html: `
+          <p class="lead">你打王者，我也开始盼着晚上和你开一局。</p>
+          <p>你说过打游戏本来就是为了增进感情。我记得你说，不要太在乎输赢，更重要是照顾彼此的情绪。</p>
+          <div class="quote-grid">
+            <div class="quote-card"><time>9 月 3 日</time><p>宝宝我们今晚玩游戏嘛。</p></div>
+            <div class="quote-card"><time>9 月 10 日</time><p>和我打游戏。</p></div>
+            <div class="quote-card"><time>9 月 13 日</time><p>给你打王者。</p></div>
+            <div class="quote-card"><time>10 月 13 日</time><p>我们一起玩呀。</p></div>
+          </div>
+        `
+      },
+      {
+        chapter: "第三幕 · 小事",
+        title: "你辅助打得真的很好",
+        html: `
+          <p class="lead">“你辅助打得太好了”不是哄你。</p>
+          <p>你说自己一般般，还会担心游戏打得不好我会不高兴。可我是真的觉得你厉害。</p>
+          <div class="quote">你辅助打得太好了。<small>圣杰</small></div>
+          <p>那段时间我最盼的就是晚上开一局。赢了当然开心，但更开心的是，一戴上耳机就能听见你。</p>
+        `
+      },
+      {
+        chapter: "第三幕 · 小事",
+        title: "猫猫",
+        html: `
+          <p class="lead">我们聊天里有很多猫。</p>
+          <div class="memory-list">
+            <div class="memory-item"><strong>9 月 10 日</strong><p>你给我看公司楼下的小猫。</p></div>
+            <div class="memory-item"><strong>9 月 15 日</strong><p>你问：“小猫可爱还是我可爱？”我说你比小猫可爱得多。</p></div>
+            <div class="memory-item"><strong>9 月 25 日</strong><p>你说猫猫都被我迷住了。</p></div>
+            <div class="memory-item"><strong>9 月 29 日</strong><p>你说“我也想你啊，我还想我的小猫”。</p></div>
+          </div>
+          <p>所以我们后来认真约定，要一起养一只小猫。</p>
+        `
+      },
+      {
+        chapter: "第三幕 · 小事",
+        title: "抖音里的 292 次分享",
+        html: `
+          <p class="lead">抖音一共留下了 292 次分享。</p>
+          <p>猫、综艺、短剧、搞笑视频，还有很多只有几秒钟的片段。</p>
+          <div class="quote-grid">
+            <div class="quote-card"><time>8 月 30 日</time><p>我抖音给你发的你都不回我。</p></div>
+            <div class="quote-card"><time>9 月 8 日</time><p>我在刷抖音啊。</p></div>
+            <div class="quote-card"><time>9 月 19 日</time><p>剪视频。</p></div>
+            <div class="quote-card"><time>10 月 28 日</time><p>还是想看到好笑的就先给你看。</p></div>
+          </div>
+          <p>分享东西看起来没什么，可“看到好笑的第一个想到你”，本身就是喜欢。</p>
+        `
+      },
+      {
+        chapter: "第三幕 · 小事",
+        title: "照片、裙子和化妆",
+        html: `
+          <p class="lead">你喜欢拍照，也总觉得自己不上镜。</p>
+          <p>可在我这里不是。你穿新裙子、做美甲、画好妆、自己卷头发，我都想多看几眼。</p>
+          <div class="quote-grid">
+            <div class="quote-card"><time>8 月 29 日</time><p>自己卷的头发。</p></div>
+            <div class="quote-card"><time>9 月 13 日</time><p>衣服是点缀，你这颜值完全超越了衣服。</p></div>
+            <div class="quote-card"><time>9 月 25 日</time><p>我想看你拍照片。</p></div>
+            <div class="quote-card"><time>10 月 13 日</time><p>粉色裙子、柴犬女仆、鞋子要怎么搭配。</p></div>
+          </div>
+        `
+      },
+      {
+        chapter: "第三幕 · 小事",
+        title: "路边摊也可以很开心",
+        html: `
+          <p class="lead">你说自己平时穿睡衣、人字拖，头发没吹，就敢去吃路边摊。</p>
+          <div class="quote">你也愿意陪我吃路边摊啊。<small>圣杰</small></div>
+          <p>我喜欢的就是这种不端着的样子。不是每天都精致，是偶尔乱糟糟、困兮兮，也愿意跟对方说今天发生了什么。</p>
+          <p>能一起过漂亮日子，也能一起在路边随便吃一顿，这样的以后我想过。</p>
+        `
+      },
+      {
+        chapter: "第三幕 · 小事",
+        title: "那些看着会笑的话",
+        html: `
+          <div class="quote-grid">
+            <div class="quote-card"><time>9 月 15 日 · 小婷</time><p>小猫可爱还是我可爱？</p></div>
+            <div class="quote-card"><time>9 月 15 日 · 圣杰</time><p>你比小猫可爱得多。</p></div>
+            <div class="quote-card"><time>10 月 21 日 · 圣杰</time><p>你是蟑螂我都爱你。</p></div>
+            <div class="quote-card"><time>8 月 20 日 · 小婷</time><p>我现在头发好浅，我像奶奶。</p></div>
+          </div>
+          <p>后来我最想念的，不是某个特别浪漫的大场面，是这些看起来没有营养、只有我们两个人懂的话。</p>
+        `
+      },
+      {
+        type: "chapter-page",
+        chapter: "第四幕",
+        title: "甜话",
+        html: `<p>有些话你早就忘了，我还留在聊天记录里。</p>`
+      },
+      {
+        chapter: "第四幕 · 甜话",
+        title: "喜欢你",
+        html: `
+          <div class="quote-grid">
+            <div class="quote-card"><time>7 月 24 日 · 圣杰</time><p>因为是真的喜欢你呀。</p></div>
+            <div class="quote-card"><time>8 月 6 日 · 小婷</time><p>我超级喜欢圣杰老公呀。</p></div>
+            <div class="quote-card"><time>8 月 10 日 · 小婷</time><p>我超级喜欢你。</p></div>
+            <div class="quote-card"><time>8 月 26 日 · 小婷</time><p>我喜欢你呀宝宝。</p></div>
+            <div class="quote-card"><time>8 月 12 日 · 圣杰</time><p>我喜欢你的灵魂。</p></div>
+            <div class="quote-card"><time>10 月 20 日 · 圣杰</time><p>就是特别特别爱你呀。</p></div>
+          </div>
+        `
+      },
+      {
+        chapter: "第四幕 · 甜话",
+        title: "爱你",
+        html: `
+          <div class="quote-grid">
+            <div class="quote-card"><time>8 月 15 日 · 小婷</time><p>好的呢，我爱你呀老公。</p></div>
+            <div class="quote-card"><time>8 月 19 日 · 小婷</time><p>老公你在我眼里真的特别有魅力，我真的好爱好爱你呀。</p></div>
+            <div class="quote-card"><time>8 月 19 日 · 圣杰</time><p>我也特别特别爱你呀宝宝。</p></div>
+            <div class="quote-card"><time>8 月 20 日 · 小婷</time><p>我就是很爱你呀。</p></div>
+            <div class="quote-card"><time>9 月 22 日 · 小婷</time><p>我爱你啊老公，特别特别爱你啊。</p></div>
+            <div class="quote-card"><time>9 月 29 日 · 圣杰</time><p>老婆，无论发生什么，我都陪着你。</p></div>
+          </div>
+        `
+      },
+      {
+        chapter: "第四幕 · 甜话",
+        title: "想你",
+        html: `
+          <div class="quote-grid">
+            <div class="quote-card"><time>8 月 27 日 · 小婷</time><p>我想你了呀老公。</p></div>
+            <div class="quote-card"><time>9 月 3 日 · 小婷</time><p>老公呀，我也好想你。</p></div>
+            <div class="quote-card"><time>9 月 18 日 · 小婷</time><p>好吧，我想你了呀老公。</p></div>
+            <div class="quote-card"><time>9 月 25 日 · 圣杰</time><p>我想你了呀。</p></div>
+            <div class="quote-card"><time>10 月 1 日 · 小婷</time><p>老公，我想你给我打电话。</p></div>
+            <div class="quote-card"><time>10 月 12 日 · 小婷</time><p>老公我特别特别爱你呀。</p></div>
+          </div>
+          <div class="quote">我将用最直白，最直接，最不绕弯子，最客观，最正确，最系统，最真实，最简洁，最容易理解，最不卖关子的方式告诉你：我想你了。<small>小婷 · 2026.09.25</small></div>
+        `
+      },
+      {
+        chapter: "第四幕 · 甜话",
+        title: "有老公真好",
+        html: `
+          <div class="quote-grid">
+            <div class="quote-card"><time>8 月 15 日 · 小婷</time><p>没有老公，我可怎么办呀。</p></div>
+            <div class="quote-card"><time>8 月 27 日 · 小婷</time><p>天塌下来有老公顶着，全世界只有老公最好。</p></div>
+            <div class="quote-card"><time>9 月 6 日 · 小婷</time><p>还好有老公。</p></div>
+            <div class="quote-card"><time>9 月 12 日 · 小婷</time><p>有老公的感觉也太好了。</p></div>
+            <div class="quote-card"><time>9 月 19 日 · 圣杰</time><p>现在你有老公了。</p></div>
+            <div class="quote-card"><time>9 月 19 日 · 小婷</time><p>有老公真好呀。</p></div>
+          </div>
+        `
+      },
+      {
+        chapter: "第四幕 · 甜话",
+        title: "世界正数第一般配",
+        html: `
+          <p class="lead">8 月 9 日是我生日。</p>
+          <div class="quote">我把蜡烛也点上了。<br>祝圣杰老公生日快乐呀～<br>世界正数第一般配。<small>小婷 · 2026.08.09</small></div>
+          <p>那天我们隔着屏幕一起过生日。你说这叫赛博一起过生日。</p>
+          <p>没有真的蛋糕，没有坐在对面的人，可我还是觉得那天特别完整。</p>
+        `
+      },
+      {
+        chapter: "第四幕 · 甜话",
+        title: "那些一想起就会笑的承诺",
+        html: `
+          <div class="quote-grid">
+            <div class="quote-card"><time>9 月 30 日 · 小婷</time><p>我不离开你呀老公。</p></div>
+            <div class="quote-card"><time>9 月 30 日 · 小婷</time><p>无论怎样我都不离开你。</p></div>
+            <div class="quote-card"><time>9 月 30 日 · 小婷</time><p>我要永远陪着你。</p></div>
+            <div class="quote-card"><time>10 月 21 日 · 小婷</time><p>老公呀我只想和你过。</p></div>
+            <div class="quote-card"><time>10 月 25 日 · 小婷</time><p>我们还会再见的呀。</p></div>
+            <div class="quote-card"><time>10 月 25 日 · 小婷</time><p>不离开呀。</p></div>
+          </div>
+          <p>这些话我写在这里，只是因为你当时真的说过，我也真的相信过。</p>
+        `
+      },
+      {
+        type: "chapter-page",
+        chapter: "第五幕",
+        title: "约定",
+        html: `<p>我们聊过的以后，不是一句“有空再说”。</p>`
+      },
+      {
+        chapter: "第五幕 · 约定",
+        title: "来北京",
+        html: `
+          <p class="lead">“等你来北京”这句话，我们说过很多次。</p>
+          <div class="stat-row">
+            <div class="stat"><strong>北京</strong><span>我们计划里最常出现的城市</span></div>
+            <div class="stat"><strong>接你</strong><span>我认真想过去机场接你</span></div>
+            <div class="stat"><strong>一起住</strong><span>不是见一面就走</span></div>
+          </div>
+          <p>我们聊过机票、高铁，聊过你来了以后先吃什么、去哪里。你说怕自己来了以后不习惯，我说有我在。</p>
+        `
+      },
+      {
+        chapter: "第五幕 · 约定",
+        title: "一起住新房",
+        html: `
+          <p class="lead">你说想一起去看房。</p>
+          <div class="quote">那我们一起看房。<small>圣杰 · 2026.09.26</small></div>
+          <div class="quote">我们一起住新房呀。<small>圣杰 · 2026.09.26</small></div>
+          <p>后来我们连见面的行程都规划好了：23 号在酒店给你过生日，24 号一起玩，25 号去看新房。</p>
+          <p>那些计划最后变成了我手机里记得特别清楚的一段。不是随口说说，是我们真的往一起生活的样子去想过。</p>
+        `
+      },
+      {
+        chapter: "第五幕 · 约定",
+        title: "一只小猫",
+        html: `
+          <p class="lead">猫这件事，我们提了一次又一次。</p>
+          <div class="quote-grid">
+            <div class="quote-card"><time>9 月 26 日 · 圣杰</time><p>然后我们一起养只小猫。</p></div>
+            <div class="quote-card"><time>10 月 7 日 · 圣杰</time><p>以后我们买鱼缸。</p></div>
+            <div class="quote-card"><time>9 月 15 日 · 圣杰</time><p>你比小猫可爱得多。</p></div>
+            <div class="quote-card"><time>9 月 29 日 · 小婷</time><p>我也想你啊，我还想我的小猫。</p></div>
+          </div>
+          <p>我连以后家里有猫、有鱼缸的样子都想过。你负责抱猫，我负责收拾被它弄乱的东西。</p>
+        `
+      },
+      {
+        chapter: "第五幕 · 约定",
+        title: "迪士尼和环球",
+        html: `
+          <p class="lead">我们说过很多次要一起去玩。</p>
+          <div class="memory-list">
+            <div class="memory-item"><strong>北京环球</strong><p>你来了以后，我带你去。</p></div>
+            <div class="memory-item"><strong>上海迪士尼</strong><p>想给你买周边，陪你一起排队。</p></div>
+            <div class="memory-item"><strong>圣诞节、跨年</strong><p>你说以后还可以再去一次迪士尼。</p></div>
+            <div class="memory-item"><strong>拍照</strong><p>我负责给你拍很多照片，你负责说我拍得还不错。</p></div>
+          </div>
+        `
+      },
+      {
+        chapter: "第五幕 · 约定",
+        title: "去很多城市",
+        html: `
+          <p class="lead">北京、杭州、上海、苏州，我们都认真聊过。</p>
+          <div class="tags"><span>北京烤鸭</span><span>杭州</span><span>上海</span><span>苏州</span><span>迪士尼</span><span>环球影城</span><span>天台酒吧</span></div>
+          <p>你想吃烤鸭，想看风景；我想带你去好玩的地方，想看你穿喜欢的裙子拍照。</p>
+          <p>旅行还没走完，目的地我已经记了一长串。</p>
+        `
+      },
+      {
+        chapter: "第五幕 · 约定",
+        title: "结婚这件事，我们真的聊过",
+        html: `
+          <p class="lead">它不是一句玩笑就带过去的话题。</p>
+          <div class="quote-grid">
+            <div class="quote-card"><time>8 月 20 日 · 圣杰</time><p>27 年结婚也不是不行了。</p></div>
+            <div class="quote-card"><time>8 月 24 日 · 小婷</time><p>今年领证，明年结婚吗？</p></div>
+            <div class="quote-card"><time>8 月 29 日 · 圣杰</time><p>那我查查领证需要啥。</p></div>
+            <div class="quote-card"><time>9 月 12 日 · 小婷</time><p>我只会晚上睡不着，醒来要跟你结婚。</p></div>
+          </div>
+          <p>这些都是当时真实说出口的愿望。写下来，是为了承认它发生过，不是为了拿它要求谁兑现。</p>
+        `
+      },
+      {
+        chapter: "第五幕 · 约定",
+        title: "23 号，给你过生日",
+        html: `
+          <p class="lead">日期是你生日，酒店是你喜欢的，行程是咱们一起盼的。</p>
+          <div class="quote">23 号是周五，我陪你在那个超级好看的酒店过生日，然后 24 号我们玩一天，25 号周日我们去看新房。<small>圣杰 · 2026.09.26</small></div>
+          <div class="stat-row">
+            <div class="stat"><strong>10.23</strong><span>见面、过生日</span></div>
+            <div class="stat"><strong>10.24</strong><span>一起玩一天</span></div>
+            <div class="stat"><strong>10.25</strong><span>原本计划看新房</span></div>
+          </div>
+          <p>后来这三天的计划，真的在我的记忆里一格一格地发生了。</p>
+        `
+      },
+      {
+        chapter: "第五幕 · 约定",
+        title: "倒计时",
+        html: `
+          <p class="lead">越接近见面，我们的消息反而多了很多具体的小问题。</p>
+          <div class="memory-list">
+            <div class="memory-item"><strong>你穿什么</strong><p>粉色裙子、柴犬女仆、要不要多带一双鞋。</p></div>
+            <div class="memory-item"><strong>头发怎么办</strong><p>原生头发会炸，要带假发还是要卷一下。</p></div>
+            <div class="memory-item"><strong>酒店怎么布置</strong><p>你喜欢什么、要不要提前放好东西。</p></div>
+            <div class="memory-item"><strong>吃什么</strong><p>到了以后先一起点奶茶，再去吃饭。</p></div>
+            <div class="memory-item"><strong>几点到</strong><p>你让我到了大堂就告诉你，我一直在等。</p></div>
+          </div>
+        `
+      },
+      {
+        chapter: "第五幕 · 约定",
+        title: "见面前一天，最长的一通电话",
+        html: `
+          <p class="lead">10 月 22 日 08:11，你打来电话。</p>
+          <p>那一通一直连了 11 小时 40 分 08 秒。</p>
+          <div class="quote">我们明天就见面了。<small>圣杰 · 2026.10.22 09:20</small></div>
+          <p>可能是兴奋，也可能是紧张。明天就能见到屏幕里的人，连电话都舍不得挂。</p>
+          <p>后来这成了我们最长的一通电话。</p>
+        `
+      },
+      {
+        type: "chapter-page",
+        chapter: "第六幕",
+        title: "见面",
+        html: `<p>隔着屏幕喜欢了那么久，终于有一天，不用再猜你在哪一边。</p>`
+      },
+      {
+        chapter: "第六幕 · 见面",
+        title: "机场",
+        html: `
+          <p class="lead">10 月 23 日，我五点出门，七点五十到机场。</p>
+          <div class="quote-grid">
+            <div class="quote-card"><time>07:51 · 圣杰</time><p>机场。</p></div>
+            <div class="quote-card"><time>07:57 · 小婷</time><p>疼不疼呀老公。</p></div>
+            <div class="quote-card"><time>07:57 · 小婷</time><p>辛苦老公了。</p></div>
+            <div class="quote-card"><time>07:58 · 圣杰</time><p>要老婆揉揉。</p></div>
+          </div>
+          <p>我紧张到手划破了。不是一路上有多辛苦，是终于要见到你了。</p>
+        `
+      },
+      {
+        chapter: "第六幕 · 见面",
+        title: "酒店大堂",
+        html: `
+          <p class="lead">我先到了酒店，在大堂一直等你。</p>
+          <div class="quote">宝宝，到了大厅就和我说。<small>圣杰 · 2026.10.23 14:55</small></div>
+          <div class="quote">我真的好想你呀。<small>圣杰 · 2026.10.23 14:56</small></div>
+          <p>酒店里有水，我想着一会儿和你点奶茶。房间里还想提前放一点你喜欢的东西。</p>
+          <p>等待的时候，时间特别慢。</p>
+        `
+      },
+      {
+        chapter: "第六幕 · 见面",
+        title: "你来了",
+        html: `
+          <p class="lead">后来你到了。屏幕上那个每天叫我老公的人，真的站在了我面前。</p>
+          <p>那天也是你生日。酒店、生日、见面，全都挤在同一天。</p>
+          <div class="stat-row">
+            <div class="stat"><strong>2026.10.23</strong><span>第一次真的见面</span></div>
+            <div class="stat"><strong>生日</strong><span>我本来就想给你过得最好</span></div>
+            <div class="stat"><strong>终于</strong><span>不用只看照片和视频了</span></div>
+          </div>
+          <p>我没写什么“那一刻世界都亮了”的大话。就是很紧张，也很高兴。</p>
+        `
+      },
+      {
+        chapter: "第六幕 · 见面",
+        title: "人在身边的时候，消息就少了",
+        html: `
+          <p class="lead">10 月 24 日，微信里只有 1 条消息。</p>
+          <p>不是没话说了，是因为人在身边。</p>
+          <p>不用再问“你在干嘛”，不用等回复，也不用靠一串消息猜对方的表情。</p>
+          <p>那天的空白，我后来再看，反而觉得很珍贵。</p>
+        `
+      },
+      {
+        chapter: "第六幕 · 见面",
+        title: "我们还会再见的呀",
+        html: `
+          <p class="lead">10 月 25 日，分开的时候很舍不得。</p>
+          <div class="quote-grid">
+            <div class="quote-card"><time>圣杰</time><p>我舍不得你呀。</p></div>
+            <div class="quote-card"><time>小婷</time><p>我们还会再见的呀。</p></div>
+            <div class="quote-card"><time>圣杰</time><p>你不要离开我好不好呀。</p></div>
+            <div class="quote-card"><time>小婷</time><p>不离开呀。</p></div>
+          </div>
+          <p>那天之后，我还是会提醒你吹头发，还是会问你吃饭没有。只是这些话从“以后见面”变成了“我们真的见过以后”。</p>
+        `
+      },
+      {
+        type: "chapter-page",
+        chapter: "尾声",
+        title: "我记得的我们",
+        html: `<p>不是每一天都惊天动地，但每一天都有过你。</p>`
+      },
+      {
+        chapter: "尾声",
+        title: "一些很小的数字",
+        html: `
+          <div class="stat-row">
+            <div class="stat"><strong>31,603</strong><span>微信和抖音的消息、分享与事件</span></div>
+            <div class="stat"><strong>1,307</strong><span>我叫过你“宝宝”</span></div>
+            <div class="stat"><strong>722</strong><span>你叫过我“老公”</span></div>
+            <div class="stat"><strong>292</strong><span>抖音分享</span></div>
+            <div class="stat"><strong>620</strong><span>两个平台的图片消息</span></div>
+            <div class="stat"><strong>384</strong><span>语音消息</span></div>
+          </div>
+          <p>这些数字不是用来交换什么。只是证明那些日子真的发生过。</p>
+        `
+      },
+      {
+        chapter: "尾声",
+        title: "以后也请照顾好自己",
+        html: `
+          <p class="lead">写到最后，我还是想再叮嘱你几件很普通的小事。</p>
+          <div class="memory-list">
+            <div class="memory-item"><strong>好好吃饭。</strong><p>再忙也别空腹，别只拿一杯奶茶当一顿饭。</p></div>
+            <div class="memory-item"><strong>早点睡觉。</strong><p>能早点躺下就早点躺下，别总熬到眼睛都睁不开。</p></div>
+            <div class="memory-item"><strong>酒少喝一点。</strong><p>能不喝就不喝，遇到要喝的场合也别逞强。</p></div>
+            <div class="memory-item"><strong>洗完澡记得吹头发。</strong><p>你本来就容易头疼，别总是顶着湿头发吹空调。</p></div>
+            <div class="memory-item"><strong>头痛别硬扛。</strong><p>不舒服就休息、吃药、去看看，不要总说睡一觉就好了。</p></div>
+            <div class="memory-item"><strong>难过也别憋太久。</strong><p>想说话的时候有人听，不想说话就先安静待一会儿。</p></div>
+          </div>
+          <div class="quote">我不是要管你。就是希望你以后不管在哪儿、身边是谁，都能把自己照顾好。<small>这些是很普通的希望，也是我真心希望你过得舒服</small></div>
+        `
+      },
+      {
+        chapter: "尾声",
+        title: "谢谢你",
+        html: `
+          <p class="lead">谢谢你在我生日那天陪我点蜡烛。</p>
+          <p>谢谢你在我胃疼、头痛的时候问我怎么了。谢谢你愿意叫我老公，愿意跟我聊以后，愿意让一个人走进你的日常。</p>
+          <p>也谢谢那些特别普通的晚上：你刚洗完澡，头发还湿着；我隔着屏幕催你吹干；然后电话接通，你说：“我先吹个头发。”</p>
+          <p>这些小事，我会记得很久。</p>
+        `
+      },
+      {
+        type: "end-page",
+        chapter: "",
+        title: "这一页留白",
+        html: `
+          <h1>后面的页，<br>先留白。</h1>
+          <p class="lead">回忆录写到这里，刚好合上。</p>
+          <p>不是替你写结尾，也不是要你现在回答什么。只是把属于我们的这一段，好好放在这里。</p>
+          <p class="small">小婷，谢谢你来过我的 2026。</p>
+        `
+      }
+    ];
+
+    const pageCard = document.getElementById("pageCard");
+    const pageCounter = document.getElementById("pageCounter");
+    const pageChapter = document.getElementById("pageChapter");
+    const progressBar = document.getElementById("progressBar");
+    const prevButton = document.getElementById("prevButton");
+    const nextButton = document.getElementById("nextButton");
+    const tocButton = document.getElementById("tocButton");
+    const tocOverlay = document.getElementById("tocOverlay");
+    const tocClose = document.getElementById("tocClose");
+    const tocList = document.getElementById("tocList");
+    let currentPage = 0;
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    function readHashPage() {
+      const match = location.hash.match(/page=(\d+)/);
+      const value = match ? Number(match[1]) - 1 : 0;
+      return Math.min(Math.max(value, 0), pages.length - 1);
+    }
+
+    function renderPage(index, updateHash = true) {
+      currentPage = Math.min(Math.max(index, 0), pages.length - 1);
+      const page = pages[currentPage];
+      pageCard.className = `page-card${page.type ? ` ${page.type}` : ""}`;
+      pageCard.style.animation = "none";
+      pageCard.offsetHeight;
+      pageCard.style.animation = "";
+      pageCard.innerHTML = `
+        ${page.chapter ? `<div class="chapter">${page.chapter}</div>` : ""}
+        ${page.type === "title" ? "" : `<h2>${page.title}</h2>`}
+        ${page.html}
+      `;
+      pageCounter.textContent = `${currentPage + 1} / ${pages.length}`;
+      pageChapter.textContent = page.chapter || "给小婷的回忆录";
+      prevButton.disabled = currentPage === 0;
+      nextButton.disabled = currentPage === pages.length - 1;
+      progressBar.style.width = `${((currentPage + 1) / pages.length) * 100}%`;
+      document.title = `${page.title} · 给小婷的回忆录`;
+      if (updateHash) history.replaceState(null, "", `#page=${currentPage + 1}`);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function buildToc() {
+      tocList.innerHTML = "";
+      pages.forEach((page, index) => {
+        if (page.type === "chapter-page") return;
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "toc-item";
+        button.innerHTML = `<b>${String(index + 1).padStart(2, "0")}</b><span>${page.title}</span>`;
+        button.addEventListener("click", () => {
+          tocOverlay.classList.remove("open");
+          renderPage(index);
+        });
+        tocList.appendChild(button);
+      });
+    }
+
+    prevButton.addEventListener("click", () => renderPage(currentPage - 1));
+    nextButton.addEventListener("click", () => renderPage(currentPage + 1));
+    tocButton.addEventListener("click", () => tocOverlay.classList.add("open"));
+    tocClose.addEventListener("click", () => tocOverlay.classList.remove("open"));
+    tocOverlay.addEventListener("click", (event) => {
+      if (event.target === tocOverlay) tocOverlay.classList.remove("open");
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") renderPage(currentPage - 1);
+      if (event.key === "ArrowRight") renderPage(currentPage + 1);
+      if (event.key === "Escape") tocOverlay.classList.remove("open");
+    });
+    document.addEventListener("touchstart", (event) => {
+      const touch = event.changedTouches[0];
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+    }, { passive: true });
+    document.addEventListener("touchend", (event) => {
+      const touch = event.changedTouches[0];
+      const dx = touch.clientX - touchStartX;
+      const dy = touch.clientY - touchStartY;
+      if (Math.abs(dx) > 65 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+        renderPage(currentPage + (dx < 0 ? 1 : -1));
+      }
+    }, { passive: true });
+    window.addEventListener("hashchange", () => renderPage(readHashPage(), false));
+
+    buildToc();
+    renderPage(readHashPage(), false);
+  </script>
+</body>
+</html>
