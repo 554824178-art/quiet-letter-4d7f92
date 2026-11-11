@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow,noarchive,noimageindex">
+  <link rel="icon" href="data:,">
+  <meta name="theme-color" content="#f7ece9">
+  <meta property="og:title" content="小婷，我想跟你说点心里话">
+  <meta property="og:description" content="一封信，关于我听懂的事、记得的小事，还有你不需要马上回答的话。">
+  <title>小婷，我想跟你说点心里话</title>
+  <style>
+    :root {
+      --paper: #fffaf6;
+      --paper-deep: #f5e9e5;
+      --ink: #3c3034;
+      --muted: #74656a;
+      --rose: #a64e64;
+      --rose-deep: #743446;
+      --rose-soft: #efd8dc;
+      --sage: #53756b;
+      --line: rgba(91, 59, 69, .14);
+      --shadow: 0 22px 70px rgba(89, 51, 60, .11);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 4%, rgba(248, 216, 222, .72), transparent 29rem),
+        radial-gradient(circle at 94% 18%, rgba(235, 218, 198, .62), transparent 28rem),
+        linear-gradient(180deg, #fbf3ef 0%, var(--paper) 48%, #f5ece8 100%);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.9;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--rose-deep); }
+    .wrap { width: min(790px, calc(100% - 34px)); margin: 0 auto; }
+    .letter {
+      position: relative;
+      padding: clamp(54px, 10vw, 108px) 0 86px;
+    }
+    .letter:before {
+      content: "";
+      position: fixed;
+      width: 340px;
+      height: 340px;
+      left: -190px;
+      top: 12%;
+      border-radius: 50%;
+      background: rgba(239, 207, 214, .42);
+      filter: blur(48px);
+      pointer-events: none;
+    }
+    .hero {
+      position: relative;
+      padding: clamp(28px, 6vw, 52px);
+      border: 1px solid rgba(115, 72, 82, .14);
+      border-radius: 30px;
+      background: rgba(255, 250, 246, .86);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      overflow: hidden;
+    }
+    .hero:after {
+      content: "";
+      position: absolute;
+      width: 210px;
+      height: 210px;
+      right: -104px;
+      top: -90px;
+      border-radius: 50%;
+      background: rgba(237, 194, 203, .32);
+      pointer-events: none;
+    }
+    .to {
+      position: relative;
+      z-index: 1;
+      color: var(--rose);
+      font-size: 13px;
+      font-weight: 750;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      margin: 16px 0 18px;
+      font-family: "Songti SC", "STSong", "SimSun", serif;
+      font-size: clamp(39px, 8.7vw, 68px);
+      font-weight: 600;
+      line-height: 1.18;
+      letter-spacing: -.035em;
+    }
+    .hero-lead {
+      position: relative;
+      z-index: 1;
+      max-width: 610px;
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: clamp(16px, 3.5vw, 19px);
+    }
+    .opening { padding: clamp(52px, 9vw, 92px) 0 16px; }
+    .opening p {
+      font-size: clamp(18px, 3.7vw, 21px);
+      line-height: 1.95;
+    }
+    .opening p:first-child {
+      font-size: clamp(21px, 4.5vw, 26px);
+      line-height: 1.75;
+    }
+    .section {
+      padding: 21px 0;
+    }
+    .section h2 {
+      margin-bottom: 20px;
+      font-family: "Songti SC", "STSong", "SimSun", serif;
+      font-size: clamp(28px, 5.7vw, 40px);
+      font-weight: 550;
+      line-height: 1.35;
+      letter-spacing: -.02em;
+    }
+    .section h3 {
+      margin-bottom: 8px;
+      font-size: 18px;
+      line-height: 1.55;
+    }
+    .section p:last-child { margin-bottom: 0; }
+    .spaced-note { margin-top: 24px; }
+    .soft-block {
+      margin: 30px 0;
+      padding: clamp(21px, 5vw, 31px);
+      border: 1px solid var(--line);
+      border-radius: 23px;
+      background: linear-gradient(145deg, rgba(239, 216, 220, .54), rgba(242, 232, 217, .54));
+    }
+    .soft-block p {
+      margin-bottom: 12px;
+      font-size: 17px;
+    }
+    .soft-block p:last-child { margin-bottom: 0; }
+    .fact-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 18px 0 4px;
+    }
+    .fact-line span {
+      padding: 5px 11px;
+      border: 1px solid rgba(164, 78, 100, .18);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .55);
+      color: var(--rose-deep);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .plain-rule {
+      width: 64px;
+      height: 1px;
+      margin: 48px 0;
+      border: 0;
+      background: var(--rose-soft);
+    }
+    .apology {
+      margin: 32px 0;
+      padding: clamp(24px, 6vw, 38px);
+      border-radius: 25px;
+      background: var(--rose-deep);
+      color: #fff;
+      box-shadow: 0 18px 48px rgba(104, 46, 63, .16);
+    }
+    .apology h2 {
+      margin-bottom: 16px;
+      font-family: "Songti SC", "STSong", "SimSun", serif;
+      font-size: clamp(30px, 6.5vw, 44px);
+      font-weight: 500;
+    }
+    .apology p { color: rgba(255, 255, 255, .88); }
+    .apology p:last-child { margin-bottom: 0; }
+    .moments {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 26px;
+    }
+    .moment {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255, 253, 250, .75);
+    }
+    .moment:nth-child(2n) {
+      background: linear-gradient(150deg, rgba(255, 252, 248, .82), rgba(242, 230, 216, .64));
+    }
+    .moment p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.85;
+    }
+    .moment strong {
+      color: var(--rose-deep);
+      font-weight: 650;
+    }
+    .quote {
+      margin: 28px 0;
+      padding: 21px 24px;
+      border-left: 3px solid var(--rose);
+      border-radius: 0 18px 18px 0;
+      background: rgba(255, 253, 250, .78);
+      color: var(--ink);
+      font-family: "Songti SC", "STSong", "SimSun", serif;
+      font-size: clamp(18px, 4vw, 21px);
+      line-height: 1.75;
+    }
+    .story {
+      display: grid;
+      gap: 0;
+      margin-top: 26px;
+      padding-left: 24px;
+      position: relative;
+    }
+    .story:before {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 8px;
+      bottom: 8px;
+      width: 1px;
+      background: linear-gradient(var(--rose-soft), var(--line));
+    }
+    .story-item {
+      position: relative;
+      padding: 0 0 26px 16px;
+    }
+    .story-item:last-child { padding-bottom: 0; }
+    .story-item:before {
+      content: "";
+      position: absolute;
+      left: -23px;
+      top: 9px;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--rose);
+      box-shadow: 0 0 0 5px rgba(239, 216, 220, .56);
+    }
+    .story-item time {
+      color: var(--rose);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .08em;
+    }
+    .story-item h3 { margin-top: 5px; }
+    .story-item p {
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+    .wishes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin: 24px 0;
+    }
+    .wishes span {
+      padding: 7px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .6);
+      color: var(--rose-deep);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+    .actions {
+      display: grid;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .action {
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+      border-radius: 19px;
+      background: rgba(255, 255, 255, .58);
+    }
+    .action strong {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--rose-deep);
+    }
+    .action span {
+      color: var(--muted);
+      font-size: 15px;
+    }
+    details {
+      margin: 17px 0;
+      border: 1px solid var(--line);
+      border-radius: 19px;
+      background: rgba(255, 253, 250, .64);
+      overflow: hidden;
+    }
+    summary {
+      cursor: pointer;
+      padding: 17px 20px;
+      color: var(--rose-deep);
+      font-weight: 700;
+      line-height: 1.55;
+      list-style-position: inside;
+    }
+    details[open] summary { border-bottom: 1px solid var(--line); }
+    .drawer-body { padding: 18px 20px 22px; }
+    .drawer-body p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .quote-cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .quote-card {
+      padding: 16px;
+      border-radius: 16px;
+      background: rgba(239, 216, 220, .38);
+    }
+    .quote-card time {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--rose);
+      font-size: 11px;
+      font-weight: 800;
+    }
+    .quote-card p {
+      margin: 0;
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+    .call-total {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 15px 0 18px;
+    }
+    .call-total div {
+      padding: 16px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, .62);
+      border: 1px solid var(--line);
+    }
+    .call-total strong {
+      display: block;
+      color: var(--rose-deep);
+      font-family: "Songti SC", "STSong", "SimSun", serif;
+      font-size: clamp(25px, 5vw, 34px);
+      line-height: 1.22;
+    }
+    .call-total span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .table-wrap {
+      margin: 13px 0;
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      -webkit-overflow-scrolling: touch;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    th, td {
+      padding: 10px 9px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+    }
+    th {
+      background: rgba(239, 216, 220, .36);
+      color: var(--rose-deep);
+      font-size: 11px;
+    }
+    tr:last-child td { border-bottom: 0; }
+    td:first-child { color: var(--rose-deep); font-weight: 700; }
+    .ending {
+      padding: clamp(54px, 10vw, 88px) 0 10px;
+      text-align: center;
+    }
+    .ending h2 {
+      font-family: "Songti SC", "STSong", "SimSun", serif;
+      font-size: clamp(31px, 7vw, 48px);
+      font-weight: 500;
+      line-height: 1.4;
+    }
+    .ending > p {
+      max-width: 650px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .signature {
+      margin-top: 32px;
+      color: var(--rose-deep);
+      font-family: "Songti SC", "STSong", "SimSun", serif;
+      font-size: 22px;
+    }
+    .privacy {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 28px;
+    }
+    @media (max-width: 640px) {
+      body { line-height: 1.82; }
+      .wrap { width: calc(100% - 24px); }
+      .letter { padding-top: 18px; }
+      .hero { border-radius: 25px; padding: 28px 21px 30px; }
+      .opening { padding-top: 52px; }
+      .section { padding: 18px 0; }
+      .moments, .quote-cards, .call-total { grid-template-columns: 1fr; }
+      .moment { padding: 19px 18px; border-radius: 19px; }
+      .soft-block, .apology { border-radius: 21px; padding: 23px 18px; }
+      .story { padding-left: 20px; }
+      .story-item { padding-left: 14px; }
+      .story-item:before { left: -19px; }
+      summary, .drawer-body { padding-left: 16px; padding-right: 16px; }
+      th, td { padding: 9px 6px; font-size: 11px; }
+      .privacy { padding-bottom: 40px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *:before, *:after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="letter">
+    <div class="wrap">
+      <header class="hero">
+        <div class="to">给小婷</div>
+        <h1>小婷，我想跟你说点心里话</h1>
+        <p class="hero-lead">这封信有点长。你不用急着回，也不用一口气看完。</p>
+      </header>
+
+      <article class="opening">
+        <p>小婷，这两天我一直在想我们的事。</p>
+        <p>微信、抖音、短信我都翻了一遍。以前我总觉得自己挺在乎你，直到这次往回看，我才发现，我很多时候只顾着自己的难受，没顾上你累不累。</p>
+        <p>我今天写这些，不是来跟你争谁对谁错。以前那些好，我也不会拿来压你。这次我是真的知道，我让你太累了。</p>
+
+        <div class="soft-block">
+          <p>我回看记录才发现，我们在微信里聊了 29,006 条，在抖音又聊了 2,597 条；微信接通了 462 次电话，加起来有 23 天 16 小时 16 分。</p>
+          <p>我写这些不是跟你算账。</p>
+          <p>聊天不是积分，电话也不是筹码。</p>
+          <div class="fact-line">
+            <span>微信 29,006 条</span>
+            <span>抖音 2,597 条</span>
+            <span>接通 462 次</span>
+            <span>共 23 天 16 小时 16 分</span>
+          </div>
+        </div>
+      </article>
+
+      <hr class="plain-rule">
+
+      <section class="section">
+        <h2>我听懂了你说的问题</h2>
+        <p>你说见面以后觉得我们不合适，说异地太远，说叔叔阿姨不想你嫁那么远。</p>
+        <p>你也说我老想争对错、爱讲大道理，让你没面子，让你觉得自己位置很低。</p>
+        <p>这些话我都记住了。</p>
+        <p>以前我一听这些，第一反应就是解释。我会说我不是那个意思，会翻前面的话，会想证明我没有。你明明是在告诉我你有多难受，我却一直忙着证明自己没错。</p>
+        <p>现在我回头看，才明白你要我听的，是「我真的不舒服了」。我以前让你觉得自己位置低，这个我认。是我那副非要讲赢的样子，把你挤到了那个位置。</p>
+        <p>你还说过，付出是你愿意的，感情不能清算。</p>
+        <p>这句话我也记住了。</p>
+      </section>
+
+      <section class="apology">
+        <h2>对不起，我让你太累了</h2>
+        <p>是我不安的时候一直发消息、一直打电话，逼着你回应我。你不回，我就更慌，越想马上要一个答案。</p>
+        <p>是我分开以后还说钱、说补偿，把你的真心弄得像一笔账。你不欠我，喜欢一个人也不是给了多少，就能要求她留下。</p>
+        <p>也是我拿你以前受过的伤刺痛你。你受过的委屈不该被我拿来比较，更不该被我拿来逼你证明什么。</p>
+        <p>我以前总说那是在乎。现在我认了，那里面很多是我自己的害怕。我把自己扛不住的情绪，一股脑压到你身上了。</p>
+      </section>
+
+      <hr class="plain-rule">
+
+      <section class="section">
+        <h2>那些很小，但我一直记得的事</h2>
+        <p>我最舍不得的，真不只是几句甜话。是很多特别小、以前觉得每天都会有的瞬间。</p>
+
+        <div class="moments">
+          <article class="moment">
+            <h3>你上班改图，跟我吐槽领导</h3>
+            <p>你发一句「在骂领导呀」，我就能知道你今天又不顺。你讲改图、加班、单休，我嘴上总说先吃饭、别气了。有时候你说完又发来一个搞笑视频，情绪一下就过去了。</p>
+          </article>
+
+          <article class="moment">
+            <h3>肚子疼的时候贴暖宝宝</h3>
+            <p>你跟我说贴个暖宝宝就行，还让我不要天天点饮品、不要浪费钱。我嘴上答应，过两天又问喝不喝奶茶。我那时以为花钱是关心，没先问你想不想、会不会让你有负担。</p>
+          </article>
+
+          <article class="moment">
+            <h3>每次洗完澡，都要吹好久头发</h3>
+            <p>你常说「在吹头发」。我就在那边等，有时还催你快一点，好打电话。我其实想过以后帮你洗、帮你吹。可连洗澡和吹头发的时间都被我一遍遍催着，久了肯定会累。</p>
+          </article>
+
+          <article class="moment">
+            <h3>你游戏辅助打得是真的好</h3>
+            <p>我说你辅助打得好，不是哄你。你有时候嘴上说没有，其实挺得意。那阵子我最盼着晚上开一局，能一边玩一边听你说话，哪怕输了也挺开心。</p>
+          </article>
+
+          <article class="moment">
+            <h3>刷到猫、短剧、搞笑视频就发给我</h3>
+            <p>抖音里你分享了很多。猫、短剧、几秒钟的笑话，什么都有。我以前回得有时很随意，就一句「哈哈哈哈」。后来再翻，才知道每一条都是你想把那一刻递给我。</p>
+          </article>
+
+          <article class="moment">
+            <h3>晚上困了，还是等我的电话</h3>
+            <p>你发过「在等你给我打电话呀」。我记得那种感觉。你明明困了，还会撑着跟我说话；有时候谁也没说挂，电话就一直连着。很多早上八点左右的电话，也是我们一天开始的方式。</p>
+          </article>
+
+          <article class="moment">
+            <h3>隔着屏幕过生日</h3>
+            <p>8 月 9 日，你点着蜡烛跟我说「祝圣杰老公生日快乐呀～」。那不是多贵重的礼物，可你让我觉得，那天虽然一个人，还是有人惦记着我。</p>
+          </article>
+
+          <article class="moment">
+            <h3>吃饭能吃到一块去</h3>
+            <p>咱们吃的东西挺像。我当时还说过，以后吃饭肯定能吃到一块去。就是这么一句普通的话，我后来想起来，觉得特别像过日子。</p>
+          </article>
+        </div>
+
+        <p class="spaced-note">还有你洗澡前跟我说一声，忙完回来找我；你困得不行还回我一句；你听我讲工作，陪我熬过那些烦躁的时候；你看到什么好玩的，第一个想到发给我。</p>
+        <p>这些事放在一起，才是我们真的过过的日子。</p>
+
+        <details>
+          <summary>那几句我后来反复看过的话</summary>
+          <div class="drawer-body">
+            <p>我没有把整段聊天摊出来。留下这几句，是因为它们能让我想起当时的你，也想起我后来哪里做错了。</p>
+            <div class="quote-cards">
+              <div class="quote-card">
+                <time>7 月 22 日</time>
+                <p>「叫我小婷就行。」</p>
+              </div>
+              <div class="quote-card">
+                <time>7 月 27 日</time>
+                <p>「老公呀。」<br>「晚安啦老婆。」</p>
+              </div>
+              <div class="quote-card">
+                <time>8 月 9 日</time>
+                <p>「我把蜡烛也点上了。」<br>「祝圣杰老公生日快乐呀～」</p>
+              </div>
+              <div class="quote-card">
+                <time>10 月</time>
+                <p>「在等你给我打电话呀。」</p>
+              </div>
+              <div class="quote-card">
+                <time>9 月 25 日</time>
+                <p>「我将用最直白、最不绕弯子的方式告诉你，我想你了。」</p>
+              </div>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <hr class="plain-rule">
+
+      <section class="section">
+        <h2>我们真的一起做过的事</h2>
+        <p>7 月 22 日，我问你「怎么啦大美女」，你回我「在骂领导呀」。后来你告诉我，叫你小婷就行。咱俩就是从这么普通的一句话开始聊起来的。</p>
+        <p>7 月 27 日，记录里出现了「我们在一起啦」。那天早上你叫我老公，我叫你老婆。第一通电话就打了两个多小时。关系快得让我以为，只要每天有说不完的话，就一定能一直走下去。</p>
+        <p>8 月，我们几乎每天都在说话。你给我发猫，发短剧，发你上班遇到的事；我给你点吃的，问你有没有好好吃饭。生日、游戏、电话、晚安，都是真的。</p>
+        <p>到了 10 月，我们开始准备见面。你挑酒店、挑衣服，我问你喜欢什么，想怎么给你过生日，还想着带你玩、去看新房。10 月 23 日，我终于真的见到你了。</p>
+        <p>那天我五点多出门，七点五十到机场，后来在酒店大堂等你。当时紧张得手都划破了。隔着屏幕喜欢了那么久的人，真的站到面前时，我反倒有点不知道该怎么放自己的手。</p>
+        <p>10 月 24 日和 25 日，我们终于不用靠手机了。一起吃饭、拍照、待在同一个房间里。那两天消息很少，因为人就在身边。</p>
+        <p>分开的时候我还是没忍住。我说舍不得你，反复问你会不会离开。你还安慰我，说这是正常的戒断反应，没有关系。</p>
+        <p>现在想想，你已经很累了，还要反过来接住我的害怕。那一刻我又把情绪压给你了。</p>
+      </section>
+
+      <section class="section">
+        <h2>当时真的想过的以后</h2>
+        <p>咱们真的聊过以后你来北京，聊过结束异地、一起住、养猫，聊过去上海或者日本迪士尼。你挑酒店衣服的时候，我认真看房间怎么布置；你说以后吃饭能吃到一块去，我也是真的想过那样的日子。</p>
+        <p>那些话当时都是真的。</p>
+        <p>我现在不是拿它们提醒你答应过什么。你后来觉得不合适，我听见了，也不会逼你按以前说过的来。</p>
+        <div class="wishes">
+          <span>结束异地</span>
+          <span>你来北京</span>
+          <span>每天都能见到</span>
+          <span>一起住</span>
+          <span>养一只猫</span>
+          <span>去上海或日本迪士尼</span>
+          <span>一起过生日</span>
+          <span>不用隔着屏幕说晚安</span>
+        </div>
+        <p>我舍不得的，是咱们当时一边聊、一边认真想过的这些普通以后。可没走到，就是没走到。我不会再拿这些向你要一个结果。</p>
+      </section>
+
+      <hr class="plain-rule">
+
+      <section class="section">
+        <h2>我们后来实际发生了什么</h2>
+        <div class="story">
+          <div class="story-item">
+            <time>10 月 25 日</time>
+            <h3>分开以后，我开始慌</h3>
+            <p>你安慰我，说以后还会见。我却一直问你会不会离开，问你是不是不要我了。那时候我只想着自己舍不得，没有想到这些话也会让你有压力。</p>
+          </div>
+          <div class="story-item">
+            <time>10 月 26 日</time>
+            <h3>你头痛，我却又闹了情绪</h3>
+            <p>你那天不舒服，我也问过要不要买药。可你回得慢，我还是不高兴了。后来我提醒你早点休息，可伤害已经先发生了。关心不该只是嘴上问一句，更不该挑你难受的时候要回应。</p>
+          </div>
+          <div class="story-item">
+            <time>10 月 27 日</time>
+            <h3>你说，我们还是到此为止吧</h3>
+            <p>这句话我看了很多遍。见面以后，你觉得不合适。异地、父母的想法、你在我这里有没有被尊重，都是真实存在的问题。我再难受，也不能装作没听见。</p>
+          </div>
+          <div class="story-item">
+            <time>10 月 28 日</time>
+            <h3>加回来，也不代表问题就没了</h3>
+            <p>你说不要给你发消息，也说过已经把我删了。后来我们还是通了几次电话，最后一条是 14 分 03 秒。一次加回来，不能让前面那些累自己消失。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>我不会再做什么</h2>
+        <p>我知道现在说「我改了」，你不会马上信。我也不想拿一句话跟你要原谅。</p>
+        <div class="actions">
+          <div class="action">
+            <strong>你不回，我就先停。</strong>
+            <span>难受我自己缓，不再电话一个接一个，也不再问你为什么不理我。</span>
+          </div>
+          <div class="action">
+            <strong>你说累了，我先问你想要什么。</strong>
+            <span>想自己待一会儿，还是想我陪着。我不再替你做决定，也不拿关心当成必须马上接住的电话。</span>
+          </div>
+          <div class="action">
+            <strong>意见不一样，我先听你说完。</strong>
+            <span>不急着解释，不翻旧消息，不讲一堆道理证明我没问题。你是来跟我相处的，不是来跟我打官司的。</span>
+          </div>
+          <div class="action">
+            <strong>钱、礼物和以前做过的事，都不再拿出来说。</strong>
+            <span>那些给过就是给过，不变成你欠我的东西，也不变成我要求你留下的理由。</span>
+          </div>
+          <div class="action">
+            <strong>不再拿过去刺痛你，也不拿永远堵你。</strong>
+            <span>不要承诺、不要保证。你跟朋友正常来往，我也不会再要你证明什么。</span>
+          </div>
+        </div>
+        <p class="spaced-note">这些话不用你验收。我要真有下次，就让你从相处里看见。没有下次，我也得把这些问题改在自己身上。</p>
+      </section>
+
+      <details id="calls">
+        <summary>电话和其他记录，我放在这里了</summary>
+        <div class="drawer-body">
+          <p>我也把电话记录整理了一下，放在这里。你想看就看，不想看就关着。我不拿这些数字压你。</p>
+          <div class="call-total">
+            <div><strong>462 次</strong><span>微信里真正接通的电话</span></div>
+            <div><strong>23 天 16 小时 16 分</strong><span>微信电话累计连接时长</span></div>
+          </div>
+          <p>你主动打了 222 次，我打了 240 次。9 月最多，接通 175 次。最长的一通是 10 月 22 日，连接了 11 小时 40 分 08 秒。超长记录里可能有忘挂或者挂着睡，所以我把这叫连接时长，不写成我们一直说了这么久。</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>月份</th><th>接通次数</th><th>累计连接时长</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>7 月</td><td>8 次</td><td>8 小时 35 分 58 秒</td></tr>
+                <tr><td>8 月</td><td>140 次</td><td>4 天 18 小时 34 分 49 秒</td></tr>
+                <tr><td>9 月</td><td>175 次</td><td>9 天 20 小时 51 分 33 秒</td></tr>
+                <tr><td>10 月</td><td>139 次</td><td>8 天 16 小时 14 分 03 秒</td></tr>
+                <tr><td>合计</td><td>462 次</td><td>23 天 16 小时 16 分 23 秒</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>抖音还有 33 条通话事件，其中 31 条明确成功。导出记录没有给准确时长，所以我没有硬加进上面的总时长。</p>
+        </div>
+      </details>
+
+      <section class="ending">
+        <h2>你可以不回复</h2>
+        <p>小婷，我把想说的都放在这里了。</p>
+        <p>你要是愿意，等哪天不累了，咱们找个不吵架的时候说几句话。</p>
+        <p>你要是还需要时间，我就安静地给你时间。</p>
+        <p>你要是已经决定不继续，我也会学着接受，不再拿联系、钱或者承诺去烦你。</p>
+        <p>你不用为了照顾我的情绪马上回。这一页不回也行。</p>
+        <p>这几个月里，你给过我的开心都是真的。谢谢你也对不起你。</p>
+        <div class="signature">圣杰</div>
+        <p class="privacy">这个链接没有密码，拿到的人都能打开。页面不让搜索引擎收录，但请不要转发。</p>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
