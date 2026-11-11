@@ -546,7 +546,7 @@
   </style>
 </head>
 <body>
-  <audio id="backgroundMusic" loop preload="none">
+  <audio id="backgroundMusic" loop preload="metadata">
     <source src="assets/music/jue-bie-shu.mp3" type="audio/mpeg">
   </audio>
   <header class="bookbar">
@@ -1869,7 +1869,7 @@
     backgroundMusic.addEventListener("play", updateMusicButton);
     backgroundMusic.addEventListener("pause", updateMusicButton);
     document.addEventListener("click", (event) => {
-      if (event.target.closest("button, a")) playMusic();
+      if (!event.target.closest("#musicButton") && event.target.closest("button, a")) playMusic();
     });
 
     function readHashPage() {
