@@ -299,10 +299,6 @@
     .photo-wide img { height: auto; max-height: 430px; object-fit: cover; }
     .chapter-page .photo-grid { width: min(100%, 560px); margin: 24px auto 4px; }
     .chapter-page .photo-card img { height: 150px; }
-    .page-card:not(.photo-album) .photo-grid,
-    .page-card:not(.photo-album) .photo-wide {
-      display: none;
-    }
     .toc-list { display: grid; gap: 8px; margin-top: 20px; }
     .toc-item {
       display: grid;
@@ -1567,6 +1563,64 @@
       ...photoBookPages
     );
 
+    // Photos belong with the moments they came from. Remove the standalone
+    // photo chapter and distribute one distinct image to its first real scene.
+    for (let index = pages.length - 1; index >= 0; index -= 1) {
+      if (pages[index].title === "照片簿" || pages[index].title.startsWith("照片簿 ")) {
+        pages.splice(index, 1);
+      }
+    }
+
+    pages.splice(
+      pages.findIndex((page) => page.type === "chapter-page" && page.title === "普通日子"),
+      0,
+      {
+        chapter: "第一幕 · 认识你",
+        title: "那束让我记住的花",
+        html: `
+          <p class="lead">8 月 1 日，你发来一张花束照片，后面跟着一句：“你怎么又送我花？”</p>
+          <p>我说，花当然会枯萎，但你看到它的那一瞬间是开心的，这就值回价格了。要是枯萎了，我就再给你送。</p>
+          <div class="photo-wide photo-card"><img src="assets/photos/bouquet.jpg" alt="8月1日你收到花后拍给我的花束"><figcaption>8 月 1 日，你收到花后拍给我的照片。</figcaption></div>
+          <p>你说我值得。那不是一句需要反复证明的情话，是那天很具体的一束花。</p>
+        `
+      }
+    );
+
+    const blockedPhotoFiles = new Set([
+      "portrait-cafe.jpg",
+      "first-photo.jpg",
+      "selfie-message.jpg",
+      "workspace.jpg",
+      "gaming-setup.jpg",
+      "room.jpg",
+      "game-list.jpg",
+      "cake-saved.jpg",
+      "necklace.jpg",
+      "summer-selfie-2.jpg"
+    ]);
+    const usedPhotoSources = new Set();
+    for (const page of pages) {
+      const container = document.createElement("div");
+      container.innerHTML = page.html;
+
+      for (const image of [...container.querySelectorAll("img")]) {
+        const source = image.getAttribute("src") || "";
+        if (!source.startsWith("assets/photos/")) continue;
+        const file = source.split("/").pop();
+        const isBouquetOutsideItsPage = file === "bouquet.jpg" && page.title !== "那束让我记住的花";
+        if (blockedPhotoFiles.has(file) || isBouquetOutsideItsPage || usedPhotoSources.has(source)) {
+          (image.closest("figure") || image).remove();
+        } else {
+          usedPhotoSources.add(source);
+        }
+      }
+
+      for (const grid of [...container.querySelectorAll(".photo-grid")]) {
+        if (!grid.querySelector("img")) grid.remove();
+      }
+      page.html = container.innerHTML;
+    }
+
     const pageCard = document.getElementById("pageCard");
     const pageCounter = document.getElementById("pageCounter");
     const pageChapter = document.getElementById("pageChapter");
@@ -1599,9 +1653,6 @@
         ${page.type === "title" ? "" : `<h2>${page.title}</h2>`}
         ${page.html}
       `;
-      if (page.type !== "photo-album") {
-        pageCard.querySelectorAll(".photo-grid, .photo-wide").forEach((element) => element.remove());
-      }
       pageCounter.textContent = `${currentPage + 1} / ${pages.length}`;
       pageChapter.textContent = page.chapter || "给小婷的回忆录";
       prevButton.disabled = currentPage === 0;
