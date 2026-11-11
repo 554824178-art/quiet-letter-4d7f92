@@ -50,7 +50,7 @@
       height: 54px;
       padding: 0 max(14px, env(safe-area-inset-left)) 0 max(14px, env(safe-area-inset-right));
       display: grid;
-      grid-template-columns: 1fr auto;
+      grid-template-columns: 1fr auto auto;
       align-items: center;
       gap: 12px;
       color: var(--ink);
@@ -75,6 +75,16 @@
       color: var(--rose-deep);
       background: rgba(238, 212, 217, .38);
       cursor: pointer;
+    }
+    .music-btn {
+      min-height: 34px;
+      border: 1px solid rgba(86, 121, 111, .28);
+      border-radius: 999px;
+      padding: 5px 12px;
+      color: #35594f;
+      background: rgba(226, 238, 232, .66);
+      cursor: pointer;
+      white-space: nowrap;
     }
     .progress {
       position: fixed;
@@ -287,8 +297,10 @@
     .photo-card img {
       display: block;
       width: 100%;
-      height: 180px;
-      object-fit: cover;
+      height: auto;
+      max-height: none;
+      object-fit: contain;
+      background: #f2eeeb;
     }
     .photo-card figcaption {
       padding: 8px 10px 10px;
@@ -296,10 +308,54 @@
       font-size: 11px;
       line-height: 1.5;
     }
-    .photo-wide img { height: auto; max-height: 430px; object-fit: cover; }
+    .photo-wide img { height: auto; max-height: none; object-fit: contain; }
+    .photo-card.photo-full img {
+      height: auto;
+      max-height: none;
+      object-fit: contain;
+      background: #101728;
+    }
     .chapter-page .photo-grid { width: min(100%, 560px); margin: 24px auto 4px; }
-    .chapter-page .photo-card img { height: 150px; }
-    .toc-list { display: grid; gap: 8px; margin-top: 20px; }
+    .toc-list { display: grid; gap: 8px; margin-top: 12px; }
+    .toc-tools {
+      display: grid;
+      gap: 9px;
+      margin-top: 16px;
+    }
+    .toc-search {
+      width: 100%;
+      min-height: 44px;
+      padding: 9px 13px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      color: var(--ink);
+      background: rgba(255, 255, 255, .72);
+      font: inherit;
+      outline: none;
+    }
+    .toc-search:focus {
+      border-color: rgba(168, 78, 101, .48);
+      box-shadow: 0 0 0 3px rgba(238, 212, 217, .35);
+    }
+    .toc-actions { display: flex; flex-wrap: wrap; gap: 7px; }
+    .toc-action {
+      min-height: 34px;
+      padding: 5px 11px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--rose-deep);
+      background: rgba(238, 212, 217, .3);
+      cursor: pointer;
+    }
+    .toc-action.active { color: #fff; background: var(--rose-deep); border-color: transparent; }
+    .toc-group-title {
+      margin: 16px 0 2px;
+      color: var(--rose);
+      font-size: 12px;
+      font-weight: 750;
+      letter-spacing: .12em;
+    }
+    .toc-row { display: grid; grid-template-columns: 1fr 38px; gap: 6px; align-items: stretch; }
     .toc-item {
       display: grid;
       grid-template-columns: 32px 1fr;
@@ -315,7 +371,72 @@
       cursor: pointer;
     }
     .toc-item b { color: var(--rose); font-size: 12px; }
-    .toc-item span { font-size: 14px; line-height: 1.45; }
+    .toc-item span { display: block; font-size: 14px; line-height: 1.45; }
+    .toc-item small {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.45;
+    }
+    .toc-star {
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, .55);
+      cursor: pointer;
+    }
+    .toc-star.saved { color: var(--rose-deep); background: var(--rose-soft); }
+    .toc-empty { padding: 22px 12px; color: var(--muted); text-align: center; }
+    .secret-combo {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 20px;
+    }
+    .secret-combo button {
+      min-height: 48px;
+      border: 1px solid rgba(168, 78, 101, .24);
+      border-radius: 16px;
+      color: var(--rose-deep);
+      background: rgba(238, 212, 217, .38);
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .secret-reply {
+      min-height: 48px;
+      margin-top: 10px;
+      padding: 12px 15px;
+      border-radius: 15px;
+      color: var(--muted);
+      background: rgba(255,255,255,.6);
+      border: 1px solid var(--line);
+    }
+    .page-card.reply-pulse .secret-reply {
+      animation: replyPulse .5s ease;
+    }
+    @keyframes replyPulse {
+      0% { transform: scale(.97); background: rgba(238, 212, 217, .35); }
+      60% { transform: scale(1.02); background: rgba(238, 212, 217, .62); }
+      100% { transform: scale(1); }
+    }
+    .toast {
+      position: fixed;
+      z-index: 80;
+      left: 50%;
+      bottom: 82px;
+      transform: translate(-50%, 16px);
+      padding: 9px 15px;
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(72, 48, 57, .94);
+      font-size: 13px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease, transform .2s ease;
+    }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
     .title-page { display: flex; flex-direction: column; justify-content: center; }
     .title-page .date { color: var(--rose); font-size: 13px; font-weight: 750; letter-spacing: .18em; }
     .title-page h1 { margin-top: 22px; }
@@ -353,8 +474,26 @@
       cursor: pointer;
     }
     .page-nav button:disabled { opacity: .3; cursor: default; }
-    .page-indicator { text-align: center; font-size: 12px; line-height: 1.3; }
+    .page-indicator {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      align-items: center;
+      gap: 5px;
+      text-align: left;
+      font-size: 12px;
+      line-height: 1.3;
+    }
     .page-indicator b { display: block; font-size: 14px; }
+    .bookmark-btn {
+      width: 32px;
+      height: 32px;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 50%;
+      color: #fff;
+      background: rgba(255,255,255,.08);
+      cursor: pointer;
+    }
+    .bookmark-btn.saved { color: #ffdca8; background: rgba(255,255,255,.16); }
     .toc-overlay {
       position: fixed;
       z-index: 60;
@@ -399,7 +538,6 @@
       .quote-grid { grid-template-columns: 1fr; }
       .stat-row { grid-template-columns: 1fr 1fr; }
       .stat:last-child:nth-child(odd) { grid-column: 1 / -1; }
-      .photo-card img { height: 150px; }
       .page-nav { grid-template-columns: 82px 1fr 82px; }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -408,8 +546,12 @@
   </style>
 </head>
 <body>
+  <audio id="backgroundMusic" loop preload="none">
+    <source src="assets/music/jue-bie-shu.m4a" type="audio/mp4">
+  </audio>
   <header class="bookbar">
     <div class="bookbar-title">给小婷的回忆录</div>
+    <button class="music-btn" id="musicButton" type="button" aria-pressed="false">♪ 音乐</button>
     <button class="toc-btn" id="tocButton" type="button">目录</button>
   </header>
   <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
@@ -420,7 +562,10 @@
 
   <nav class="page-nav" aria-label="翻页">
     <button id="prevButton" type="button">上一页</button>
-    <div class="page-indicator"><b id="pageCounter"></b><span id="pageChapter"></span></div>
+    <div class="page-indicator">
+      <button class="bookmark-btn" id="bookmarkButton" type="button" aria-label="收藏当前页">☆</button>
+      <div><b id="pageCounter"></b><span id="pageChapter"></span></div>
+    </div>
     <button id="nextButton" type="button">下一页</button>
   </nav>
 
@@ -430,9 +575,17 @@
         <h2>目录</h2>
         <button class="toc-close" id="tocClose" type="button" aria-label="关闭目录">×</button>
       </div>
+      <div class="toc-tools">
+        <input class="toc-search" id="tocSearch" type="search" placeholder="搜索日期、事情或一句原话">
+        <div class="toc-actions">
+          <button class="toc-action" id="resumeButton" type="button">↤ 回到开头</button>
+          <button class="toc-action" id="savedFilter" type="button">☆ 只看收藏</button>
+        </div>
+      </div>
       <div class="toc-list" id="tocList"></div>
     </section>
   </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script>
     const pages = [
@@ -786,7 +939,6 @@
           <p>很多快乐都很小，但足够把一天照亮。</p>
           <div class="photo-grid">
             <figure class="photo-card"><img src="assets/photos/cosplay-room.jpg" alt="一套喜欢的裙子"><figcaption>喜欢的裙子和认真打扮的日子。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/cat-orange.jpg" alt="一只橘猫"><figcaption>聊天里出现次数很多的猫猫。</figcaption></figure>
           </div>
         `
       },
@@ -802,9 +954,10 @@
             <div class="quote-card"><time>9 月 13 日</time><p>给你打王者。</p></div>
             <div class="quote-card"><time>10 月 13 日</time><p>我们一起玩呀。</p></div>
           </div>
+          <figure class="photo-wide photo-full photo-card"><img src="assets/photos/game-top-sunquan.jpg" alt="顶级孙权完整战绩截图"><figcaption>8 月 3 日，顶级孙权：12.4 分、前 15%、金牌发育路、三连决胜、MVP。</figcaption></figure>
           <div class="photo-grid">
-            <figure class="photo-card"><img src="assets/photos/game-match-1.jpg" alt="游戏对局截图"><figcaption>8 月 18 日，游戏里的记录。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/game-match-2.jpg" alt="王者荣耀对局截图"><figcaption>9 月 5 日，又一起打了一局。</figcaption></figure>
+            <figure class="photo-card photo-full"><img src="assets/photos/game-gold-1.jpg" alt="金币游走与金牌打野完整对局截图"><figcaption>8 月 27 日，23 比 5 获胜；金牌游走 12.5，李白金牌打野 14.3 并拿到 MVP。</figcaption></figure>
+            <figure class="photo-card photo-full"><img src="assets/photos/game-gold-2.jpg" alt="金币游走与金牌中路完整对局截图"><figcaption>8 月 27 日，24 比 4 获胜；金牌游走 12.6，妲己金牌中路 12.8 并拿到 MVP。</figcaption></figure>
           </div>
           <p>输赢其实记得不多了，记得的是你开着麦笑、我等你上线，还有打完一局以后说“再来一把”。</p>
         `
@@ -823,23 +976,17 @@
       },
       {
         chapter: "第三幕 · 小事",
-        title: "猫猫",
+        title: "小福和我们想养的猫",
         html: `
-          <p class="lead">我们聊天里有很多猫。</p>
+          <p class="lead">你养了一只猫，叫小福。</p>
+          <p>聊天里出现过不少猫，但我不能确定哪一张才是小福，所以没有拿别的猫照片来代替。小福就是小福，这一点不能糊弄。</p>
           <div class="memory-list">
-            <div class="memory-item"><strong>9 月 10 日</strong><p>你给我看公司楼下的小猫。</p></div>
-            <div class="memory-item"><strong>9 月 15 日</strong><p>你问：“小猫可爱还是我可爱？”我说你比小猫可爱得多。</p></div>
-            <div class="memory-item"><strong>9 月 25 日</strong><p>你说猫猫都被我迷住了。</p></div>
-            <div class="memory-item"><strong>9 月 29 日</strong><p>你说“我也想你啊，我还想我的小猫”。</p></div>
+            <div class="memory-item"><strong>小福</strong><p>它现在陪着你，是你生活里的一部分。</p></div>
+            <div class="memory-item"><strong>9 月 10 日</strong><p>你还给我看过公司楼下的小猫，和家里的小福不是一回事。</p></div>
+            <div class="memory-item"><strong>9 月 15 日</strong><p>你问“小猫可爱还是我可爱”，这题我当然选你。</p></div>
+            <div class="memory-item"><strong>后来</strong><p>我们又约定，以后一起养一只属于我们的小猫。</p></div>
           </div>
-          <p>所以我们后来认真约定，要一起养一只小猫。</p>
-          <div class="photo-grid">
-            <figure class="photo-card"><img src="assets/photos/cat-bed.jpg" alt="一只待在床上的猫"><figcaption>猫猫趴在软软的地方。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/cat-orange-2.jpg" alt="一只橘猫"><figcaption>你发来的猫猫照片。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/cat-floor.jpg" alt="地板上的小猫"><figcaption>走到哪里都能遇到猫。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/cat-close.jpg" alt="小猫近距离照片"><figcaption>这张看起来像在等摸摸。</figcaption></figure>
-          </div>
-          <figure class="chat-shot"><img src="assets/chat-cat.png" alt="猫猫和你的原始聊天记录节选"></figure>
+          <p>等以后拿到小福的原图，再把它单独放进这一页。现在不放，是因为我不想让一只不相干的猫占了它的位置。</p>
         `
       },
       {
@@ -856,7 +1003,6 @@
           </div>
           <p>分享东西看起来没什么，可“看到好笑的第一个想到你”，本身就是喜欢。</p>
           <p>292 次分享里，很多视频我后来都不记得内容了，但我记得输入框上面那句“分享给 小婷”，也记得看到猫和短剧时下意识就想点发送。</p>
-          <figure class="photo-wide photo-card"><img src="assets/photos/cat-green.jpg" alt="一只猫"><figcaption>猫猫大概是 292 次分享里出现最多的一类。</figcaption></figure>
           <figure class="chat-shot"><img src="assets/chat-share.png" alt="抖音分享相关原始聊天记录节选"></figure>
         `
       },
@@ -877,8 +1023,10 @@
             <figure class="photo-card"><img src="assets/photos/cosplay-blue.jpg" alt="蓝色裙子照片"><figcaption>8 月 6 日，cos 照片。</figcaption></figure>
             <figure class="photo-card"><img src="assets/photos/gift-box.jpg" alt="礼盒和娃娃"><figcaption>9 月 10 日，礼盒和娃娃。</figcaption></figure>
             <figure class="photo-card"><img src="assets/photos/teddy.jpg" alt="一只小熊玩偶"><figcaption>8 月 20 日，小熊。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/city-dress.jpg" alt="城市里的裙装照"><figcaption>9 月 28 日，城市里的裙装照。</figcaption></figure>
             <figure class="photo-card"><img src="assets/photos/summer-selfie.jpg" alt="夏天的一张照片"><figcaption>8 月 28 日，夏天的一张照片。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/hand-ring.jpg" alt="美甲和戒指"><figcaption>8 月 2 日，你发来的美甲和戒指。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/dress-mirror.jpg" alt="试衣镜前的穿搭"><figcaption>10 月 12 日，试衣镜前的穿搭。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/bunny-selfie.jpg" alt="兔子耳造型"><figcaption>9 月 26 日，兔子耳造型。</figcaption></figure>
           </div>
           <figure class="chat-shot"><img src="assets/chat-photo.png" alt="照片和穿搭相关原始聊天记录节选"></figure>
         `
@@ -953,8 +1101,6 @@
         title: "照片簿 03：游戏和生活",
         html: `
           <div class="photo-grid">
-            <figure class="photo-card"><img src="assets/photos/game-match-1.jpg" alt="游戏对局"><figcaption>8 月 18 日，游戏对局。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/game-match-2.jpg" alt="游戏战绩"><figcaption>9 月 5 日，游戏战绩。</figcaption></figure>
           </div>
         `
       },
@@ -963,12 +1109,6 @@
         title: "照片簿 04：一整个猫猫频道",
         html: `
           <div class="photo-grid">
-            <figure class="photo-card"><img src="assets/photos/cat-orange.jpg" alt="橘猫"><figcaption>9 月 15 日，橘猫。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/cat-bed.jpg" alt="床上的猫"><figcaption>9 月 24 日，窝在床上的猫。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/cat-orange-2.jpg" alt="猫猫"><figcaption>9 月 27 日，又一只橘猫。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/cat-floor.jpg" alt="地板上的猫"><figcaption>9 月 25 日，地板上的小猫。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/cat-close.jpg" alt="猫脸特写"><figcaption>9 月 29 日，凑近镜头的小猫。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/cat-green.jpg" alt="绿色背景的猫"><figcaption>9 月 28 日，另一张猫猫。</figcaption></figure>
           </div>
         `
       },
@@ -982,7 +1122,6 @@
             <figure class="photo-card"><img src="assets/photos/barbecue.jpg" alt="烤肉"><figcaption>8 月 27 日，烤肉。</figcaption></figure>
             <figure class="photo-card"><img src="assets/photos/soup.jpg" alt="热汤"><figcaption>9 月 5 日，热汤。</figcaption></figure>
             <figure class="photo-card"><img src="assets/photos/watermelon.jpg" alt="西瓜"><figcaption>10 月 4 日，切好的西瓜。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/plush-cat.jpg" alt="猫咪玩偶"><figcaption>9 月 14 日，猫咪玩偶。</figcaption></figure>
           </div>
         `
       },
@@ -1023,7 +1162,6 @@
             <figure class="photo-card"><img src="assets/photos/farewell-flowers.jpg" alt="告别时的花"><figcaption>10 月 25 日，花和房间。</figcaption></figure>
             <figure class="photo-card"><img src="assets/photos/last-meal.jpg" alt="一起吃的饭"><figcaption>10 月 25 日，一起吃饭。</figcaption></figure>
             <figure class="photo-card"><img src="assets/photos/holding-hands.jpg" alt="牵手照片"><figcaption>10 月 25 日，牵过的手。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/cat-last.jpg" alt="猫猫"><figcaption>10 月 25 日，还是没忘了拍猫。</figcaption></figure>
           </div>
         `
       },
@@ -1092,6 +1230,23 @@
       },
       {
         chapter: "第四幕 · 甜话",
+        title: "只属于我们的“一键三连”",
+        html: `
+          <p class="lead">你说，老公、我喜欢你、mua，这三个放在一起，就是我们的“一键三连”。</p>
+          <p>这不是网上通用的梗，是只有我们两个人知道怎么接的暗号。你叫一声老公，我应你；你说喜欢我，我就知道你是真的在撒娇；最后那声 mua，是这套话的收尾。</p>
+          <div class="quote">老公，我喜欢你，mua。<small>小婷 · 我们的“一键三连”</small></div>
+          <figure class="chat-shot"><img src="assets/chat-three-combo.png" alt="我们之间的一键三连"></figure>
+          <div class="secret-combo" aria-label="我们的一键三连互动">
+            <button type="button" data-secret-reply="我在。">老公</button>
+            <button type="button" data-secret-reply="我也喜欢你呀。">我喜欢你</button>
+            <button type="button" data-secret-reply="这声 mua 我收到了。">mua</button>
+          </div>
+          <div class="secret-reply" id="secretReply">她不用回复，点一下就会得到我这一句回应。</div>
+          <p>后来你忙起来、心情不好、或者只是想哄我一下，我都会想起这三句。每次听见，还是会很没出息地开心。</p>
+        `
+      },
+      {
+        chapter: "第四幕 · 甜话",
         title: "有老公真好",
         html: `
           <div class="quote-grid">
@@ -1135,6 +1290,7 @@
           </div>
           <p>这些话我写在这里，只是因为你当时真的说过，我也真的相信过。</p>
           <figure class="photo-wide photo-card"><img src="assets/photos/dolls.jpg" alt="一排娃娃"><figcaption>有些未来聊得很远，有些收藏却很小。</figcaption></figure>
+          <figure class="photo-wide photo-card"><img src="assets/photos/doll-display.jpg" alt="娃娃和摆件"><figcaption>8 月 14 日，你发来的娃娃和摆件。</figcaption></figure>
         `
       },
       {
@@ -1188,8 +1344,6 @@
           </div>
           <p>我连以后家里有猫、有鱼缸的样子都想过。你负责抱猫，我负责收拾被它弄乱的东西。</p>
           <div class="photo-grid">
-            <figure class="photo-card"><img src="assets/photos/cat-green.jpg" alt="一只猫"><figcaption>以后家里也想有一只这样的猫。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/cat-orange-2.jpg" alt="橘猫"><figcaption>你发来的猫，我一张张都看过。</figcaption></figure>
           </div>
         `
       },
@@ -1358,7 +1512,6 @@
           <p>那天的空白，我后来再看，反而觉得很珍贵。</p>
           <div class="photo-grid">
             <figure class="photo-card"><img src="assets/photos/last-meal.jpg" alt="一起吃饭的照片"><figcaption>一起吃的饭，比聊天框里的外卖更有温度。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/cat-last.jpg" alt="猫猫照片"><figcaption>那天也没有忘记拍猫。</figcaption></figure>
           </div>
         `
       },
@@ -1370,7 +1523,7 @@
           <div class="quote-grid">
             <div class="quote-card"><time>圣杰</time><p>我舍不得你呀。</p></div>
             <div class="quote-card"><time>小婷</time><p>我们还会再见的呀。</p></div>
-            <div class="quote-card"><time>圣杰</time><p>你不要离开我好不好呀。</p></div>
+            <div class="quote-card"><time>小婷</time><p>会呀。</p></div>
             <div class="quote-card"><time>小婷</time><p>不离开呀。</p></div>
           </div>
           <p>那天之后，我还是会提醒你吹头发，还是会问你吃饭没有。只是这些话从“以后见面”变成了“我们真的见过以后”。</p>
@@ -1408,7 +1561,6 @@
           <p>这些数字不是用来交换什么。只是证明那些日子真的发生过。</p>
           <p>数字不会记得事情是怎么发生的，但我会记得：电话是你先打来的，照片是你随手发来的，甜话也不是复制粘贴。</p>
           <div class="photo-grid">
-            <figure class="photo-card"><img src="assets/photos/cat-green.jpg" alt="猫猫"><figcaption>猫猫占了很多页。</figcaption></figure>
             <figure class="photo-card"><img src="assets/photos/hotel-flower.jpg" alt="酒店里的花"><figcaption>最后，我们真的见到了。</figcaption></figure>
           </div>
         `
@@ -1439,7 +1591,6 @@
           <p>也谢谢那些特别普通的晚上：你刚洗完澡，头发还湿着；我隔着屏幕催你吹干；然后电话接通，你说：“我先吹个头发。”</p>
           <p>这些小事，我会记得很久。</p>
           <div class="photo-grid">
-            <figure class="photo-card"><img src="assets/photos/cat-last.jpg" alt="猫猫"><figcaption>谢谢你愿意和我分享喜欢的东西。</figcaption></figure>
             <figure class="photo-card"><img src="assets/photos/holding-hands.jpg" alt="牵手照片"><figcaption>也谢谢那次真的见面。</figcaption></figure>
           </div>
         `
@@ -1469,7 +1620,6 @@
       ["headpiece-selfie.jpg", "8 月 12 日，戴着头饰的自拍。"],
       ["teddy.jpg", "8 月 20 日，我发给你的小熊。"],
       ["doll-display.jpg", "8 月 14 日，娃娃和摆件。"],
-      ["plush-cat.jpg", "9 月 14 日，猫咪玩偶。"],
       ["plush-corner.jpg", "8 月 20 日，玩偶角落。"],
       ["cosplay-room.jpg", "8 月 23 日，你认真打扮后的照片。"],
       ["barbecue.jpg", "8 月 27 日，我发给你的烤肉照片。"],
@@ -1479,15 +1629,6 @@
       ["home-meal.jpg", "8 月 29 日，家里的一碗饭。"],
       ["soup.jpg", "9 月 5 日，热汤。"],
       ["watermelon.jpg", "10 月 4 日，切好的西瓜。"],
-      ["game-match-1.jpg", "8 月 18 日，游戏对局截图。"],
-      ["game-match-2.jpg", "9 月 5 日，另一张游戏截图。"],
-      ["cat-orange.jpg", "9 月 15 日，橘猫。"],
-      ["cat-bed.jpg", "9 月 24 日，窝在床上的猫。"],
-      ["cat-orange-2.jpg", "9 月 27 日，又一只橘猫。"],
-      ["cat-floor.jpg", "9 月 25 日，地板上的小猫。"],
-      ["cat-close.jpg", "9 月 29 日，凑近镜头的猫。"],
-      ["cat-green.jpg", "9 月 28 日，我发给你的猫猫照片。"],
-      ["cat-last.jpg", "10 月 25 日，那天拍到的猫。"],
       ["portrait-close.jpg", "9 月 12 日，聊天里的近照。"],
       ["portrait-outfit.jpg", "10 月 13 日，我发给你的穿搭参考图。"],
       ["dress-mirror.jpg", "10 月 12 日，试衣镜前的照片。"],
@@ -1499,7 +1640,6 @@
       ["swing-beach.jpg", "9 月 14 日，白色秋千。"],
       ["summer-selfie.jpg", "8 月 28 日，夏天的一张照片。"],
       ["school-style.jpg", "9 月 2 日，学院风照片。"],
-      ["city-dress.jpg", "9 月 28 日，城市里的裙装照。"],
       ["sunset.jpg", "9 月 30 日，晚霞。"],
       ["living-room.jpg", "8 月 25 日，房间里的一角。"],
       ["hotel-room.jpg", "10 月 11 日，提前看过的酒店房间。"],
@@ -1602,12 +1742,31 @@
       "game-list.jpg",
       "cake-saved.jpg",
       "necklace.jpg",
-      "summer-selfie-2.jpg"
+      "summer-selfie-2.jpg",
+      "portrait-close.jpg",
+      "portrait-outfit.jpg",
+      "living-room.jpg",
+      "dinner.jpg",
+      "meal.jpg",
+      "pink-dress.jpg",
+      "teddy.jpg",
+      "seaside-blue.jpg",
+      "ocean-view.jpg",
+      "sunset.jpg",
+      "last-meal.jpg",
+      "farewell-flowers.jpg",
+      "holding-hands.jpg",
+      "gift-set.jpg",
+      "school-style.jpg",
+      "swing-beach.jpg",
+      "watermelon.jpg",
+      "hotel-room.jpg"
     ]);
     const usedPhotoSources = new Set();
+    const photoParser = new DOMParser();
     for (const page of pages) {
-      const container = document.createElement("div");
-      container.innerHTML = page.html;
+      const parsed = photoParser.parseFromString(page.html, "text/html");
+      const container = parsed.body;
 
       for (const image of [...container.querySelectorAll("img")]) {
         const source = image.getAttribute("src") || "";
@@ -1637,13 +1796,94 @@
     const tocOverlay = document.getElementById("tocOverlay");
     const tocClose = document.getElementById("tocClose");
     const tocList = document.getElementById("tocList");
+    const tocSearch = document.getElementById("tocSearch");
+    const resumeButton = document.getElementById("resumeButton");
+    const savedFilter = document.getElementById("savedFilter");
+    const bookmarkButton = document.getElementById("bookmarkButton");
+    const toast = document.getElementById("toast");
+    const backgroundMusic = document.getElementById("backgroundMusic");
+    const musicButton = document.getElementById("musicButton");
     let currentPage = 0;
     let touchStartX = 0;
     let touchStartY = 0;
+    let musicPausedByUser = false;
+    let onlyShowSaved = false;
+    let bookmarks = new Set();
+
+    try {
+      const storedBookmarks = JSON.parse(localStorage.getItem("memoirBookmarks") || "[]");
+      if (Array.isArray(storedBookmarks)) bookmarks = new Set(storedBookmarks);
+    } catch {}
+
+    let toastTimer = null;
+    const showToast = (message) => {
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 1800);
+    };
+
+    const saveBookmarks = () => {
+      try {
+        localStorage.setItem("memoirBookmarks", JSON.stringify([...bookmarks]));
+      } catch {}
+    };
+
+    const pageSummary = (page) => {
+      const container = document.createElement("div");
+      container.innerHTML = page.html;
+      const paragraph = container.querySelector("p.lead, blockquote, p");
+      const text = (paragraph?.textContent || page.title).replace(/\s+/g, " ").trim();
+      return text.length > 58 ? `${text.slice(0, 58)}…` : text;
+    };
+
+    const isSubsequenceMatch = (query, text) => {
+      let cursor = 0;
+      for (const character of query) {
+        cursor = text.indexOf(character, cursor);
+        if (cursor < 0) return false;
+        cursor += 1;
+      }
+      return true;
+    };
+
+    backgroundMusic.volume = 0.34;
+    const updateMusicButton = () => {
+      const playing = !backgroundMusic.paused;
+      musicButton.textContent = playing ? "♪ 暂停" : "♪ 音乐";
+      musicButton.setAttribute("aria-pressed", String(playing));
+    };
+    const playMusic = () => {
+      if (musicPausedByUser) return;
+      backgroundMusic.play().then(updateMusicButton).catch(() => updateMusicButton());
+    };
+    musicButton.addEventListener("click", () => {
+      if (backgroundMusic.paused) {
+        musicPausedByUser = false;
+        backgroundMusic.play().then(updateMusicButton).catch(() => updateMusicButton());
+      } else {
+        musicPausedByUser = true;
+        backgroundMusic.pause();
+        updateMusicButton();
+      }
+    });
+    backgroundMusic.addEventListener("play", updateMusicButton);
+    backgroundMusic.addEventListener("pause", updateMusicButton);
+    document.addEventListener("click", (event) => {
+      if (event.target.closest("button, a")) playMusic();
+    });
 
     function readHashPage() {
       const match = location.hash.match(/page=(\d+)/);
-      const value = match ? Number(match[1]) - 1 : 0;
+      let value = 0;
+      if (match) {
+        value = Number(match[1]) - 1;
+      } else {
+        try {
+          const stored = Number(localStorage.getItem("memoirLastPage")) - 1;
+          if (Number.isFinite(stored) && stored >= 0) value = stored;
+        } catch {}
+      }
       return Math.min(Math.max(value, 0), pages.length - 1);
     }
 
@@ -1666,29 +1906,111 @@
       progressBar.style.width = `${((currentPage + 1) / pages.length) * 100}%`;
       document.title = `${page.title} · 给小婷的回忆录`;
       if (updateHash) history.replaceState(null, "", `#page=${currentPage + 1}`);
+      try {
+        localStorage.setItem("memoirLastPage", String(currentPage + 1));
+      } catch {}
+      const saved = bookmarks.has(currentPage);
+      bookmarkButton.textContent = saved ? "★" : "☆";
+      bookmarkButton.classList.toggle("saved", saved);
+      bookmarkButton.setAttribute("aria-pressed", String(saved));
+      bookmarkButton.setAttribute("aria-label", saved ? "取消收藏当前页" : "收藏当前页");
+      pageCard.querySelectorAll("[data-secret-reply]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const reply = document.getElementById("secretReply");
+          if (reply) reply.textContent = button.dataset.secretReply || "";
+          pageCard.classList.remove("reply-pulse");
+          pageCard.offsetHeight;
+          pageCard.classList.add("reply-pulse");
+        });
+      });
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
     function buildToc() {
       tocList.innerHTML = "";
+      const keyword = tocSearch.value.trim().toLocaleLowerCase("zh-CN");
+      savedFilter.textContent = `${onlyShowSaved ? "★" : "☆"} 只看收藏 (${bookmarks.size})`;
+      let currentGroup = "";
+      let visibleCount = 0;
       pages.forEach((page, index) => {
         if (page.type === "chapter-page") return;
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "toc-item";
-        button.innerHTML = `<b>${String(index + 1).padStart(2, "0")}</b><span>${page.title}</span>`;
-        button.addEventListener("click", () => {
+        const summary = pageSummary(page);
+        const searchText = `${page.title} ${page.chapter || ""} ${summary}`.toLocaleLowerCase("zh-CN");
+        if (keyword && !searchText.includes(keyword) && !isSubsequenceMatch(keyword, searchText)) return;
+        if (onlyShowSaved && !bookmarks.has(index)) return;
+        const group = page.chapter || "开篇";
+        if (group !== currentGroup) {
+          const title = document.createElement("div");
+          title.className = "toc-group-title";
+          title.textContent = group;
+          tocList.appendChild(title);
+          currentGroup = group;
+        }
+        const row = document.createElement("div");
+        row.className = "toc-row";
+        const item = document.createElement("button");
+        item.type = "button";
+        item.className = "toc-item";
+        item.innerHTML = `<b>${String(index + 1).padStart(2, "0")}</b><span>${page.title}<small>${summary}</small></span>`;
+        item.addEventListener("click", () => {
           tocOverlay.classList.remove("open");
           renderPage(index);
         });
-        tocList.appendChild(button);
+        const star = document.createElement("button");
+        star.type = "button";
+        star.className = `toc-star${bookmarks.has(index) ? " saved" : ""}`;
+        star.textContent = bookmarks.has(index) ? "★" : "☆";
+        star.setAttribute("aria-label", bookmarks.has(index) ? "取消收藏" : "收藏");
+        star.addEventListener("click", () => {
+          if (bookmarks.has(index)) bookmarks.delete(index);
+          else bookmarks.add(index);
+          saveBookmarks();
+          if (currentPage === index) {
+            const saved = bookmarks.has(index);
+            bookmarkButton.textContent = saved ? "★" : "☆";
+            bookmarkButton.classList.toggle("saved", saved);
+          }
+          buildToc();
+          showToast(bookmarks.has(index) ? "这一页已经收藏好了" : "已取消收藏");
+        });
+        row.append(item, star);
+        tocList.appendChild(row);
+        visibleCount += 1;
       });
+      if (!visibleCount) {
+        const empty = document.createElement("div");
+        empty.className = "toc-empty";
+        empty.textContent = onlyShowSaved ? "还没有收藏的页面。翻到喜欢的页，点一下“☆”。" : "没有找到，换个关键词试试。";
+        tocList.appendChild(empty);
+      }
     }
 
     prevButton.addEventListener("click", () => renderPage(currentPage - 1));
     nextButton.addEventListener("click", () => renderPage(currentPage + 1));
-    tocButton.addEventListener("click", () => tocOverlay.classList.add("open"));
+    tocButton.addEventListener("click", () => {
+      resumeButton.hidden = currentPage === 0;
+      buildToc();
+      tocOverlay.classList.add("open");
+    });
     tocClose.addEventListener("click", () => tocOverlay.classList.remove("open"));
+    tocSearch.addEventListener("input", buildToc);
+    resumeButton.addEventListener("click", () => {
+      tocOverlay.classList.remove("open");
+      renderPage(0);
+    });
+    savedFilter.addEventListener("click", () => {
+      onlyShowSaved = !onlyShowSaved;
+      savedFilter.classList.toggle("active", onlyShowSaved);
+      savedFilter.textContent = onlyShowSaved ? "★ 只看收藏" : "☆ 只看收藏";
+      buildToc();
+    });
+    bookmarkButton.addEventListener("click", () => {
+      if (bookmarks.has(currentPage)) bookmarks.delete(currentPage);
+      else bookmarks.add(currentPage);
+      saveBookmarks();
+      renderPage(currentPage, false);
+      showToast(bookmarks.has(currentPage) ? "这一页已经收藏好了" : "已取消收藏");
+    });
     tocOverlay.addEventListener("click", (event) => {
       if (event.target === tocOverlay) tocOverlay.classList.remove("open");
     });
