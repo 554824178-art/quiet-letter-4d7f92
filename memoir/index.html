@@ -222,6 +222,23 @@
       line-height: 1.15;
     }
     .stat span { color: var(--muted); font-size: 11px; line-height: 1.5; }
+    .call-table {
+      width: 100%;
+      margin: 18px 0 20px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: 17px;
+      background: rgba(255, 255, 255, .58);
+      font-size: 13px;
+    }
+    .call-table th,
+    .call-table td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; }
+    .call-table tr:last-child th,
+    .call-table tr:last-child td { border-bottom: 0; }
+    .call-table th { color: var(--muted); font-weight: 550; }
+    .call-table td { color: var(--rose-deep); font-weight: 750; text-align: right; }
     .timeline {
       position: relative;
       display: grid;
@@ -421,6 +438,325 @@
       60% { transform: scale(1.02); background: rgba(238, 212, 217, .62); }
       100% { transform: scale(1); }
     }
+    .tutorial-steps {
+      display: grid;
+      gap: 9px;
+      margin: 20px 0 14px;
+    }
+    .tutorial-step {
+      display: grid;
+      grid-template-columns: 30px 1fr;
+      gap: 11px;
+      align-items: start;
+      padding: 12px 13px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: rgba(255, 255, 255, .55);
+    }
+    .tutorial-step b {
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--rose);
+      font-size: 12px;
+    }
+    .tutorial-step span { color: var(--muted); font-size: 14px; line-height: 1.55; }
+    .tutorial-go,
+    .voice-action,
+    .game-next,
+    .reply-generate,
+    .reply-copy,
+    .reply-share,
+    .reply-close {
+      min-height: 44px;
+      border: 1px solid rgba(168, 78, 101, .28);
+      border-radius: 999px;
+      padding: 8px 16px;
+      color: #fff;
+      background: var(--rose-deep);
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .tutorial-go { margin-top: 3px; }
+    .voice-wall {
+      display: grid;
+      gap: 11px;
+      margin: 20px 0 16px;
+    }
+    .voice-note {
+      display: grid;
+      grid-template-columns: 76px 1fr;
+      gap: 12px;
+      align-items: center;
+      margin: 0;
+      padding: 13px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, .62);
+    }
+    .voice-bubble {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 48px;
+      border-radius: 16px 16px 16px 5px;
+      color: #fff;
+      background: linear-gradient(135deg, #9c5268, #b97380);
+      font-size: 12px;
+      font-weight: 750;
+    }
+    .voice-bubble:after {
+      content: "▶";
+      display: block;
+      margin-top: 2px;
+      font-size: 10px;
+      opacity: .8;
+    }
+    .voice-note figcaption { min-width: 0; }
+    .voice-note strong {
+      display: block;
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+    .voice-note time {
+      display: block;
+      margin: 3px 0 6px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+    .voice-note audio {
+      display: block;
+      width: 100%;
+      height: 34px;
+      accent-color: var(--rose);
+    }
+    .voice-note.is-playing {
+      border-color: rgba(168, 78, 101, .45);
+      box-shadow: 0 0 0 3px rgba(238, 212, 217, .35);
+    }
+    .memory-game {
+      margin-top: 18px;
+      padding: 17px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background:
+        radial-gradient(circle at 100% 0, rgba(238, 212, 217, .62), transparent 13rem),
+        rgba(255, 255, 255, .62);
+    }
+    .game-meter {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .game-meter b { color: var(--rose-deep); }
+    .game-progress {
+      flex: 1;
+      height: 5px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(168, 78, 101, .12);
+    }
+    .game-progress span {
+      display: block;
+      width: 20%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--rose), #cb8c9a);
+      transition: width .25s ease;
+    }
+    .memory-game h3 { margin: 15px 0 12px; font-size: 18px; line-height: 1.6; }
+    .game-options { display: grid; gap: 8px; }
+    .game-option {
+      width: 100%;
+      min-height: 46px;
+      padding: 9px 13px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      color: var(--ink);
+      background: rgba(255, 255, 255, .72);
+      text-align: left;
+      cursor: pointer;
+    }
+    .game-option:hover { border-color: rgba(168, 78, 101, .4); }
+    .game-option.correct {
+      color: #2f584d;
+      border-color: rgba(86, 121, 111, .45);
+      background: #e4efe9;
+    }
+    .game-option.wrong {
+      color: #8b3e50;
+      border-color: rgba(168, 78, 101, .4);
+      background: #f5e1e4;
+    }
+    .game-option:disabled { cursor: default; opacity: .78; }
+    .game-reveal {
+      margin-top: 11px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      color: var(--rose-deep);
+      background: rgba(238, 212, 217, .38);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+    .game-reveal[hidden],
+    .game-next[hidden],
+    .reply-result[hidden],
+    .reply-error[hidden] { display: none; }
+    .game-next { margin-top: 12px; }
+    .game-finish {
+      margin: 13px 0 0;
+      color: var(--rose-deep);
+      font-family: "Songti SC", "STSong", "SimSun", serif;
+      font-size: 20px;
+      line-height: 1.55;
+    }
+    .reply-composer {
+      margin-top: 18px;
+      padding: 17px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, .6);
+    }
+    .reply-label {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--rose-deep);
+      font-size: 13px;
+      font-weight: 750;
+    }
+    .reply-textarea {
+      display: block;
+      width: 100%;
+      min-height: 110px;
+      resize: vertical;
+      padding: 12px 13px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      color: var(--ink);
+      background: rgba(255, 255, 255, .78);
+      font: inherit;
+      font-size: 15px;
+      line-height: 1.65;
+      outline: none;
+    }
+    .reply-textarea:focus {
+      border-color: rgba(168, 78, 101, .52);
+      box-shadow: 0 0 0 3px rgba(238, 212, 217, .34);
+    }
+    .reply-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin: 10px 0 12px;
+    }
+    .reply-chip {
+      min-height: 34px;
+      padding: 5px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--rose-deep);
+      background: rgba(238, 212, 217, .26);
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .reply-chip.active { color: #fff; background: var(--rose-deep); border-color: transparent; }
+    .reply-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 7px 0 12px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+    .reply-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+    .reply-copy,
+    .reply-share {
+      color: var(--rose-deep);
+      background: rgba(255, 255, 255, .72);
+    }
+    .reply-result { margin-top: 14px; }
+    .reply-card {
+      padding: 16px;
+      border: 1px dashed rgba(168, 78, 101, .34);
+      border-radius: 18px;
+      background:
+        linear-gradient(160deg, rgba(255, 250, 246, .95), rgba(245, 229, 227, .72));
+    }
+    .reply-card small { display: block; color: var(--rose-deep); font-size: 11px; letter-spacing: .08em; }
+    .reply-card blockquote {
+      margin: 10px 0;
+      color: var(--ink);
+      font-family: "Songti SC", "STSong", "SimSun", serif;
+      font-size: 18px;
+      line-height: 1.72;
+      white-space: pre-wrap;
+    }
+    .reply-card time { color: var(--muted); font-size: 11px; }
+    .reply-error {
+      margin: 8px 0 0;
+      color: #8b3e50;
+      font-size: 13px;
+    }
+    .reply-inbox {
+      position: fixed;
+      z-index: 90;
+      inset: 0;
+      display: none;
+      place-items: center;
+      padding: 22px;
+      background: rgba(42, 30, 35, .52);
+      backdrop-filter: blur(10px);
+    }
+    .reply-inbox.open { display: grid; }
+    .reply-inbox-card {
+      width: min(500px, 100%);
+      max-height: calc(100svh - 44px);
+      overflow: auto;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+    .reply-inbox-card > small {
+      color: var(--rose);
+      font-size: 12px;
+      font-weight: 750;
+      letter-spacing: .12em;
+    }
+    .reply-inbox-card h2 { margin: 8px 0 14px; font-size: 30px; }
+    .reply-inbox-text {
+      margin: 0;
+      padding: 16px;
+      border-left: 3px solid var(--rose);
+      border-radius: 0 16px 16px 0;
+      color: var(--ink);
+      background: rgba(238, 212, 217, .3);
+      font-family: "Songti SC", "STSong", "SimSun", serif;
+      font-size: 19px;
+      line-height: 1.75;
+      white-space: pre-wrap;
+    }
+    .reply-inbox-date { display: block; margin: 10px 0 18px; color: var(--muted); font-size: 12px; }
+    .toc-badge {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 1px 7px;
+      border-radius: 999px;
+      color: #fff;
+      background: var(--sage);
+      font-size: 10px;
+      font-style: normal;
+      vertical-align: 1px;
+    }
     .toast {
       position: fixed;
       z-index: 80;
@@ -539,6 +875,12 @@
       .stat-row { grid-template-columns: 1fr 1fr; }
       .stat:last-child:nth-child(odd) { grid-column: 1 / -1; }
       .page-nav { grid-template-columns: 82px 1fr 82px; }
+      .voice-note { grid-template-columns: 68px 1fr; padding: 11px; }
+      .memory-game,
+      .reply-composer { padding: 14px; }
+      .reply-actions > button { flex: 1 1 135px; }
+      .reply-inbox { padding: 14px; }
+      .reply-inbox-card { padding: 20px; border-radius: 21px; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *:before, *:after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
@@ -546,7 +888,7 @@
   </style>
 </head>
 <body>
-  <audio id="backgroundMusic" loop preload="metadata">
+  <audio id="backgroundMusic" loop autoplay preload="metadata">
     <source src="assets/music/jue-bie-shu.mp3" type="audio/mpeg">
   </audio>
   <header class="bookbar">
@@ -580,9 +922,20 @@
         <div class="toc-actions">
           <button class="toc-action" id="resumeButton" type="button">↤ 回到开头</button>
           <button class="toc-action" id="savedFilter" type="button">☆ 只看收藏</button>
+          <button class="toc-action" id="interactionFilter" type="button">✦ 只看互动</button>
         </div>
       </div>
       <div class="toc-list" id="tocList"></div>
+    </section>
+  </div>
+
+  <div class="reply-inbox" id="replyInbox" role="dialog" aria-modal="true" aria-labelledby="replyInboxTitle">
+    <section class="reply-inbox-card">
+      <small>小婷给圣杰的回信</small>
+      <h2 id="replyInboxTitle">她把一句话留在这里</h2>
+      <blockquote class="reply-inbox-text" id="replyInboxText"></blockquote>
+      <time class="reply-inbox-date" id="replyInboxDate"></time>
+      <button class="reply-close" id="replyInboxClose" type="button">收好了，继续翻</button>
     </section>
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -614,7 +967,12 @@
             <div class="memory-item"><strong>第五幕 · 约定</strong><p>北京、新房、小猫、迪士尼和生日。</p></div>
             <div class="memory-item"><strong>第六幕 · 见面</strong><p>机场、酒店大堂，还有终于看到你的那一刻。</p></div>
           </div>
-          <p class="small">可以用下面的按钮翻页，也可以直接打开目录。手机可以左右滑。</p>
+          <div class="tutorial-steps" aria-label="翻阅说明">
+            <div class="tutorial-step"><b>1</b><span>点右下角“下一页”往下翻；手机也可以从屏幕中间向左滑。</span></div>
+            <div class="tutorial-step"><b>2</b><span>点右上角“目录”，可以按章节找、搜一句原话，或者只看收藏和互动。</span></div>
+            <div class="tutorial-step"><b>3</b><span>每页底部的“☆”会收藏这一页；下次打开会自动回到上次看到的地方。</span></div>
+          </div>
+          <button class="tutorial-go" type="button" data-open-page="3">试一下，翻到第一页故事</button>
           <p>每张聊天截图都来自我们当时的记录，照片也都是聊天里真实发过的。它们和文字放在一起，才是我们过过的日子。</p>
         `
       },
@@ -664,7 +1022,6 @@
           <p>它出现在消息里、电话接通的第一句里，也出现在我不舍得删的聊天记录里。</p>
           <p>一个名字很短，可它把一个人的生活，慢慢放进了另一个人的日常。</p>
           <p>后来我会在早上问“小婷到公司了吗”，晚上说“小婷早点睡”。同一句称呼重复得越多，越像生活里真的有了一个人。</p>
-          <figure class="photo-wide photo-card"><img src="assets/photos/bouquet.jpg" alt="一束花"><figcaption>从“大美女”到“小婷”，称呼变了，距离也变了。</figcaption></figure>
         `
       },
       {
@@ -706,7 +1063,6 @@
           </div>
           <p>后来这两个称呼出现了太多次。可第一次看见“老公呀”的时候，我还是高兴得像个傻子。</p>
           <p>那几天我们几乎每句都带着称呼。你叫“老公呀”，我叫“老婆”，像是在反复确认：这不是做梦，我们真的一起了。</p>
-          <figure class="photo-wide photo-card"><img src="assets/photos/bouquet.jpg" alt="聊天里收到的一束花"><figcaption>8 月 1 日，你发来的花，也是那段日子里很小的一份浪漫。</figcaption></figure>
         `
       },
       {
@@ -770,7 +1126,6 @@
           <p>后来我们也反过来。你会问我吃饭没有，会提醒我感冒了要多喝水。</p>
           <div class="photo-grid">
             <figure class="photo-card"><img src="assets/photos/dinner.jpg" alt="聊天里分享的一桌饭"><figcaption>8 月 30 日，你发来的饭菜。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/meal.jpg" alt="老板做的饭"><figcaption>这张是我发给你的老板工作餐，不是我们一起吃的。</figcaption></figure>
           </div>
         `
       },
@@ -789,10 +1144,6 @@
           <p>肯德基不是多了不起的东西，奶茶也不是。可当一个人愿意记住你爱喝什么、今天有没有吃，连普通外卖都像是被认真对待过。</p>
           <figure class="photo-wide photo-card"><img src="assets/photos/dinner.jpg" alt="一桌饭菜"><figcaption>那些问过的“吃了吗”，后来都变成具体的饭菜。</figcaption></figure>
           <figure class="chat-shot"><img src="assets/chat-milktea.png" alt="肯德基和奶茶的原始聊天记录节选"></figure>
-          <div class="photo-grid">
-            <figure class="photo-card"><img src="assets/photos/porridge.jpg" alt="一碗粥"><figcaption>8 月 1 日，一碗粥。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/home-meal.jpg" alt="家里的一顿饭"><figcaption>8 月 29 日，家里的一碗饭。</figcaption></figure>
-          </div>
         `
       },
       {
@@ -863,7 +1214,7 @@
           </div>
           <p>你说等头发再长一点，我也记住了。头发的长度会变，颜色会变，你还是小婷。</p>
           <div class="photo-grid">
-            <figure class="photo-card"><img src="assets/photos/cosplay-selfie-1.jpg" alt="一张日常自拍"><figcaption>8 月 3 日，聊天里留下的照片。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/headpiece-selfie.jpg" alt="戴着头饰的近照"><figcaption>8 月 12 日，你发来的头饰自拍。</figcaption></figure>
             <figure class="photo-card"><img src="assets/photos/cosplay-outdoor.jpg" alt="外出时拍的照片"><figcaption>8 月 12 日，出去玩时发给我的照片。</figcaption></figure>
           </div>
         `
@@ -878,7 +1229,6 @@
           <p>后来我又说，想买一个洗头椅包，因为我觉得你每次洗头发都好辛苦。</p>
           <p>这些约定很小，小到不像什么大事。可真正想一起生活，不就是从吹头发、吃饭、等你回家这些小事开始的吗。</p>
           <p>我还想过，等你来北京以后，不用每次洗完都自己折腾。你躺着，我帮你把头发吹干。这个画面我想过不止一次。</p>
-          <figure class="photo-wide photo-card"><img src="assets/photos/cosplay-selfie-1.jpg" alt="一张近照"><figcaption>头发长短会变，那个人还是小婷。</figcaption></figure>
         `
       },
       {
@@ -907,6 +1257,15 @@
             <div class="stat"><strong>222 次</strong><span>你主动打给我的通话</span></div>
             <div class="stat"><strong>11:40:08</strong><span>最长的一次</span></div>
           </div>
+          <table class="call-table" aria-label="我们的通话统计">
+            <tbody>
+              <tr><th>留下的通话记录</th><td>574 条</td></tr>
+              <tr><th>真正接通的电话</th><td>462 次</td></tr>
+              <tr><th>加起来的连接时长</th><td>23 天 16 小时</td></tr>
+              <tr><th>我打给你 / 你打给我</th><td>240 次 / 222 次</td></tr>
+              <tr><th>最长的一通</th><td>11 小时 40 分 08 秒</td></tr>
+            </tbody>
+          </table>
           <p>下班打、吃饭前打、洗完澡打、快睡了还打。</p>
           <p>有时我们一直说话，有时什么都不说，电话就挂着。可只要知道你在那边，一个人也没那么像一个人。</p>
           <p>我发起 240 次，你发起 222 次。这个数字我特别喜欢，因为它说明不是只有我一个人在往前走。你也一次次打过来，也一次次等过我接电话。</p>
@@ -956,8 +1315,8 @@
           </div>
           <figure class="photo-wide photo-full photo-card"><img src="assets/photos/game-top-sunquan.jpg" alt="顶级孙权完整战绩截图"><figcaption>8 月 3 日，顶级孙权：12.4 分、前 15%、金牌发育路、三连决胜、MVP。</figcaption></figure>
           <div class="photo-grid">
-            <figure class="photo-card photo-full"><img src="assets/photos/game-gold-1.jpg" alt="金币游走与金牌打野完整对局截图"><figcaption>8 月 27 日，23 比 5 获胜；金牌游走 12.5，李白金牌打野 14.3 并拿到 MVP。</figcaption></figure>
-            <figure class="photo-card photo-full"><img src="assets/photos/game-gold-2.jpg" alt="金币游走与金牌中路完整对局截图"><figcaption>8 月 27 日，24 比 4 获胜；金牌游走 12.6，妲己金牌中路 12.8 并拿到 MVP。</figcaption></figure>
+            <figure class="photo-card photo-full"><img src="assets/photos/game-gold-1.jpg" alt="金牌游走完整对局截图"><figcaption>8 月 27 日，你发来的对局：23 比 5 获胜，金牌游走 12.5。</figcaption></figure>
+            <figure class="photo-card photo-full"><img src="assets/photos/game-gold-2.jpg" alt="另一场金牌游走完整对局截图"><figcaption>8 月 27 日，另一局 24 比 4。两张对局截图，我也一直留着。</figcaption></figure>
           </div>
           <p>输赢其实记得不多了，记得的是你开着麦笑、我等你上线，还有打完一局以后说“再来一把”。</p>
         `
@@ -1023,9 +1382,9 @@
             <figure class="photo-card"><img src="assets/photos/cosplay-blue.jpg" alt="蓝色裙子照片"><figcaption>8 月 6 日，cos 照片。</figcaption></figure>
             <figure class="photo-card"><img src="assets/photos/gift-box.jpg" alt="礼盒和娃娃"><figcaption>9 月 10 日，礼盒和娃娃。</figcaption></figure>
             <figure class="photo-card"><img src="assets/photos/teddy.jpg" alt="一只小熊玩偶"><figcaption>8 月 20 日，小熊。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/portrait-close.jpg" alt="她发来的近照"><figcaption>9 月 12 日，你发给我的近照。</figcaption></figure>
             <figure class="photo-card"><img src="assets/photos/summer-selfie.jpg" alt="夏天的一张照片"><figcaption>8 月 28 日，夏天的一张照片。</figcaption></figure>
             <figure class="photo-card"><img src="assets/photos/hand-ring.jpg" alt="美甲和戒指"><figcaption>8 月 2 日，你发来的美甲和戒指。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/dress-mirror.jpg" alt="试衣镜前的穿搭"><figcaption>10 月 12 日，试衣镜前的穿搭。</figcaption></figure>
             <figure class="photo-card"><img src="assets/photos/bunny-selfie.jpg" alt="兔子耳造型"><figcaption>9 月 26 日，兔子耳造型。</figcaption></figure>
           </div>
           <figure class="chat-shot"><img src="assets/chat-photo.png" alt="照片和穿搭相关原始聊天记录节选"></figure>
@@ -1039,10 +1398,7 @@
           <div class="quote">你也愿意陪我吃路边摊啊。<small>圣杰</small></div>
           <p>我喜欢的就是这种不端着的样子。不是每天都精致，是偶尔乱糟糟、困兮兮，也愿意跟对方说今天发生了什么。</p>
           <p>能一起过漂亮日子，也能一起在路边随便吃一顿，这样的以后我想过。</p>
-          <div class="photo-grid">
-            <figure class="photo-card"><img src="assets/photos/barbecue.jpg" alt="湘菜照片"><figcaption>8 月 27 日，我发给你的湘菜照片。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/meal.jpg" alt="老板做的工作餐"><figcaption>我发给你的老板工作餐，当时吐槽“这也能吃”。</figcaption></figure>
-          </div>
+          <p>我也给你看过老板做的饭，当时没有装体面，直接吐槽了一句“这也能吃”。我们连这种很小的抱怨都愿意讲给对方听。</p>
         `
       },
       {
@@ -1062,118 +1418,11 @@
       },
       {
         type: "chapter-page",
-        chapter: "第三幕附录",
-        title: "照片簿",
-        html: `
-          <p>光有文字还不够。聊天里真实出现过的照片，也占了这本回忆录很重要的一部分。</p>
-          <p>我只保留有上下文的图片：收到的花、吃过的饭、猫、裙子、礼物、旅途和见面。相同图片只出现一次；不是小婷本人的图，不会冒充她。</p>
-          <p>有些画面是开心的，有些是当时随手拍的普通一餐。它们不能代替文字，但能把那一天重新拉回来。</p>
-        `
-      },
-      {
-        chapter: "第三幕附录 · 照片簿",
-        title: "照片簿 01：刚熟悉的时候",
-        html: `
-          <div class="photo-grid">
-            <figure class="photo-card"><img src="assets/photos/bouquet.jpg" alt="花束"><figcaption>8 月 1 日，花。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/hand-ring.jpg" alt="手和戒指"><figcaption>8 月 2 日，手上的戒指。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/cosplay-selfie-1.jpg" alt="近照"><figcaption>8 月 3 日，另一张照片。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/cosplay-blue.jpg" alt="蓝色穿搭"><figcaption>8 月 6 日，蓝色穿搭。</figcaption></figure>
-          </div>
-        `
-      },
-      {
-        chapter: "第三幕附录 · 照片簿",
-        title: "照片簿 02：裙子和喜欢的小东西",
-        html: `
-          <div class="photo-grid">
-            <figure class="photo-card"><img src="assets/photos/cosplay-outdoor.jpg" alt="户外照片"><figcaption>8 月 12 日，出门拍照。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/gift-set.jpg" alt="礼物"><figcaption>8 月 13 日，礼盒和小物。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/dolls.jpg" alt="娃娃"><figcaption>8 月 19 日，一整柜娃娃。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/teddy.jpg" alt="小熊"><figcaption>8 月 20 日，小熊。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/pink-dress.jpg" alt="粉色裙子"><figcaption>9 月 10 日，粉色裙子。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/gift-box.jpg" alt="礼盒"><figcaption>9 月 10 日，礼盒里的娃娃。</figcaption></figure>
-          </div>
-        `
-      },
-      {
-        chapter: "第三幕附录 · 照片簿",
-        title: "照片簿 03：游戏和生活",
-        html: `
-          <div class="photo-grid">
-          </div>
-        `
-      },
-      {
-        chapter: "第三幕附录 · 照片簿",
-        title: "照片簿 04：一整个猫猫频道",
-        html: `
-          <div class="photo-grid">
-          </div>
-        `
-      },
-      {
-        chapter: "第三幕附录 · 照片簿",
-        title: "照片簿 05：吃饭这件大事",
-        html: `
-          <div class="photo-grid">
-            <figure class="photo-card"><img src="assets/photos/dinner.jpg" alt="晚餐"><figcaption>8 月 30 日，一桌饭。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/meal.jpg" alt="老板做的饭"><figcaption>9 月 19 日，老板做的饭。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/barbecue.jpg" alt="烤肉"><figcaption>8 月 27 日，烤肉。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/soup.jpg" alt="热汤"><figcaption>9 月 5 日，热汤。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/watermelon.jpg" alt="西瓜"><figcaption>10 月 4 日，切好的西瓜。</figcaption></figure>
-          </div>
-        `
-      },
-      {
-        chapter: "第三幕附录 · 照片簿",
-        title: "照片簿 06：你喜欢的风景",
-        html: `
-          <div class="photo-grid">
-            <figure class="photo-card"><img src="assets/photos/portrait-close.jpg" alt="近照"><figcaption>9 月 12 日，近照。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/bunny-selfie.jpg" alt="兔子造型"><figcaption>9 月 26 日，兔子耳造型。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/school-style.jpg" alt="学院风照片"><figcaption>9 月 2 日，学院风照片。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/swing-beach.jpg" alt="海边秋千"><figcaption>9 月 14 日，海边秋千。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/seaside-blue.jpg" alt="海边蓝裙"><figcaption>8 月 29 日，海边蓝裙。</figcaption></figure>
-          </div>
-        `
-      },
-      {
-        chapter: "第三幕附录 · 照片簿",
-        title: "照片簿 07：为见面准备",
-        html: `
-          <div class="photo-grid">
-            <figure class="photo-card"><img src="assets/photos/dress-mirror.jpg" alt="裙子与试衣"><figcaption>10 月 12 日，试裙子。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/portrait-outfit.jpg" alt="穿搭照片"><figcaption>10 月 13 日，见面前的穿搭。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/teddy.jpg" alt="玩偶"><figcaption>带进房间的小物。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/airport-hall.jpg" alt="机场大厅"><figcaption>10 月 23 日，机场大厅。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/hotel-room.jpg" alt="酒店房间"><figcaption>10 月 11 日，提前看的房间。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/hotel-bouquet.jpg" alt="酒店里的花"><figcaption>10 月 23 日，房间里的花。</figcaption></figure>
-          </div>
-        `
-      },
-      {
-        chapter: "第三幕附录 · 照片簿",
-        title: "照片簿 08：见过以后",
-        html: `
-          <div class="photo-grid">
-            <figure class="photo-card"><img src="assets/photos/hotel-flower.jpg" alt="酒店里的花"><figcaption>10 月 23 日，等你的时候拍下的花。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/cosplay-room.jpg" alt="见面时的裙子"><figcaption>那天准备好的衣服。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/farewell-flowers.jpg" alt="告别时的花"><figcaption>10 月 25 日，花和房间。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/last-meal.jpg" alt="一起吃的饭"><figcaption>10 月 25 日，一起吃饭。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/holding-hands.jpg" alt="牵手照片"><figcaption>10 月 25 日，牵过的手。</figcaption></figure>
-          </div>
-        `
-      },
-      {
-        type: "chapter-page",
         chapter: "第四幕",
         title: "甜话",
         html: `
           <p>有些话你早就忘了，我还留在聊天记录里。</p>
           <div class="photo-grid">
-            <figure class="photo-card"><img src="assets/photos/bouquet.jpg" alt="一束花"><figcaption>花会枯萎，那天发来照片时的开心没有。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/cosplay-selfie-1.jpg" alt="一张喜欢的照片"><figcaption>你发给我的照片，我都存着。</figcaption></figure>
           </div>
         `
       },
@@ -1190,7 +1439,6 @@
             <div class="quote-card"><time>10 月 20 日 · 圣杰</time><p>就是特别特别爱你呀。</p></div>
           </div>
           <p>“喜欢你”这三个字被我们说得很轻，有时候夹在一句晚安里，有时候前一句还在聊外卖。可轻不代表假，恰恰因为说得自然，才像真的每天都在喜欢。</p>
-          <figure class="photo-wide photo-card"><img src="assets/photos/bouquet.jpg" alt="一束花"><figcaption>喜欢不只在文字里，也在你发来的花和日常照片里。</figcaption></figure>
         `
       },
       {
@@ -1236,12 +1484,12 @@
           <p>这不是网上通用的梗，是只有我们两个人知道怎么接的暗号。你叫一声老公，我应你；你说喜欢我，我就知道你是真的在撒娇；最后那声 mua，是这套话的收尾。</p>
           <div class="quote">老公，我喜欢你，mua。<small>小婷 · 我们的“一键三连”</small></div>
           <figure class="chat-shot"><img src="assets/chat-three-combo.png" alt="我们之间的一键三连"></figure>
-          <div class="secret-combo" aria-label="我们的一键三连互动">
-            <button type="button" data-secret-reply="我在。">老公</button>
-            <button type="button" data-secret-reply="我也喜欢你呀。">我喜欢你</button>
-            <button type="button" data-secret-reply="这声 mua 我收到了。">mua</button>
+          <div class="secret-combo" data-combo aria-label="我们的一键三连互动">
+            <button type="button" data-combo-key="call" data-secret-reply="我在。">老公</button>
+            <button type="button" data-combo-key="like" data-secret-reply="我也喜欢你呀。">我喜欢你</button>
+            <button type="button" data-combo-key="mua" data-secret-reply="这声 mua 我收到了。">mua</button>
           </div>
-          <div class="secret-reply" id="secretReply">她不用回复，点一下就会得到我这一句回应。</div>
+          <div class="secret-reply" id="secretReply">按顺序点一遍。我就在这一页等你把它们接回来。</div>
           <p>后来你忙起来、心情不好、或者只是想哄我一下，我都会想起这三句。每次听见，还是会很没出息地开心。</p>
         `
       },
@@ -1290,7 +1538,117 @@
           </div>
           <p>这些话我写在这里，只是因为你当时真的说过，我也真的相信过。</p>
           <figure class="photo-wide photo-card"><img src="assets/photos/dolls.jpg" alt="一排娃娃"><figcaption>有些未来聊得很远，有些收藏却很小。</figcaption></figure>
-          <figure class="photo-wide photo-card"><img src="assets/photos/doll-display.jpg" alt="娃娃和摆件"><figcaption>8 月 14 日，你发来的娃娃和摆件。</figcaption></figure>
+          <figure class="photo-wide photo-card"><img src="assets/photos/doll-display.jpg" alt="娃娃和摆件"><figcaption>8 月 14 日，你发来的照片：娃娃是你自己的，摆件是我送你的。</figcaption></figure>
+        `
+      },
+      {
+        chapter: "只属于我们俩 · 声音",
+        title: "先听一遍当时的你",
+        interaction: true,
+        html: `
+          <p class="lead">文字把话留下了，声音把当时的你留下了。</p>
+          <p>这些不是你后来补给我的话，是我们还在每天打电话的时候，你随手发来的语音。点一下，就能听见那天的你。</p>
+          <div class="voice-wall">
+            <figure class="voice-note">
+              <span class="voice-bubble">4.8 秒</span>
+              <figcaption>
+                <strong>“你老说我这么可爱，其实是你可爱我了，对不对？”</strong>
+                <time>2026.08.05 · 你发给我的原声</time>
+                <audio controls preload="none" src="assets/voices/xiaoting-20260805.mp3"></audio>
+              </figcaption>
+            </figure>
+            <figure class="voice-note">
+              <span class="voice-bubble">2.2 秒</span>
+              <figcaption>
+                <strong>“我好爱你呀，老公。”</strong>
+                <time>2026.08.07 · 你发给我的原声</time>
+                <audio controls preload="none" src="assets/voices/xiaoting-20260807.mp3"></audio>
+              </figcaption>
+            </figure>
+            <figure class="voice-note">
+              <span class="voice-bubble">2.6 秒</span>
+              <figcaption>
+                <strong>“我超级想你呀，老公。”</strong>
+                <time>2026.08.20 · 你发给我的原声</time>
+                <audio controls preload="none" src="assets/voices/xiaoting-20260820.mp3"></audio>
+              </figcaption>
+            </figure>
+            <figure class="voice-note">
+              <span class="voice-bubble">2.5 秒</span>
+              <figcaption>
+                <strong>“我和小猫谁更可爱？”</strong>
+                <time>2026.08.22 · 你发给我的原声</time>
+                <audio controls preload="none" src="assets/voices/xiaoting-20260822.mp3"></audio>
+              </figcaption>
+            </figure>
+            <figure class="voice-note">
+              <span class="voice-bubble">2.8 秒</span>
+              <figcaption>
+                <strong>“谢谢老公，我爱你哦。”</strong>
+                <time>2026.08.27 · 你发给我的原声</time>
+                <audio controls preload="none" src="assets/voices/xiaoting-20260827.mp3"></audio>
+              </figcaption>
+            </figure>
+          </div>
+          <p class="small">点播放时，背景音乐会自动停一下；这条语音结束后，再接着放。</p>
+        `
+      },
+      {
+        chapter: "只属于我们俩 · 默契",
+        title: "我们俩的默契题",
+        interaction: true,
+        html: `
+          <p class="lead">不是考你记不记得，只是想和你一起翻回那些原话。</p>
+          <p>每题选一个答案。选完，我就会把那天的真实聊天翻出来给你看。</p>
+          <div class="memory-game" data-memory-game>
+            <div class="game-meter">
+              <b data-game-step>第 1 / 4 题</b>
+              <div class="game-progress"><span data-game-progress></span></div>
+            </div>
+            <h3 data-game-question></h3>
+            <div class="game-options" data-game-options></div>
+            <div class="game-reveal" data-game-reveal hidden></div>
+            <button class="game-next" type="button" data-game-next hidden>下一题</button>
+          </div>
+        `
+      },
+      {
+        chapter: "只属于我们俩 · 回信",
+        title: "这一页，一起写完",
+        interaction: true,
+        html: `
+          <p class="lead">前面的页是我写的。这一页，留给你。</p>
+          <p>你可以从下面挑几个还记得的小事，也可以自己写一句。写好以后，页面会生成一个可以发给圣杰的回信链接。</p>
+          <div class="reply-composer" data-reply-composer>
+            <label class="reply-label" for="replyText">如果愿意，留一句给我</label>
+            <textarea class="reply-textarea" id="replyText" maxlength="240" data-reply-text placeholder="比如：那束花，我还记得。"></textarea>
+            <div class="reply-chips" aria-label="加入想对我说的话">
+              <button class="reply-chip" type="button" data-reply-chip="那束花，我还记得。">那束花</button>
+              <button class="reply-chip" type="button" data-reply-chip="你总催我吹头发，我也记得。">吹头发</button>
+              <button class="reply-chip" type="button" data-reply-chip="见面前那通很长的电话，我还记得。">那通电话</button>
+              <button class="reply-chip" type="button" data-reply-chip="那些很普通的日子，我也记得。">普通日子</button>
+            </div>
+            <div class="reply-meta">
+              <span>最多 240 个字</span>
+              <span data-reply-count>0 / 240</span>
+            </div>
+            <div class="reply-actions">
+              <button class="reply-generate" type="button" data-reply-generate>生成给圣杰的回信链接</button>
+            </div>
+            <p class="reply-error" data-reply-error hidden></p>
+            <div class="reply-result" data-reply-result hidden>
+              <div class="reply-card">
+                <small>给圣杰的回信</small>
+                <blockquote data-reply-preview></blockquote>
+                <time data-reply-date></time>
+              </div>
+              <div class="reply-actions" style="margin-top: 10px">
+                <button class="reply-copy" type="button" data-reply-copy>复制回信链接</button>
+                <button class="reply-share" type="button" data-reply-share>发给圣杰</button>
+              </div>
+            </div>
+          </div>
+          <p class="small">网站没有后台，回信只会编码在链接里，不会存进公开目录；链接本身就带着这段话，记得只发给圣杰。</p>
         `
       },
       {
@@ -1344,7 +1702,11 @@
           </div>
           <p>我连以后家里有猫、有鱼缸的样子都想过。你负责抱猫，我负责收拾被它弄乱的东西。</p>
           <div class="photo-grid">
+            <figure class="photo-card"><img src="assets/photos/cat-bed.jpg" alt="聊天里出现的一只橘猫"><figcaption>9 月 24 日，你发给我的猫猫照片。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/cat-floor.jpg" alt="聊天里出现的一只小猫"><figcaption>9 月 25 日，你在聊天里分享的小猫。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/cat-close.jpg" alt="一只猫咪的近照"><figcaption>9 月 29 日，你发来的猫咪近照。</figcaption></figure>
           </div>
+          <p class="small">这三张你都发过，但我没有把它们都写成“小福”；认错猫，也会把回忆写错。</p>
         `
       },
       {
@@ -1392,7 +1754,6 @@
           </div>
           <p>这些都是当时真实说出口的愿望。写下来，是为了承认它发生过，不是为了拿它要求谁兑现。</p>
           <p>你说怕太快，我也说可以先同居试试。我们并不是毫无顾虑，只是愿意坐下来把这些顾虑一件件说出来。</p>
-          <figure class="photo-wide photo-card"><img src="assets/photos/bouquet.jpg" alt="花束"><figcaption>真心想过的以后，不应该被装作没发生。</figcaption></figure>
         `
       },
       {
@@ -1608,126 +1969,30 @@
       }
     ];
 
-    const photoBookPhotos = [
-      ["bouquet.jpg", "8 月 1 日，你收到花后拍给我看。"],
-      ["hand-ring.jpg", "8 月 2 日，你发来的手和戒指。"],
-      ["birthday-cake.jpg", "8 月 9 日，生日蛋糕。"],
-      ["cosplay-selfie-1.jpg", "8 月 3 日，聊天里的一张照片。"],
-      ["cosplay-blue.jpg", "8 月 6 日，你发来的裙装照。"],
-      ["cosplay-outdoor.jpg", "8 月 12 日，出门时拍的裙装照。"],
-      ["dolls.jpg", "8 月 19 日，一整柜娃娃。"],
-      ["red-bouquet.jpg", "8 月 13 日，红白色花束。"],
-      ["headpiece-selfie.jpg", "8 月 12 日，戴着头饰的自拍。"],
-      ["teddy.jpg", "8 月 20 日，我发给你的小熊。"],
-      ["doll-display.jpg", "8 月 14 日，娃娃和摆件。"],
-      ["plush-corner.jpg", "8 月 20 日，玩偶角落。"],
-      ["cosplay-room.jpg", "8 月 23 日，你认真打扮后的照片。"],
-      ["barbecue.jpg", "8 月 27 日，我发给你的烤肉照片。"],
-      ["dinner.jpg", "8 月 30 日，你发来的饭菜。"],
-      ["meal.jpg", "9 月 19 日，老板做的饭。我当时吐槽：这也能吃。"],
-      ["porridge.jpg", "8 月 1 日，一碗粥。"],
-      ["home-meal.jpg", "8 月 29 日，家里的一碗饭。"],
-      ["soup.jpg", "9 月 5 日，热汤。"],
-      ["watermelon.jpg", "10 月 4 日，切好的西瓜。"],
-      ["portrait-close.jpg", "9 月 12 日，聊天里的近照。"],
-      ["portrait-outfit.jpg", "10 月 13 日，我发给你的穿搭参考图。"],
-      ["dress-mirror.jpg", "10 月 12 日，试衣镜前的照片。"],
-      ["pink-dress.jpg", "9 月 10 日，你发来的粉色裙子。"],
-      ["gift-box.jpg", "9 月 10 日，礼盒和娃娃。"],
-      ["gift-set.jpg", "9 月 24 日，礼盒和小物。"],
-      ["seaside-blue.jpg", "9 月 2 日，海边蓝裙。"],
-      ["ocean-view.jpg", "8 月 30 日，海边的风景。"],
-      ["swing-beach.jpg", "9 月 14 日，白色秋千。"],
-      ["summer-selfie.jpg", "8 月 28 日，夏天的一张照片。"],
-      ["school-style.jpg", "9 月 2 日，学院风照片。"],
-      ["sunset.jpg", "9 月 30 日，晚霞。"],
-      ["living-room.jpg", "8 月 25 日，房间里的一角。"],
-      ["hotel-room.jpg", "10 月 11 日，提前看过的酒店房间。"],
-      ["hotel-flower.jpg", "10 月 23 日，酒店里的花。"],
-      ["hotel-bouquet.jpg", "10 月 23 日，房间里的生日花束。"],
-      ["farewell-flowers.jpg", "10 月 25 日，离开前的花。"],
-      ["last-meal.jpg", "10 月 25 日，一起吃的一顿饭。"],
-      ["holding-hands.jpg", "10 月 25 日，牵过的手。"],
-      ["airport-hall.jpg", "10 月 23 日 07:29，机场大厅。"],
-      ["bunny-selfie.jpg", "9 月 26 日，兔子耳造型。"]
-    ];
-
-    for (let index = pages.length - 1; index >= 0; index -= 1) {
-      if (pages[index].title === "照片簿" || pages[index].title.startsWith("照片簿 ")) {
-        pages.splice(index, 1);
-      }
-    }
-
-    const photoBookPages = [];
-    const photoPageSizes = [7, 7, 7, 7, 6, 6, 6, 6];
-    const photoPageTitles = [
-      "照片簿 01：花、生日和裙子",
-      "照片簿 02：玩偶和一起吃饭",
-      "照片簿 03：饭桌、游戏和猫",
-      "照片簿 04：猫猫频道",
-      "照片簿 05：裙子、礼物和海",
-      "照片簿 06：风景和普通一天",
-      "照片簿 07：见面那天",
-      "照片簿 08：日常碎片"
-    ];
-    let photoOffset = 0;
-    for (const [pageOffset, photoSize] of photoPageSizes.entries()) {
-      const photos = photoBookPhotos.slice(photoOffset, photoOffset + photoSize);
-      photoOffset += photoSize;
-      const pageNumber = String(pageOffset + 1).padStart(2, "0");
-      photoBookPages.push({
-        type: "photo-album",
-        chapter: "第三幕附录 · 照片簿",
-        title: photoPageTitles[pageOffset],
-        html: `
-          <div class="photo-grid">
-            ${photos.map(([file, caption]) => `
-              <figure class="photo-card">
-                <img src="assets/photos/${file}" alt="${caption}">
-                <figcaption>${caption}</figcaption>
-              </figure>
-            `).join("")}
-          </div>
-        `
-      });
-    }
-    const sweetChapterIndex = pages.findIndex(
-      (page) => page.type === "chapter-page" && page.title === "甜话"
-    );
-    pages.splice(
-      sweetChapterIndex,
-      0,
-      {
-        type: "chapter-page",
-        chapter: "第三幕附录",
-        title: "照片簿",
-        html: `
-          <p>这些照片都是聊天里真实出现过的。每张只放一次，按当时聊到的事情来写。</p>
-          <p>有的是你发来的，有的是我发给你的。不是小婷本人的照片，我不会再写成她；聊天里吐槽的饭、参考图和猫猫，也按当时的上下文分开说明。</p>
-        `
-      },
-      ...photoBookPages
-    );
-
-    // Photos belong with the moments they came from. Remove the standalone
-    // photo chapter and distribute one distinct image to its first real scene.
-    for (let index = pages.length - 1; index >= 0; index -= 1) {
-      if (pages[index].title === "照片簿" || pages[index].title.startsWith("照片簿 ")) {
-        pages.splice(index, 1);
-      }
-    }
-
     pages.splice(
       pages.findIndex((page) => page.type === "chapter-page" && page.title === "普通日子"),
       0,
       {
         chapter: "第一幕 · 认识你",
-        title: "那束让我记住的花",
+        title: "恋爱从一束花开始",
         html: `
-          <p class="lead">8 月 1 日，你发来一张花束照片，后面跟着一句：“你怎么又送我花？”</p>
+          <p class="lead">7 月 27 日晚上，第一束花送到你家。你爸帮你拿上楼，还看见了贺卡。</p>
+          <p>你说“好漂亮呀”“还看了卡片”，然后回答我：“我愿意呀。”</p>
+          <div class="quote">恋爱要从一束花开始嘛。<small>圣杰 · 2026.07.27 21:30</small></div>
+          <figure class="photo-wide photo-card"><img src="assets/photos/first-flower-selfie.jpg" alt="小婷抱着第一束花拍的照片"><figcaption>你抱着第一束花拍给我的照片。那天你一直说自己刚下班、很憔悴。</figcaption></figure>
+          <figure class="photo-wide photo-card"><img src="assets/photos/first-flower-card.jpg" alt="第一束花和贺卡"><figcaption>贺卡上写的是：“你愿意做我的女朋友吗？”</figcaption></figure>
+          <p>后来你说，这下补全了仪式感。我们也从那天开始，认真叫彼此男朋友、女朋友。</p>
+        `
+      },
+      {
+        chapter: "第一幕 · 认识你",
+        title: "后来又送你一束花",
+        allowBouquet: true,
+        html: `
+          <p class="lead">8 月 1 日，你发来第二束花，后面跟着一句：“你怎么又送我花？”</p>
           <p>我说，花当然会枯萎，但你看到它的那一瞬间是开心的，这就值回价格了。要是枯萎了，我就再给你送。</p>
-          <div class="photo-wide photo-card"><img src="assets/photos/bouquet.jpg" alt="8月1日你收到花后拍给我的花束"><figcaption>8 月 1 日，你收到花后拍给我的照片。</figcaption></div>
-          <p>你说我值得。那不是一句需要反复证明的情话，是那天很具体的一束花。</p>
+          <div class="photo-wide photo-card"><img src="assets/photos/bouquet.jpg" alt="8月1日你收到花后拍给我的花束"><figcaption>8 月 1 日，你收到的第二束花。</figcaption></div>
+          <p>第一束是仪式，第二束是我记住了你喜欢花。后来每一次送花，其实都在接着这一天。</p>
         `
       }
     );
@@ -1742,11 +2007,9 @@
       "cake-saved.jpg",
       "necklace.jpg",
       "summer-selfie-2.jpg",
-      "portrait-close.jpg",
       "portrait-outfit.jpg",
       "living-room.jpg",
       "dinner.jpg",
-      "meal.jpg",
       "pink-dress.jpg",
       "teddy.jpg",
       "seaside-blue.jpg",
@@ -1759,7 +2022,12 @@
       "school-style.jpg",
       "swing-beach.jpg",
       "watermelon.jpg",
-      "hotel-room.jpg"
+      "hotel-room.jpg",
+      "porridge.jpg",
+      "home-meal.jpg",
+      "cosplay-selfie-1.jpg",
+      "dress-mirror.jpg",
+      "barbecue.jpg"
     ]);
     const usedPhotoSources = new Set();
     const photoParser = new DOMParser();
@@ -1771,8 +2039,7 @@
         const source = image.getAttribute("src") || "";
         if (!source.startsWith("assets/photos/")) continue;
         const file = source.split("/").pop();
-        const isBouquetOutsideItsPage = file === "bouquet.jpg" && page.title !== "那束让我记住的花";
-        if (blockedPhotoFiles.has(file) || isBouquetOutsideItsPage || usedPhotoSources.has(source)) {
+        if (blockedPhotoFiles.has(file) || usedPhotoSources.has(source)) {
           (image.closest("figure") || image).remove();
         } else {
           usedPhotoSources.add(source);
@@ -1798,15 +2065,23 @@
     const tocSearch = document.getElementById("tocSearch");
     const resumeButton = document.getElementById("resumeButton");
     const savedFilter = document.getElementById("savedFilter");
+    const interactionFilter = document.getElementById("interactionFilter");
     const bookmarkButton = document.getElementById("bookmarkButton");
     const toast = document.getElementById("toast");
     const backgroundMusic = document.getElementById("backgroundMusic");
     const musicButton = document.getElementById("musicButton");
+    const replyInbox = document.getElementById("replyInbox");
+    const replyInboxText = document.getElementById("replyInboxText");
+    const replyInboxDate = document.getElementById("replyInboxDate");
+    const replyInboxClose = document.getElementById("replyInboxClose");
     let currentPage = 0;
     let touchStartX = 0;
     let touchStartY = 0;
     let musicPausedByUser = false;
+    let voicePausedMusic = false;
+    let generatedReplyUrl = "";
     let onlyShowSaved = false;
+    let onlyShowInteractive = false;
     let bookmarks = new Set();
 
     try {
@@ -1827,6 +2102,295 @@
         localStorage.setItem("memoirBookmarks", JSON.stringify([...bookmarks]));
       } catch {}
     };
+
+    const encodeReply = (payload) => {
+      const bytes = new TextEncoder().encode(JSON.stringify(payload));
+      let binary = "";
+      for (const byte of bytes) binary += String.fromCharCode(byte);
+      return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+    };
+
+    const decodeReply = (value) => {
+      try {
+        const normalized = value.replace(/-/g, "+").replace(/_/g, "/");
+        const padded = normalized.padEnd(Math.ceil(normalized.length / 4) * 4, "=");
+        const binary = atob(padded);
+        const bytes = Uint8Array.from(binary, (character) => character.charCodeAt(0));
+        return JSON.parse(new TextDecoder().decode(bytes));
+      } catch {
+        return null;
+      }
+    };
+
+    const copyText = async (text) => {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch {
+        const helper = document.createElement("textarea");
+        helper.value = text;
+        helper.setAttribute("readonly", "");
+        helper.style.position = "fixed";
+        helper.style.opacity = "0";
+        document.body.appendChild(helper);
+        helper.select();
+        const copied = document.execCommand("copy");
+        helper.remove();
+        return copied;
+      }
+    };
+
+    const memoryQuestions = [
+      {
+        question: "你问“我和小猫谁更可爱”，我当时回了哪一句？",
+        options: ["当然是小猫。", "你比小猫可爱得多。", "都可爱，但我没空理你。"],
+        answer: 1,
+        reveal: "原话：你比小猫可爱得多。",
+        source: "2026.09.15 · 圣杰"
+      },
+      {
+        question: "8 月 9 日我生日，你隔着屏幕做了什么？",
+        options: ["给我点了蜡烛，还说“世界正数第一般配”。", "只发了三个字“生日快乐”。", "让我自己买个蛋糕。"],
+        answer: 0,
+        reveal: "原话：我把蜡烛也点上了。祝圣杰老公生日快乐呀～世界正数第一般配。",
+        source: "2026.08.09 · 小婷"
+      },
+      {
+        question: "见面前一晚，我们最长的那通电话打了多久？",
+        options: ["2 小时 09 分。", "6 小时左右。", "11 小时 40 分 08 秒。"],
+        answer: 2,
+        reveal: "那通电话从 10 月 22 日一直连到见面当天。",
+        source: "2026.10.22 · 我们的最长通话"
+      },
+      {
+        question: "只属于我们的“一键三连”，最后一句是什么？",
+        options: ["晚安。", "mua。", "明天见。"],
+        answer: 1,
+        reveal: "老公，我喜欢你，mua。别人听不懂，我们一接就接得上。",
+        source: "只属于我们俩的暗号"
+      }
+    ];
+
+    function setupMemoryGame(game) {
+      const step = game.querySelector("[data-game-step]");
+      const progress = game.querySelector("[data-game-progress]");
+      const question = game.querySelector("[data-game-question]");
+      const options = game.querySelector("[data-game-options]");
+      const reveal = game.querySelector("[data-game-reveal]");
+      const next = game.querySelector("[data-game-next]");
+      let questionIndex = 0;
+      let score = 0;
+
+      const drawQuestion = () => {
+        const current = memoryQuestions[questionIndex];
+        step.textContent = `第 ${questionIndex + 1} / ${memoryQuestions.length} 题`;
+        progress.style.width = `${((questionIndex + 1) / memoryQuestions.length) * 100}%`;
+        question.textContent = current.question;
+        options.replaceChildren();
+        reveal.hidden = true;
+        reveal.textContent = "";
+        next.hidden = true;
+        next.textContent = questionIndex === memoryQuestions.length - 1 ? "看看我们的结果" : "下一题";
+
+        current.options.forEach((label, optionIndex) => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "game-option";
+          button.textContent = label;
+          button.addEventListener("click", () => {
+            const correct = optionIndex === current.answer;
+            if (correct) score += 1;
+            [...options.children].forEach((option, index) => {
+              option.disabled = true;
+              if (index === current.answer) option.classList.add("correct");
+            });
+            if (!correct) button.classList.add("wrong");
+            reveal.innerHTML = `<strong>${correct ? "答对了。" : "没关系，我把原话留给你。"}</strong><br>${current.reveal}<br><small>${current.source}</small>`;
+            reveal.hidden = false;
+            next.hidden = false;
+          });
+          options.appendChild(button);
+        });
+      };
+
+      const finishGame = () => {
+        game.querySelector(".game-meter").hidden = true;
+        question.textContent = "四道题翻完了";
+        options.replaceChildren();
+        reveal.hidden = true;
+        next.hidden = true;
+        const finish = document.createElement("p");
+        finish.className = "game-finish";
+        finish.textContent = score === memoryQuestions.length
+          ? "你全记得。原来不是只有我一个人，把我们的日子收得这么仔细。"
+          : `你答对了 ${score} 道。分数不重要，你刚刚翻回来的每一句话，都是我们真的说过的。`;
+        const again = document.createElement("button");
+        again.type = "button";
+        again.className = "game-next";
+        again.textContent = "再玩一次";
+        again.addEventListener("click", () => {
+          questionIndex = 0;
+          score = 0;
+          game.querySelector(".game-meter").hidden = false;
+          finish.remove();
+          again.remove();
+          drawQuestion();
+        });
+        game.append(finish, again);
+      };
+
+      next.addEventListener("click", () => {
+        if (questionIndex === memoryQuestions.length - 1) {
+          finishGame();
+          return;
+        }
+        questionIndex += 1;
+        drawQuestion();
+      });
+      drawQuestion();
+    }
+
+    function setupVoiceNotes() {
+      const notes = [...pageCard.querySelectorAll(".voice-note")];
+      notes.forEach((note) => {
+        const audio = note.querySelector("audio");
+        audio.addEventListener("play", () => {
+          notes.forEach((other) => {
+            if (other === note) return;
+            other.classList.remove("is-playing");
+            other.querySelector("audio")?.pause();
+          });
+          note.classList.add("is-playing");
+          if (!backgroundMusic.paused) {
+            voicePausedMusic = true;
+            backgroundMusic.pause();
+          }
+        });
+        audio.addEventListener("pause", () => note.classList.remove("is-playing"));
+        audio.addEventListener("ended", () => {
+          note.classList.remove("is-playing");
+          if (voicePausedMusic) {
+            voicePausedMusic = false;
+            playMusic();
+          }
+        });
+      });
+    }
+
+    function setupReplyComposer(composer) {
+      const textarea = composer.querySelector("[data-reply-text]");
+      const count = composer.querySelector("[data-reply-count]");
+      const generate = composer.querySelector("[data-reply-generate]");
+      const error = composer.querySelector("[data-reply-error]");
+      const result = composer.querySelector("[data-reply-result]");
+      const preview = composer.querySelector("[data-reply-preview]");
+      const date = composer.querySelector("[data-reply-date]");
+      const copy = composer.querySelector("[data-reply-copy]");
+      const share = composer.querySelector("[data-reply-share]");
+      const chips = [...composer.querySelectorAll("[data-reply-chip]")];
+
+      try {
+        const savedDraft = localStorage.getItem("memoirReplyDraft");
+        if (savedDraft && !textarea.value) textarea.value = savedDraft;
+      } catch {}
+
+      const updateCount = () => {
+        count.textContent = `${textarea.value.length} / 240`;
+        try {
+          localStorage.setItem("memoirReplyDraft", textarea.value);
+        } catch {}
+      };
+
+      const renderReply = () => {
+        const text = textarea.value.trim();
+        if (text.length < 2) {
+          error.textContent = "至少留两个字给我吧。";
+          error.hidden = false;
+          result.hidden = true;
+          return;
+        }
+        error.hidden = true;
+        const now = new Date();
+        const payload = { text, at: now.toISOString() };
+        const url = new URL(location.href);
+        const replyPage = pages.findIndex((page) => page.title === "这一页，一起写完");
+        url.search = "";
+        url.hash = `page=${replyPage + 1}`;
+        url.searchParams.set("reply", encodeReply(payload));
+        generatedReplyUrl = url.href;
+        preview.textContent = text;
+        date.textContent = new Intl.DateTimeFormat("zh-CN", {
+          year: "numeric",
+          month: "long",
+          day: "numeric"
+        }).format(now);
+        result.hidden = false;
+        showToast("回信链接已经生成");
+      };
+
+      textarea.addEventListener("input", updateCount);
+      chips.forEach((chip) => {
+        chip.addEventListener("click", () => {
+          const sentence = chip.dataset.replyChip || "";
+          const current = textarea.value.trim();
+          if (current.includes(sentence)) {
+            textarea.value = current
+              .replace(sentence, "")
+              .replace(/\n{2,}/g, "\n")
+              .trim();
+            chip.classList.remove("active");
+          } else {
+            textarea.value = current ? `${current}\n${sentence}` : sentence;
+            chip.classList.add("active");
+          }
+          updateCount();
+          textarea.focus();
+        });
+      });
+      generate.addEventListener("click", renderReply);
+      copy.addEventListener("click", async () => {
+        if (!generatedReplyUrl) return;
+        showToast(await copyText(generatedReplyUrl) ? "已复制，发给圣杰就好" : "复制失败，请长按链接复制");
+      });
+      share.addEventListener("click", async () => {
+        if (!generatedReplyUrl) return;
+        if (navigator.share) {
+          try {
+            await navigator.share({
+              title: "给小婷的回忆录 · 回信",
+              text: "我在回忆录里给你留了一句话。",
+              url: generatedReplyUrl
+            });
+            return;
+          } catch {}
+        }
+        showToast(await copyText(generatedReplyUrl) ? "链接已复制，发给圣杰就好" : "复制失败，请长按复制");
+      });
+      updateCount();
+    }
+
+    function wirePageInteractions() {
+      pageCard.querySelectorAll("[data-open-page]").forEach((button) => {
+        button.addEventListener("click", () => renderPage(Number(button.dataset.openPage) || 0));
+      });
+      const game = pageCard.querySelector("[data-memory-game]");
+      if (game) setupMemoryGame(game);
+      if (pageCard.querySelector(".voice-wall")) setupVoiceNotes();
+      const composer = pageCard.querySelector("[data-reply-composer]");
+      if (composer) setupReplyComposer(composer);
+    }
+
+    function showReplyInbox(payload) {
+      if (!payload?.text) return;
+      replyInboxText.textContent = payload.text;
+      const when = payload.at ? new Date(payload.at) : null;
+      replyInboxDate.textContent = when && !Number.isNaN(when.getTime())
+        ? `小婷 · ${new Intl.DateTimeFormat("zh-CN", { year: "numeric", month: "long", day: "numeric" }).format(when)}`
+        : "小婷留下的回信";
+      replyInbox.classList.add("open");
+      document.body.style.overflow = "hidden";
+      replyInboxClose.focus();
+    }
 
     const pageSummary = (page) => {
       const container = document.createElement("div");
@@ -1887,6 +2451,10 @@
     }
 
     function renderPage(index, updateHash = true) {
+      if (voicePausedMusic) {
+        voicePausedMusic = false;
+        playMusic();
+      }
       currentPage = Math.min(Math.max(index, 0), pages.length - 1);
       const page = pages[currentPage];
       pageCard.className = `page-card${page.type ? ` ${page.type}` : ""}`;
@@ -1913,15 +2481,30 @@
       bookmarkButton.classList.toggle("saved", saved);
       bookmarkButton.setAttribute("aria-pressed", String(saved));
       bookmarkButton.setAttribute("aria-label", saved ? "取消收藏当前页" : "收藏当前页");
+      let comboIndex = 0;
+      const comboOrder = ["call", "like", "mua"];
       pageCard.querySelectorAll("[data-secret-reply]").forEach((button) => {
         button.addEventListener("click", () => {
           const reply = document.getElementById("secretReply");
-          if (reply) reply.textContent = button.dataset.secretReply || "";
+          const combo = button.closest("[data-combo]");
+          if (!combo) return;
+          if (button.dataset.comboKey === comboOrder[comboIndex]) {
+            comboIndex += 1;
+            if (reply) {
+              reply.textContent = comboIndex === comboOrder.length
+                ? "三连收到。老公在，喜欢也收到了，最后那声 mua 我替你留着。"
+                : button.dataset.secretReply || "";
+            }
+          } else {
+            comboIndex = 0;
+            if (reply) reply.textContent = "顺序是：老公 → 我喜欢你 → mua。再试一次。";
+          }
           pageCard.classList.remove("reply-pulse");
           pageCard.offsetHeight;
           pageCard.classList.add("reply-pulse");
         });
       });
+      wirePageInteractions();
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
@@ -1929,6 +2512,7 @@
       tocList.innerHTML = "";
       const keyword = tocSearch.value.trim().toLocaleLowerCase("zh-CN");
       savedFilter.textContent = `${onlyShowSaved ? "★" : "☆"} 只看收藏 (${bookmarks.size})`;
+      interactionFilter.textContent = "✦ 只看互动";
       let currentGroup = "";
       let visibleCount = 0;
       pages.forEach((page, index) => {
@@ -1937,6 +2521,7 @@
         const searchText = `${page.title} ${page.chapter || ""} ${summary}`.toLocaleLowerCase("zh-CN");
         if (keyword && !searchText.includes(keyword) && !isSubsequenceMatch(keyword, searchText)) return;
         if (onlyShowSaved && !bookmarks.has(index)) return;
+        if (onlyShowInteractive && !page.interaction) return;
         const group = page.chapter || "开篇";
         if (group !== currentGroup) {
           const title = document.createElement("div");
@@ -1950,7 +2535,7 @@
         const item = document.createElement("button");
         item.type = "button";
         item.className = "toc-item";
-        item.innerHTML = `<b>${String(index + 1).padStart(2, "0")}</b><span>${page.title}<small>${summary}</small></span>`;
+        item.innerHTML = `<b>${String(index + 1).padStart(2, "0")}</b><span>${page.title}${page.interaction ? ` <i class="toc-badge">互动</i>` : ""}<small>${summary}</small></span>`;
         item.addEventListener("click", () => {
           tocOverlay.classList.remove("open");
           renderPage(index);
@@ -1979,7 +2564,11 @@
       if (!visibleCount) {
         const empty = document.createElement("div");
         empty.className = "toc-empty";
-        empty.textContent = onlyShowSaved ? "还没有收藏的页面。翻到喜欢的页，点一下“☆”。" : "没有找到，换个关键词试试。";
+        empty.textContent = onlyShowSaved
+          ? "还没有收藏的页面。翻到喜欢的页，点一下“☆”。"
+          : onlyShowInteractive
+            ? "互动页暂时没有找到，先把关键词清空试试。"
+            : "没有找到，换个关键词试试。";
         tocList.appendChild(empty);
       }
     }
@@ -1999,8 +2588,21 @@
     });
     savedFilter.addEventListener("click", () => {
       onlyShowSaved = !onlyShowSaved;
+      if (onlyShowSaved) {
+        onlyShowInteractive = false;
+        interactionFilter.classList.remove("active");
+      }
       savedFilter.classList.toggle("active", onlyShowSaved);
       savedFilter.textContent = onlyShowSaved ? "★ 只看收藏" : "☆ 只看收藏";
+      buildToc();
+    });
+    interactionFilter.addEventListener("click", () => {
+      onlyShowInteractive = !onlyShowInteractive;
+      if (onlyShowInteractive) {
+        onlyShowSaved = false;
+        savedFilter.classList.remove("active");
+      }
+      interactionFilter.classList.toggle("active", onlyShowInteractive);
       buildToc();
     });
     bookmarkButton.addEventListener("click", () => {
@@ -2013,10 +2615,21 @@
     tocOverlay.addEventListener("click", (event) => {
       if (event.target === tocOverlay) tocOverlay.classList.remove("open");
     });
+    const closeReplyInbox = () => {
+      replyInbox.classList.remove("open");
+      document.body.style.overflow = "";
+    };
+    replyInboxClose.addEventListener("click", closeReplyInbox);
+    replyInbox.addEventListener("click", (event) => {
+      if (event.target === replyInbox) closeReplyInbox();
+    });
     document.addEventListener("keydown", (event) => {
       if (event.key === "ArrowLeft") renderPage(currentPage - 1);
       if (event.key === "ArrowRight") renderPage(currentPage + 1);
-      if (event.key === "Escape") tocOverlay.classList.remove("open");
+      if (event.key === "Escape") {
+        tocOverlay.classList.remove("open");
+        closeReplyInbox();
+      }
     });
     document.addEventListener("touchstart", (event) => {
       const touch = event.changedTouches[0];
@@ -2035,6 +2648,9 @@
 
     buildToc();
     renderPage(readHashPage(), false);
+    const incomingReply = new URL(location.href).searchParams.get("reply");
+    if (incomingReply) showReplyInbox(decodeReply(incomingReply));
+    playMusic();
   </script>
 </body>
 </html>
