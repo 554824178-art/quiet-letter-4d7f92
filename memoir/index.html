@@ -464,7 +464,14 @@
       font-size: 12px;
     }
     .tutorial-step span { color: var(--muted); font-size: 14px; line-height: 1.55; }
+    .tutorial-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 4px 0 18px;
+    }
     .tutorial-go,
+    .tutorial-secondary,
     .voice-action,
     .game-next,
     .reply-generate,
@@ -481,6 +488,10 @@
       cursor: pointer;
     }
     .tutorial-go { margin-top: 3px; }
+    .tutorial-secondary {
+      color: var(--rose-deep);
+      background: rgba(255, 255, 255, .72);
+    }
     .voice-wall {
       display: grid;
       gap: 11px;
@@ -757,6 +768,23 @@
       font-style: normal;
       vertical-align: 1px;
     }
+    .reading-light .reading-extra { display: none; }
+    .reading-light.reading-expanded .reading-extra { display: block; }
+    .story-expand {
+      display: block;
+      width: 100%;
+      min-height: 43px;
+      margin: 12px 0 16px;
+      padding: 8px 14px;
+      border: 1px dashed rgba(168, 78, 101, .3);
+      border-radius: 14px;
+      color: var(--rose-deep);
+      background: rgba(255, 255, 255, .48);
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .story-expand:after { content: " ↓"; color: var(--rose); }
+    .reading-expanded .story-expand:after { content: " ↑"; }
     .toast {
       position: fixed;
       z-index: 80;
@@ -773,12 +801,33 @@
       transition: opacity .2s ease, transform .2s ease;
     }
     .toast.show { opacity: 1; transform: translate(-50%, 0); }
-    .title-page { display: flex; flex-direction: column; justify-content: center; }
+    .title-page {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background:
+        radial-gradient(circle at 85% 15%, rgba(238, 212, 217, .88), transparent 14rem),
+        linear-gradient(145deg, rgba(255, 255, 255, .9), rgba(255, 247, 242, .88));
+    }
     .title-page .date { color: var(--rose); font-size: 13px; font-weight: 750; letter-spacing: .18em; }
     .title-page h1 { margin-top: 22px; }
-    .chapter-page { display: flex; flex-direction: column; justify-content: center; text-align: center; }
-    .chapter-page .chapter { align-self: center; }
-    .chapter-page p { color: var(--muted); }
+    .chapter-page {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding-top: clamp(32px, 6vw, 56px);
+      text-align: left;
+    }
+    .chapter-page .chapter { align-self: flex-start; }
+    .chapter-page h2 {
+      max-width: 11em;
+      margin-bottom: 12px;
+      font-size: clamp(34px, 7vw, 52px);
+    }
+    .chapter-page p { max-width: 34rem; color: var(--muted); }
+    .chapter-page .photo-grid { width: 100%; margin: 20px 0 0; }
+    .chapter-page .photo-grid .photo-card:only-child { grid-column: 1 / -1; }
+    .chapter-page .photo-card img { max-height: 42svh; object-fit: contain; }
     .end-page { display: flex; flex-direction: column; justify-content: center; text-align: center; }
     .end-page h1 { font-size: clamp(36px, 9vw, 58px); }
     .page-nav {
@@ -878,9 +927,11 @@
       .voice-note { grid-template-columns: 68px 1fr; padding: 11px; }
       .memory-game,
       .reply-composer { padding: 14px; }
+      .tutorial-actions > button { flex: 1 1 150px; }
       .reply-actions > button { flex: 1 1 135px; }
       .reply-inbox { padding: 14px; }
       .reply-inbox-card { padding: 20px; border-radius: 21px; }
+      .chapter-page .photo-grid { grid-template-columns: 1fr; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *:before, *:after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
@@ -888,7 +939,7 @@
   </style>
 </head>
 <body>
-  <audio id="backgroundMusic" loop autoplay preload="metadata">
+  <audio id="backgroundMusic" loop autoplay playsinline preload="auto">
     <source src="assets/music/jue-bie-shu.mp3" type="audio/mpeg">
   </audio>
   <header class="bookbar">
@@ -947,7 +998,7 @@
         chapter: "",
         title: "给小婷的回忆录",
         html: `
-          <div class="date">2026.06.24 — 10.25</div>
+          <div class="date">2026.06.24 — 10.28</div>
           <h1>给小婷的<br>回忆录</h1>
           <p class="lead">从我认识你的第一句话，写到我们一起见过面以后。</p>
           <p>这里只放我记得的好日子、你说过的话，还有我们认真聊过的以后。</p>
@@ -956,9 +1007,20 @@
       },
       {
         chapter: "翻阅说明",
-        title: "这本里写了什么",
+        title: "把我们的日子，慢慢翻开",
         html: `
-          <p class="lead">不是一份数据报告。是一本很长的回忆录。</p>
+          <p class="lead">我把想你的日子一页页折好，放进一本只等你的长信。你慢慢翻，就当我在旁边陪你把从前再过一遍。</p>
+          <div class="tutorial-steps" aria-label="翻阅说明">
+            <div class="tutorial-step"><b>1</b><span>点右下角“下一页”往下翻；手机也可以从屏幕中间向左滑。</span></div>
+            <div class="tutorial-step"><b>2</b><span>点右上角“目录”，可以按章节找、搜一句原话，或者只看收藏和互动。</span></div>
+            <div class="tutorial-step"><b>3</b><span>每页底部的“☆”会收藏这一页；下次打开会自动回到上次看到的地方。</span></div>
+          </div>
+          <div class="tutorial-actions">
+            <button class="tutorial-go" type="button" data-open-page="3">试翻下一页</button>
+            <button class="tutorial-secondary" type="button" data-demo-toc>打开目录看看</button>
+            <button class="tutorial-secondary" type="button" data-demo-bookmark>收藏这一页</button>
+          </div>
+          <h3>你会经过这些地方</h3>
           <div class="memory-list">
             <div class="memory-item"><strong>第一幕 · 认识你</strong><p>从第一条消息，到“我们在一起啦”。</p></div>
             <div class="memory-item"><strong>第二幕 · 普通日子</strong><p>吃饭、洗澡、吹头发、睡觉、电话和每天的小事。</p></div>
@@ -967,13 +1029,7 @@
             <div class="memory-item"><strong>第五幕 · 约定</strong><p>北京、新房、小猫、迪士尼和生日。</p></div>
             <div class="memory-item"><strong>第六幕 · 见面</strong><p>机场、酒店大堂，还有终于看到你的那一刻。</p></div>
           </div>
-          <div class="tutorial-steps" aria-label="翻阅说明">
-            <div class="tutorial-step"><b>1</b><span>点右下角“下一页”往下翻；手机也可以从屏幕中间向左滑。</span></div>
-            <div class="tutorial-step"><b>2</b><span>点右上角“目录”，可以按章节找、搜一句原话，或者只看收藏和互动。</span></div>
-            <div class="tutorial-step"><b>3</b><span>每页底部的“☆”会收藏这一页；下次打开会自动回到上次看到的地方。</span></div>
-          </div>
-          <button class="tutorial-go" type="button" data-open-page="3">试一下，翻到第一页故事</button>
-          <p>每张聊天截图都来自我们当时的记录，照片也都是聊天里真实发过的。它们和文字放在一起，才是我们过过的日子。</p>
+          <p>每张聊天截图和照片，都来自我们真正聊过的那些天。你不用一次读完，想起一点，就翻一点。</p>
         `
       },
       {
@@ -1088,11 +1144,11 @@
         chapter: "第二幕",
         title: "普通日子",
         html: `
-          <p>真正留在记忆里的，大多是每天都会发生的小事。</p>
-          <p>不是每次都要去哪里，也不是每天都有礼物。更多时候，是你告诉我今天领导又说了什么，我问你饭吃没有，你洗完澡回来叫我一声。</p>
-          <p>这些事放在别人眼里可能很普通。可当它们连续发生了一个月，连一句“我先去吹头发”都变成了习惯。</p>
-          <p>普通日子也有它自己的顺序：你先到家，我还在忙；我去点外卖，你说不用；等你洗完澡，我们的电话才真正开始。</p>
-          <p>后来我发现，记住一个人不一定靠大事。记住她用哪个杯子、几点会困、洗完头会不会吹干，已经足够说明她在生活里占了位置。</p>
+          <p class="lead">真正留在记忆里的，大多不是节日，是你每天回来的那一句“我到啦”。</p>
+          <div class="photo-grid">
+            <figure class="photo-card"><img src="assets/photos/soup.jpg" alt="她发来的一碗热汤"><figcaption>一碗热汤，也能把很远的一天变得靠近。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/hand-ring.jpg" alt="她发来的美甲和戒指"><figcaption>那些认真打扮的小瞬间。</figcaption></figure>
+          </div>
         `
       },
       {
@@ -1213,10 +1269,7 @@
             <div class="memory-item"><strong>10 月 13 日</strong><p>你说原生头发会炸，可照片里还是很 cute。</p></div>
           </div>
           <p>你说等头发再长一点，我也记住了。头发的长度会变，颜色会变，你还是小婷。</p>
-          <div class="photo-grid">
-            <figure class="photo-card"><img src="assets/photos/headpiece-selfie.jpg" alt="戴着头饰的近照"><figcaption>8 月 12 日，你发来的头饰自拍。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/cosplay-outdoor.jpg" alt="外出时拍的照片"><figcaption>8 月 12 日，出去玩时发给我的照片。</figcaption></figure>
-          </div>
+          <figure class="photo-wide photo-card"><img src="assets/photos/cosplay-outdoor.jpg" alt="外出时拍的照片"><figcaption>8 月 12 日，出去玩时发给我的照片。</figcaption></figure>
         `
       },
       {
@@ -1298,6 +1351,7 @@
           <p>很多快乐都很小，但足够把一天照亮。</p>
           <div class="photo-grid">
             <figure class="photo-card"><img src="assets/photos/cosplay-room.jpg" alt="一套喜欢的裙子"><figcaption>喜欢的裙子和认真打扮的日子。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/cat-bed.jpg" alt="聊天里发过的猫"><figcaption>你发给我的猫猫，也是普通日子里的快乐。</figcaption></figure>
           </div>
         `
       },
@@ -1314,11 +1368,8 @@
             <div class="quote-card"><time>10 月 13 日</time><p>我们一起玩呀。</p></div>
           </div>
           <figure class="photo-wide photo-full photo-card"><img src="assets/photos/game-top-sunquan.jpg" alt="顶级孙权完整战绩截图"><figcaption>8 月 3 日，顶级孙权：12.4 分、前 15%、金牌发育路、三连决胜、MVP。</figcaption></figure>
-          <div class="photo-grid">
-            <figure class="photo-card photo-full"><img src="assets/photos/game-gold-1.jpg" alt="金牌游走完整对局截图"><figcaption>8 月 27 日，你发来的对局：23 比 5 获胜，金牌游走 12.5。</figcaption></figure>
-            <figure class="photo-card photo-full"><img src="assets/photos/game-gold-2.jpg" alt="另一场金牌游走完整对局截图"><figcaption>8 月 27 日，另一局 24 比 4。两张对局截图，我也一直留着。</figcaption></figure>
-          </div>
-          <p>输赢其实记得不多了，记得的是你开着麦笑、我等你上线，还有打完一局以后说“再来一把”。</p>
+          <p>截图里没有清楚显示两个账号名，我就不把看不清的对局硬说成我们俩。你那句“你辅助打得真的很好”，和一起等对方上线的晚上，我都记得。</p>
+          <p>输赢后来都记不清了，记得的是你开着麦笑，还有打完一局以后说“再来一把”。</p>
         `
       },
       {
@@ -1380,11 +1431,7 @@
           <div class="photo-grid">
             <figure class="photo-card"><img src="assets/photos/pink-dress.jpg" alt="粉色裙子的照片"><figcaption>9 月 10 日，粉色裙子。</figcaption></figure>
             <figure class="photo-card"><img src="assets/photos/cosplay-blue.jpg" alt="蓝色裙子照片"><figcaption>8 月 6 日，cos 照片。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/gift-box.jpg" alt="礼盒和娃娃"><figcaption>9 月 10 日，礼盒和娃娃。</figcaption></figure>
             <figure class="photo-card"><img src="assets/photos/teddy.jpg" alt="一只小熊玩偶"><figcaption>8 月 20 日，小熊。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/portrait-close.jpg" alt="她发来的近照"><figcaption>9 月 12 日，你发给我的近照。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/summer-selfie.jpg" alt="夏天的一张照片"><figcaption>8 月 28 日，夏天的一张照片。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/hand-ring.jpg" alt="美甲和戒指"><figcaption>8 月 2 日，你发来的美甲和戒指。</figcaption></figure>
             <figure class="photo-card"><img src="assets/photos/bunny-selfie.jpg" alt="兔子耳造型"><figcaption>9 月 26 日，兔子耳造型。</figcaption></figure>
           </div>
           <figure class="chat-shot"><img src="assets/chat-photo.png" alt="照片和穿搭相关原始聊天记录节选"></figure>
@@ -1423,6 +1470,8 @@
         html: `
           <p>有些话你早就忘了，我还留在聊天记录里。</p>
           <div class="photo-grid">
+            <figure class="photo-card"><img src="assets/photos/birthday-cake.jpg" alt="生日蛋糕"><figcaption>那晚隔着屏幕一起点的蜡烛。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/dolls.jpg" alt="娃娃收藏"><figcaption>那些认真收藏起来的小东西。</figcaption></figure>
           </div>
         `
       },
@@ -1658,7 +1707,8 @@
         html: `
           <p>我们聊过的以后，不是一句“有空再说”。</p>
           <div class="photo-grid">
-            <figure class="photo-card"><img src="assets/photos/pink-dress.jpg" alt="一条粉色裙子"><figcaption>为见面准备过的裙子。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/gift-box.jpg" alt="准备好的礼盒"><figcaption>那些提前准备好的小礼物。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/summer-selfie.jpg" alt="夏天的一张照片"><figcaption>想一起过的以后，也有你的每一个季节。</figcaption></figure>
           </div>
         `
       },
@@ -1702,7 +1752,6 @@
           </div>
           <p>我连以后家里有猫、有鱼缸的样子都想过。你负责抱猫，我负责收拾被它弄乱的东西。</p>
           <div class="photo-grid">
-            <figure class="photo-card"><img src="assets/photos/cat-bed.jpg" alt="聊天里出现的一只橘猫"><figcaption>9 月 24 日，你发给我的猫猫照片。</figcaption></figure>
             <figure class="photo-card"><img src="assets/photos/cat-floor.jpg" alt="聊天里出现的一只小猫"><figcaption>9 月 25 日，你在聊天里分享的小猫。</figcaption></figure>
             <figure class="photo-card"><img src="assets/photos/cat-close.jpg" alt="一只猫咪的近照"><figcaption>9 月 29 日，你发来的猫咪近照。</figcaption></figure>
           </div>
@@ -1902,8 +1951,8 @@
         html: `
           <p>不是每一天都惊天动地，但每一天都有过你。</p>
           <div class="photo-grid">
-            <figure class="photo-card"><img src="assets/photos/pink-dress.jpg" alt="粉色裙子"><figcaption>认真打扮的你。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/holding-hands.jpg" alt="牵手的照片"><figcaption>真的牵到的手。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/headpiece-selfie.jpg" alt="她发来的近照"><figcaption>认真打扮的你。</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/portrait-close.jpg" alt="她发来的近照"><figcaption>你发给我的近照。</figcaption></figure>
           </div>
         `
       },
@@ -1962,9 +2011,9 @@
         title: "这一页留白",
         html: `
           <h1>后面的页，<br>先留白。</h1>
-          <p class="lead">回忆录写到这里，刚好合上。</p>
-          <p>不是替你写结尾，也不是要你现在回答什么。只是把属于我们的这一段，好好放在这里。</p>
-          <p class="small">小婷，谢谢你来过我的 2026。</p>
+          <p class="lead">不是想把故事停在这里，是还想留一页给以后。</p>
+          <p>如果你愿意，我还想和你一起吃饭、过普通晚上，把没走完的地方慢慢走完。等多久都没关系，我会把日子过好，也会一直等你。</p>
+          <p>小婷，谢谢你来过我的 2026。要是有一天你想继续写，我一直都在。</p>
         `
       }
     ];
@@ -2083,10 +2132,13 @@
     let onlyShowSaved = false;
     let onlyShowInteractive = false;
     let bookmarks = new Set();
+    let expandedReadingPages = new Set();
 
     try {
       const storedBookmarks = JSON.parse(localStorage.getItem("memoirBookmarks") || "[]");
       if (Array.isArray(storedBookmarks)) bookmarks = new Set(storedBookmarks);
+      const expandedPages = JSON.parse(localStorage.getItem("memoirExpandedReading") || "[]");
+      if (Array.isArray(expandedPages)) expandedReadingPages = new Set(expandedPages);
     } catch {}
 
     let toastTimer = null;
@@ -2100,6 +2152,12 @@
     const saveBookmarks = () => {
       try {
         localStorage.setItem("memoirBookmarks", JSON.stringify([...bookmarks]));
+      } catch {}
+    };
+
+    const saveExpandedReading = () => {
+      try {
+        localStorage.setItem("memoirExpandedReading", JSON.stringify([...expandedReadingPages]));
       } catch {}
     };
 
@@ -2369,9 +2427,64 @@
       updateCount();
     }
 
+    function applyLightReading(index) {
+      if (pageCard.classList.contains("title-page") || pageCard.classList.contains("end-page")) return;
+      const paragraphs = [...pageCard.querySelectorAll("p")].filter((paragraph) =>
+        !paragraph.classList.contains("lead") &&
+        !paragraph.classList.contains("small") &&
+        !paragraph.closest(".memory-item, .quote-card, .timeline-item, .voice-note, .reply-card, .game-reveal")
+      );
+      if (paragraphs.length < 3) return;
+
+      const extras = paragraphs.slice(2);
+      extras.forEach((paragraph) => paragraph.classList.add("reading-extra"));
+      pageCard.classList.add("reading-light");
+
+      const toggle = document.createElement("button");
+      toggle.type = "button";
+      toggle.className = "story-expand";
+      toggle.dataset.storyExpand = "";
+      const updateLabel = () => {
+        const expanded = expandedReadingPages.has(index);
+        pageCard.classList.toggle("reading-expanded", expanded);
+        toggle.textContent = expanded
+          ? "这一页已经展开，点这里轻轻收起"
+          : `先看重点。这里还藏着 ${extras.length} 段，想听我慢慢讲就展开`;
+      };
+      toggle.addEventListener("click", () => {
+        if (expandedReadingPages.has(index)) expandedReadingPages.delete(index);
+        else expandedReadingPages.add(index);
+        saveExpandedReading();
+        updateLabel();
+      });
+      updateLabel();
+      extras[0].before(toggle);
+    }
+
+    function surfaceLeadImage() {
+      const lead = pageCard.querySelector("p.lead");
+      const firstVisual = pageCard.querySelector("figure.photo-card, figure.chat-shot");
+      if (!lead || !firstVisual) return;
+      const followsLead = Boolean(lead.compareDocumentPosition(firstVisual) & Node.DOCUMENT_POSITION_FOLLOWING);
+      if (followsLead && pageCard.innerText.length > 150) lead.after(firstVisual);
+    }
+
     function wirePageInteractions() {
       pageCard.querySelectorAll("[data-open-page]").forEach((button) => {
         button.addEventListener("click", () => renderPage(Number(button.dataset.openPage) || 0));
+      });
+      pageCard.querySelector("[data-demo-toc]")?.addEventListener("click", () => {
+        resumeButton.hidden = currentPage === 0;
+        buildToc();
+        tocOverlay.classList.add("open");
+      });
+      pageCard.querySelector("[data-demo-bookmark]")?.addEventListener("click", () => {
+        bookmarks.add(currentPage);
+        saveBookmarks();
+        const saved = bookmarks.has(currentPage);
+        bookmarkButton.textContent = saved ? "★" : "☆";
+        bookmarkButton.classList.toggle("saved", saved);
+        showToast("已经替你收藏好了");
       });
       const game = pageCard.querySelector("[data-memory-game]");
       if (game) setupMemoryGame(game);
@@ -2418,7 +2531,10 @@
     };
     const playMusic = () => {
       if (musicPausedByUser) return;
-      backgroundMusic.play().then(updateMusicButton).catch(() => updateMusicButton());
+      backgroundMusic.play().then(updateMusicButton).catch(() => {
+        updateMusicButton();
+        musicButton.textContent = "♪ 轻触开始";
+      });
     };
     musicButton.addEventListener("click", () => {
       if (backgroundMusic.paused) {
@@ -2432,6 +2548,11 @@
     });
     backgroundMusic.addEventListener("play", updateMusicButton);
     backgroundMusic.addEventListener("pause", updateMusicButton);
+    document.addEventListener("pointerdown", (event) => {
+      if (event.target.closest("#musicButton, audio")) return;
+      if (!musicPausedByUser && backgroundMusic.paused) playMusic();
+    }, { once: true, capture: true });
+    window.addEventListener("pageshow", playMusic);
     document.addEventListener("click", (event) => {
       if (!event.target.closest("#musicButton") && event.target.closest("button, a")) playMusic();
     });
@@ -2466,6 +2587,8 @@
         ${page.type === "title" ? "" : `<h2>${page.title}</h2>`}
         ${page.html}
       `;
+      surfaceLeadImage();
+      applyLightReading(currentPage);
       pageCounter.textContent = `${currentPage + 1} / ${pages.length}`;
       pageChapter.textContent = page.chapter || "给小婷的回忆录";
       prevButton.disabled = currentPage === 0;
