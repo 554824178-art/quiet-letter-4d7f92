@@ -297,7 +297,7 @@
       background: #f4f3f2;
       box-shadow: 0 12px 34px rgba(70, 47, 55, .13);
     }
-    .chat-shot img { display: block; width: 100%; height: auto; }
+    .chat-shot img { display: block; width: 100%; height: auto; min-height: 160px; }
     .photo-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -318,6 +318,7 @@
       max-height: none;
       object-fit: contain;
       background: #f2eeeb;
+      min-height: 100px;
     }
     .photo-card figcaption {
       padding: 8px 10px 10px;
@@ -1180,9 +1181,7 @@
           </div>
           <p>有时候我知道自己像在唠叨。可你不按时吃饭，我是真的会惦记。</p>
           <p>后来我们也反过来。你会问我吃饭没有，会提醒我感冒了要多喝水。</p>
-          <div class="photo-grid">
-            <figure class="photo-card"><img src="assets/photos/dinner.jpg" alt="聊天里分享的一桌饭"><figcaption>8 月 30 日，你发来的饭菜。</figcaption></figure>
-          </div>
+            <p>你发来的那桌饭，我后来还存着。不是因为菜有多特别，是因为你愿意把普通的一顿午饭分给我看。</p>
         `
       },
       {
@@ -1198,7 +1197,6 @@
           </div>
           <p>后来我才知道，喜欢一个人，真的会把“你吃了吗”问很多很多遍。</p>
           <p>肯德基不是多了不起的东西，奶茶也不是。可当一个人愿意记住你爱喝什么、今天有没有吃，连普通外卖都像是被认真对待过。</p>
-          <figure class="photo-wide photo-card"><img src="assets/photos/dinner.jpg" alt="一桌饭菜"><figcaption>那些问过的“吃了吗”，后来都变成具体的饭菜。</figcaption></figure>
           <figure class="chat-shot"><img src="assets/chat-milktea.png" alt="肯德基和奶茶的原始聊天记录节选"></figure>
         `
       },
@@ -1340,7 +1338,6 @@
           </div>
           <p>如果把某一天完整写下来，大概就是几十个很短的句子：到公司了吗、吃了吗、今天忙不忙、洗澡没有、头发吹了吗、什么时候回来、电话打吗。</p>
           <p>这些话没有任何文学性，可它们合在一起，就是我们那几个月的生活。</p>
-          <figure class="photo-wide photo-card"><img src="assets/photos/dinner.jpg" alt="一桌饭"><figcaption>很多日子，就是从一句“吃饭没有”走到一句“晚安”。</figcaption></figure>
         `
       },
       {
@@ -1369,15 +1366,15 @@
           </div>
           <figure class="photo-wide photo-full photo-card"><img src="assets/photos/game-top-sunquan.jpg" alt="顶级孙权完整战绩截图"><figcaption>8 月 3 日，顶级孙权：12.4 分、前 15%、金牌发育路、三连决胜、MVP。</figcaption></figure>
           <p>那几晚我记得的，不只是分数。是你一上线就来问我“开不开”，是打完一局还赖着不肯说晚安。</p>
-          <p>输赢后来都记不清了，记得的是你开着麦笑，还有你夸我辅助打得好的时候，我真的高兴了很久。</p>
+          <p>你玩辅助的时候，总怕自己打得不好。可你每次跟着我、替我接技能、认真报点，我都会觉得这一局特别安心。输赢后来都记不清了，记得的是你开着麦笑，还有我夸你辅助打得好的时候，你假装不服气。</p>
         `
       },
       {
         chapter: "第三幕 · 小事",
         title: "你辅助打得真的很好",
         html: `
-          <p class="lead">“你辅助打得太好了”不是哄你。</p>
-          <p>你说自己一般般，还会担心游戏打得不好我会不高兴。可我是真的觉得你厉害。</p>
+          <p class="lead">你玩辅助的时候，总是先顾着我。</p>
+          <p>你说自己一般般，还会担心打得不好我会不高兴。可你跟着我、替我接技能、认真报点的时候，我是真的觉得你厉害。</p>
           <div class="quote">你辅助打得太好了。<small>圣杰</small></div>
           <p>那段时间我最盼的就是晚上开一局。赢了当然开心，但更开心的是，一戴上耳机就能听见你。</p>
           <p>你说怕自己玩得不好，我会不高兴。可对我来说，你操作得怎么样根本不重要。你能来、愿意陪我玩，这件事本身就已经很好。</p>
@@ -1424,11 +1421,7 @@
             <div class="quote-card"><time>9 月 25 日</time><p>我想看你拍照片。</p></div>
             <div class="quote-card"><time>10 月 13 日</time><p>粉色裙子、柴犬女仆、鞋子要怎么搭配。</p></div>
           </div>
-          <div class="photo-grid">
-            <figure class="photo-card"><img src="assets/photos/pink-dress.jpg" alt="粉色裙子的照片"><figcaption>9 月 10 日，粉色裙子。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/cosplay-blue.jpg" alt="穿着蓝黑色裙子的全身照"><figcaption>8 月 6 日，你认真打扮以后拍的照片。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/teddy.jpg" alt="一只小熊玩偶"><figcaption>8 月 20 日，小熊。</figcaption></figure>
-          </div>
+          <figure class="photo-wide photo-card"><img src="assets/photos/cosplay-blue.jpg" alt="穿着蓝黑色裙子的全身照"><figcaption>8 月 6 日，你认真打扮以后拍的照片。</figcaption></figure>
           <figure class="photo-wide photo-card"><img src="assets/photos/bunny-full.jpg" alt="她穿好衣服、戴兔子耳后的全身照"><figcaption>9 月 27 日，你戴好兔子耳，把整套衣服穿给我看。我想看的从来不只是那对耳朵。</figcaption></figure>
           <figure class="chat-shot"><img src="assets/chat-photo.png" alt="照片和穿搭相关原始聊天记录节选"></figure>
         `
@@ -1456,7 +1449,6 @@
           </div>
           <p>后来我最想念的，不是某个特别浪漫的大场面，是这些看起来没有营养、只有我们两个人懂的话。</p>
           <p>比如我发“发了个日常嘿嘿”，你回一张照片；你问猫可爱还是你可爱，我立刻说你更可爱。日子就是在这种一来一回里，慢慢有了只属于我们的语气。</p>
-          <figure class="photo-wide photo-card"><img src="assets/photos/teddy.jpg" alt="一只小熊玩偶"><figcaption>有些照片没有故事，看到就会想起那阵子。</figcaption></figure>
         `
       },
       {
@@ -1519,7 +1511,6 @@
           </div>
           <div class="quote">我将用最直白，最直接，最不绕弯子，最客观，最正确，最系统，最真实，最简洁，最容易理解，最不卖关子的方式告诉你：我想你了。<small>小婷 · 2026.09.25</small></div>
           <p>那句绕着大圈子的“我想你了”，我每次看到都会笑。它不像网上抄来的情话，很像你会发给我的东西。</p>
-          <figure class="photo-wide photo-card"><img src="assets/photos/seaside-blue.jpg" alt="海边照片"><figcaption>想一个人时，连你发给我的风景都像在替我说话。</figcaption></figure>
         `
       },
       {
@@ -1551,8 +1542,8 @@
             <div class="quote-card"><time>9 月 19 日 · 圣杰</time><p>现在你有老公了。</p></div>
             <div class="quote-card"><time>9 月 19 日 · 小婷</time><p>有老公真好呀。</p></div>
           </div>
-          <p>你夸我的时候一点都不敷衍。“有老公真好”这种话对我来说，比一百句泛泛的喜欢都具体。因为那说明我真的在你生活里，帮你挡住了一点什么。</p>
-          <p>你说没有老公不知道怎么办，说天塌下来有老公顶着。后来我想，那些话不是在夸我有多厉害，是你愿意把一点脆弱交给我。</p>
+          <p>你叫“老公”的时候一点都不敷衍。“有老公真好”这句话对我来说，比一百句泛泛的喜欢都具体。因为那说明我真的在你生活里，帮你挡住了一点什么。</p>
+          <p>你说没有老公不知道怎么办，说天塌下来有老公顶着。后来我想，那些话不是在说我有多厉害，是你愿意把一点脆弱交给我。</p>
           <p>我也想把这种感觉还给你：你被工作烦到不想说话的时候，可以有个人接着；你胃疼、头痛、懒得吹头发的时候，有人惦记。</p>
           <p>我后来才明白，“有老公”不是一句好听的称呼，是你希望难过的时候有人站在你这边。这个分量比被叫多少声都重。</p>
         `
@@ -1762,7 +1753,6 @@
             <div class="memory-item"><strong>拍照</strong><p>我负责给你拍很多照片，你负责说我拍得还不错。</p></div>
           </div>
           <p>迪士尼和环球不只是两个地名。我们想到的是排队时有人陪、吃东西有人分、拍照的时候有人帮你拿包，还有玩累了以后一起回酒店。</p>
-          <figure class="photo-wide photo-card"><img src="assets/photos/seaside-blue.jpg" alt="海边的照片"><figcaption>那时我们已经在聊要一起去哪里拍照。</figcaption></figure>
         `
       },
       {
@@ -1776,10 +1766,6 @@
           <p>我甚至想过先去哪里、住哪里、哪天拍照。计划写得越细，越像是在认真准备一段共同的以后。</p>
           <figure class="photo-wide photo-card"><img src="assets/photos/cosplay-outdoor.jpg" alt="户外照片"><figcaption>你说想去玩，我脑子里已经有拍照的画面了。</figcaption></figure>
           <figure class="chat-shot"><img src="assets/chat-travel.png" alt="旅行计划相关原始聊天记录节选"></figure>
-          <div class="photo-grid">
-            <figure class="photo-card"><img src="assets/photos/ocean-view.jpg" alt="海边的风景"><figcaption>8 月 30 日，你发来的海景。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/sunset.jpg" alt="晚霞"><figcaption>9 月 30 日，我发给你的一片晚霞。</figcaption></figure>
-          </div>
         `
       },
       {
@@ -1826,7 +1812,6 @@
             <div class="memory-item"><strong>几点到</strong><p>你让我到了大堂就告诉你，我一直在等。</p></div>
           </div>
           <p>倒计时那几天，连一条裙子、一双鞋、头发要不要卷都值得讨论。现在看很可爱，因为那些小小的准备里，全都是“我想让你更喜欢我一点”。</p>
-          <figure class="photo-wide photo-card"><img src="assets/photos/pink-dress.jpg" alt="粉色裙子的照片"><figcaption>为见面挑过、试过的衣服。</figcaption></figure>
           <figure class="chat-shot"><img src="assets/chat-countdown.png" alt="见面前倒计时相关原始聊天记录节选"></figure>
         `
       },
@@ -1912,9 +1897,6 @@
           <p>不是没话说了，是因为人在身边。</p>
           <p>不用再问“你在干嘛”，不用等回复，也不用靠一串消息猜对方的表情。</p>
           <p>那天的空白，我后来再看，反而觉得很珍贵。</p>
-          <div class="photo-grid">
-            <figure class="photo-card"><img src="assets/photos/last-meal.jpg" alt="一起吃饭的照片"><figcaption>一起吃的饭，比聊天框里的外卖更有温度。</figcaption></figure>
-          </div>
         `
       },
       {
@@ -1930,10 +1912,6 @@
           </div>
           <p>那天之后，我还是会提醒你吹头发，还是会问你吃饭没有。只是这些话从“以后见面”变成了“我们真的见过以后”。</p>
           <figure class="chat-shot"><img src="assets/chat-goodbye.png" alt="10月25日原始聊天记录节选"></figure>
-          <div class="photo-grid">
-            <figure class="photo-card"><img src="assets/photos/farewell-flowers.jpg" alt="分别那天拍的花"><figcaption>10 月 25 日，花和房间。</figcaption></figure>
-            <figure class="photo-card"><img src="assets/photos/holding-hands.jpg" alt="牵手的照片"><figcaption>那天拍到的手。</figcaption></figure>
-          </div>
         `
       },
       {
@@ -1978,10 +1956,9 @@
             <div class="memory-item"><strong>酒少喝一点。</strong><p>能不喝就不喝，遇到要喝的场合也别逞强。</p></div>
             <div class="memory-item"><strong>洗完澡记得吹头发。</strong><p>你本来就容易头疼，别总是顶着湿头发吹空调。</p></div>
             <div class="memory-item"><strong>头痛别硬扛。</strong><p>不舒服就休息、吃药、去看看，不要总说睡一觉就好了。</p></div>
-            <div class="memory-item"><strong>难过也别憋太久。</strong><p>想说话的时候有人听，不想说话就先安静待一会儿。</p></div>
+            <div class="memory-item"><strong>难过也别憋太久。</strong><p>想说话就来找我，我一直在。不想说也没关系，等你想开口的时候，我还会听。</p></div>
           </div>
-          <div class="quote">我不是要管你。就是希望你以后不管在哪儿、身边是谁，都能把自己照顾好。<small>这些是很普通的希望，也是我真心希望你过得舒服</small></div>
-          <figure class="photo-wide photo-card"><img src="assets/photos/last-meal.jpg" alt="一起吃饭的照片"><figcaption>所以还是要好好吃饭，认真过每一天。</figcaption></figure>
+          <div class="quote">我不是要管你。只是希望不管以后怎样，你都别委屈自己。你要是愿意，我也想继续做那个听你说话、提醒你吹头发的人。<small>圣杰</small></div>
         `
       },
       {
@@ -1992,20 +1969,18 @@
           <p>谢谢你在我胃疼、头痛的时候问我怎么了。谢谢你愿意叫我老公，愿意跟我聊以后，愿意让一个人走进你的日常。</p>
           <p>也谢谢那些特别普通的晚上：你刚洗完澡，头发还湿着；我隔着屏幕催你吹干；然后电话接通，你说：“我先吹个头发。”</p>
           <p>这些小事，我会记得很久。</p>
-          <div class="photo-grid">
-            <figure class="photo-card"><img src="assets/photos/holding-hands.jpg" alt="牵手照片"><figcaption>也谢谢那次真的见面。</figcaption></figure>
-          </div>
         `
       },
       {
         type: "end-page",
         chapter: "",
-        title: "这一页留白",
+        title: "我希望能有以后",
         html: `
-          <h1>后面的页，<br>先留白。</h1>
-          <p class="lead">不是想把故事停在这里，是还想留一页给以后。</p>
-          <p>如果你愿意，我还想和你一起吃饭、过普通晚上，把没走完的地方慢慢走完。等多久都没关系，我会把日子过好，也会一直等你。</p>
-          <p>小婷，谢谢你来过我的 2026。要是有一天你想继续写，我一直都在。</p>
+          <h1>我希望能有以后，<br>回忆录还能继续写下去。</h1>
+          <p class="lead">我不想让这本回忆起停在告别。</p>
+          <p>如果你愿意，我们就把后面的页接着写：一起吃饭、过普通晚上，把没走完的地方慢慢走完，也把还没来得及发生的日子写进去。</p>
+          <p>你不用现在回答，也不用因为这一页觉得有负担。我只是想让你知道，我希望还有以后，也希望下一次写到我们时，不是回忆，是生活。</p>
+          <p>小婷，如果你愿意继续写，我一直都在。</p>
         `
       }
     ];
@@ -2038,38 +2013,6 @@
       }
     );
 
-    const blockedPhotoFiles = new Set([
-      "first-photo.jpg",
-      "selfie-message.jpg",
-      "workspace.jpg",
-      "gaming-setup.jpg",
-      "room.jpg",
-      "game-list.jpg",
-      "cake-saved.jpg",
-      "necklace.jpg",
-      "summer-selfie-2.jpg",
-      "portrait-outfit.jpg",
-      "living-room.jpg",
-      "dinner.jpg",
-      "pink-dress.jpg",
-      "teddy.jpg",
-      "seaside-blue.jpg",
-      "ocean-view.jpg",
-      "sunset.jpg",
-      "last-meal.jpg",
-      "farewell-flowers.jpg",
-      "holding-hands.jpg",
-      "gift-set.jpg",
-      "school-style.jpg",
-      "swing-beach.jpg",
-      "watermelon.jpg",
-      "hotel-room.jpg",
-      "porridge.jpg",
-      "home-meal.jpg",
-      "cosplay-selfie-1.jpg",
-      "dress-mirror.jpg",
-      "barbecue.jpg"
-    ]);
     const usedPhotoSources = new Set();
     const photoParser = new DOMParser();
     for (const page of pages) {
@@ -2080,7 +2023,7 @@
         const source = image.getAttribute("src") || "";
         if (!source.startsWith("assets/photos/")) continue;
         const file = source.split("/").pop();
-        if (blockedPhotoFiles.has(file) || usedPhotoSources.has(source)) {
+        if (usedPhotoSources.has(source)) {
           (image.closest("figure") || image).remove();
         } else {
           usedPhotoSources.add(source);
@@ -2129,8 +2072,7 @@
     try {
       const storedBookmarks = JSON.parse(localStorage.getItem("memoirBookmarks") || "[]");
       if (Array.isArray(storedBookmarks)) bookmarks = new Set(storedBookmarks);
-      const expandedPages = JSON.parse(localStorage.getItem("memoirExpandedReading") || "[]");
-      if (Array.isArray(expandedPages)) expandedReadingPages = new Set(expandedPages);
+      localStorage.removeItem("memoirExpandedReading");
     } catch {}
 
     let toastTimer = null;
@@ -2144,12 +2086,6 @@
     const saveBookmarks = () => {
       try {
         localStorage.setItem("memoirBookmarks", JSON.stringify([...bookmarks]));
-      } catch {}
-    };
-
-    const saveExpandedReading = () => {
-      try {
-        localStorage.setItem("memoirExpandedReading", JSON.stringify([...expandedReadingPages]));
       } catch {}
     };
 
@@ -2426,9 +2362,9 @@
         !paragraph.classList.contains("small") &&
         !paragraph.closest(".memory-item, .quote-card, .timeline-item, .voice-note, .reply-card, .game-reveal")
       );
-      if (paragraphs.length < 3) return;
+      if (paragraphs.length < 6) return;
 
-      const extras = paragraphs.slice(2);
+      const extras = paragraphs.slice(5);
       extras.forEach((paragraph) => paragraph.classList.add("reading-extra"));
       pageCard.classList.add("reading-light");
 
@@ -2440,13 +2376,12 @@
         const expanded = expandedReadingPages.has(index);
         pageCard.classList.toggle("reading-expanded", expanded);
         toggle.textContent = expanded
-          ? "这一页已经展开，点这里轻轻收起"
-          : `先看重点。这里还藏着 ${extras.length} 段，想听我慢慢讲就展开`;
+          ? "收起这一页的后半段"
+          : `这页还有 ${extras.length} 小段，继续读`;
       };
       toggle.addEventListener("click", () => {
         if (expandedReadingPages.has(index)) expandedReadingPages.delete(index);
         else expandedReadingPages.add(index);
-        saveExpandedReading();
         updateLabel();
       });
       updateLabel();
@@ -2563,22 +2498,94 @@
       return Math.min(Math.max(value, 0), pages.length - 1);
     }
 
+    const pageImageParser = new DOMParser();
+    const pageImageSources = new Map();
+    const warmedImageSources = new Set();
+
+    function imageSourcesForPage(index) {
+      if (!pages[index]) return [];
+      if (!pageImageSources.has(index)) {
+        const container = pageImageParser.parseFromString(pages[index].html || "", "text/html");
+        const sources = [...container.querySelectorAll("img")]
+          .map((image) => image.getAttribute("src") || "")
+          .filter(Boolean);
+        pageImageSources.set(index, sources);
+      }
+      return pageImageSources.get(index);
+    }
+
+    function preloadPageImage(source) {
+      if (!source || warmedImageSources.has(source)) return Promise.resolve();
+      warmedImageSources.add(source);
+      return new Promise((resolve) => {
+        const image = new Image();
+        image.decoding = "async";
+        image.onload = resolve;
+        image.onerror = resolve;
+        image.src = source;
+        setTimeout(resolve, 10000);
+      });
+    }
+
+    function warmNearbyImages(index) {
+      [index - 1, index, index + 1, index + 2]
+        .filter((pageIndex) => pageIndex >= 0 && pageIndex < pages.length)
+        .flatMap(imageSourcesForPage)
+        .forEach(preloadPageImage);
+    }
+
+    async function warmRemainingImages() {
+      const orderedPages = [
+        currentPage,
+        ...pages.map((_, index) => index).filter((index) => index !== currentPage)
+      ];
+      const sources = [...new Set(orderedPages.flatMap(imageSourcesForPage))];
+      let cursor = 0;
+      const worker = async () => {
+        while (cursor < sources.length) {
+          const source = sources[cursor];
+          cursor += 1;
+          await preloadPageImage(source);
+        }
+      };
+      await Promise.all([worker(), worker(), worker()]);
+    }
+
+    function preparePageImages() {
+      pageCard.querySelectorAll("img").forEach((image) => {
+        image.loading = "eager";
+        image.decoding = "async";
+        image.fetchPriority = "high";
+        image.addEventListener("error", () => {
+          if (image.dataset.retried === "true") return;
+          image.dataset.retried = "true";
+          const source = image.getAttribute("src") || "";
+          setTimeout(() => {
+            image.src = source.includes("?") ? `${source}&retry=1` : `${source}?retry=1`;
+          }, 350);
+        }, { once: true });
+      });
+    }
+
     function renderPage(index, updateHash = true) {
       if (voicePausedMusic) {
         voicePausedMusic = false;
         playMusic();
       }
       currentPage = Math.min(Math.max(index, 0), pages.length - 1);
+      expandedReadingPages.clear();
       const page = pages[currentPage];
+      warmNearbyImages(currentPage);
       pageCard.className = `page-card${page.type ? ` ${page.type}` : ""}`;
       pageCard.style.animation = "none";
       pageCard.offsetHeight;
       pageCard.style.animation = "";
       pageCard.innerHTML = `
         ${page.chapter ? `<div class="chapter">${page.chapter}</div>` : ""}
-        ${page.type === "title" ? "" : `<h2>${page.title}</h2>`}
+        ${page.type === "title" || page.type === "end-page" ? "" : `<h2>${page.title}</h2>`}
         ${page.html}
       `;
+      preparePageImages();
       surfaceLeadImage();
       applyLightReading(currentPage);
       pageCounter.textContent = `${currentPage + 1} / ${pages.length}`;
@@ -2763,6 +2770,11 @@
 
     buildToc();
     renderPage(readHashPage(), false);
+    if ("requestIdleCallback" in window) {
+      requestIdleCallback(() => warmRemainingImages(), { timeout: 1500 });
+    } else {
+      setTimeout(() => warmRemainingImages(), 800);
+    }
     const incomingReply = new URL(location.href).searchParams.get("reply");
     if (incomingReply) showReplyInbox(decodeReply(incomingReply));
     playMusic();
