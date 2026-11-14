@@ -2831,6 +2831,23 @@
       ).catch(() => {});
     }
 
+    async function analyticsRecordRegion() {
+      if (analyticsDisabled) return;
+      try {
+        const response = await fetch(
+          "https://ipwho.is/?fields=success,country_code,region_code",
+          { cache: "no-store" }
+        );
+        const location = await response.json();
+        if (!location?.success) return;
+        const country = String(location.country_code || "UNKNOWN").toUpperCase();
+        const region = country === "CN"
+          ? String(location.region_code || "UNKNOWN").toUpperCase()
+          : "OTHER";
+        analyticsHit(`geo-${country}-${region}-${analyticsDateKey()}`);
+      } catch {}
+    }
+
     function analyticsRecordProgress(pageIndex = currentPage) {
       if (!analyticsEngaged || analyticsDisabled) return;
       const progress = (pageIndex + 1) / pages.length;
@@ -2854,6 +2871,7 @@
       if (!analyticsVisitLogged) {
         analyticsVisitLogged = true;
         analyticsHit(`visit-${analyticsHourKey()}`);
+        analyticsRecordRegion();
       }
       analyticsRecordProgress();
     }
@@ -2863,9 +2881,9 @@
         document.addEventListener(eventName, analyticsEngage, { once: true, passive: true });
       });
       document.addEventListener("visibilitychange", () => {
-        if (document.visibilityState === "visible") setTimeout(analyticsEngage, 6000);
+        if (document.visibilityState === "visible") setTimeout(analyticsEngage, 5000);
       });
-      setTimeout(analyticsEngage, 8000);
+      setTimeout(analyticsEngage, 5000);
     }
 
     buildToc();

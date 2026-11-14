@@ -76,6 +76,21 @@
     .hour-bar i { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #c26478, #e8a7b4); }
     .hour-row b { text-align: right; font-weight: 500; }
     .empty-hours { padding: 18px; border: 1px dashed var(--line); border-radius: 14px; color: var(--muted); font-size: 12px; text-align: center; }
+    .section-head { display: flex; justify-content: space-between; gap: 12px; align-items: center; margin-top: 24px; }
+    .section-head h2 { margin: 0; font-size: 16px; }
+    .section-head button { min-height: 36px; padding: 6px 12px; }
+    .region-list { display: grid; gap: 8px; margin-top: 10px; }
+    .region-row {
+      display: grid;
+      grid-template-columns: 92px 1fr 28px;
+      gap: 9px;
+      align-items: center;
+      min-height: 28px;
+      font-size: 12px;
+    }
+    .region-bar { height: 8px; overflow: hidden; border-radius: 999px; background: rgba(185, 82, 107, .1); }
+    .region-bar i { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #b55268, #e4a3b2); }
+    .region-row b { text-align: right; font-weight: 500; }
     .note { margin: 18px 0 0; color: var(--muted); font-size: 11px; line-height: 1.7; }
     .updated { margin-top: 12px; color: var(--muted); font-size: 11px; }
     .locked { display: none; }
@@ -88,6 +103,7 @@
       .today { grid-template-columns: repeat(2, 1fr); }
       .metric:first-child { grid-column: 1 / -1; }
       .hour-row { grid-template-columns: 45px 1fr 24px; gap: 7px; }
+      .region-row { grid-template-columns: 78px 1fr 24px; gap: 7px; }
     }
   </style>
 </head>
@@ -120,7 +136,14 @@
       </div>
       <h2 class="section-title">访问时段</h2>
       <div class="hourly-list" id="hourlyRows"></div>
-      <p class="note">时间为北京时间，精确到小时。统计页验证通过后，当前浏览器会自动排除，不记录你自己的访问。记录只能说明链接被真实打开过，不能绝对确认使用者身份。</p>
+      <div class="section-head">
+        <h2>访问地区</h2>
+        <button class="secondary" id="loadRegionsButton" type="button">加载地区</button>
+      </div>
+      <div class="region-list" id="regionRows">
+        <div class="empty-hours">点击“加载地区”查看按省份归类的粗略位置</div>
+      </div>
+      <p class="note">时间为北京时间，精确到小时。地区只根据访问 IP 粗略识别到省级，不保存完整 IP。统计页验证通过后，当前浏览器会自动排除，不记录你自己的访问。</p>
       <p class="note" id="ownerStatus"></p>
       <div class="updated" id="updatedAt"></div>
     </section>
@@ -129,6 +152,15 @@
     const ACCESS_HASH = "4774ee78afae54049587c87265f76432372c75ab819417d26b1751b63838816e";
     const BASE = "https://abacus.jasoncameron.dev";
     const NAMESPACE = "xiaoting-memoir-b91e6d4c-2f78-4a31";
+    const CHINA_REGIONS = {
+      BJ: "北京", TJ: "天津", HE: "河北", SX: "山西", NM: "内蒙古",
+      LN: "辽宁", JL: "吉林", HL: "黑龙江", SH: "上海", JS: "江苏",
+      ZJ: "浙江", AH: "安徽", FJ: "福建", JX: "江西", SD: "山东",
+      HA: "河南", HB: "湖北", HN: "湖南", GD: "广东", GX: "广西",
+      HI: "海南", CQ: "重庆", SC: "四川", GZ: "贵州", YN: "云南",
+      XZ: "西藏", SN: "陕西", GS: "甘肃", QH: "青海", NX: "宁夏",
+      XJ: "新疆", TW: "台湾", HK: "香港", MO: "澳门"
+    };
     const dateInput = document.getElementById("reportDate");
     const reportEls = {
       visit: document.getElementById("openedCount"),
@@ -151,12 +183,16 @@
       return `${date.slice(0, 4)}-${date.slice(4, 6)}-${date.slice(6, 8)}`;
     }
 
-    async function getCount(prefix, dateKey) {
+    async function getCount(prefix, dateKey, retry = 0) {
       try {
         const response = await fetch(
           `${BASE}/get/${NAMESPACE}/${encodeURIComponent(`${prefix}-${dateKey}`)}`,
           { cache: "no-store" }
         );
+        if (response.status === 429 && retry < 3) {
+          await new Promise((resolve) => setTimeout(resolve, 1200 * (retry + 1)));
+          return getCount(prefix, dateKey, retry + 1);
+        }
         if (!response.ok) return 0;
         const payload = await response.json();
         return Number(payload.value) || 0;
@@ -227,6 +263,39 @@
         `更新于 ${new Date().toLocaleString("zh-CN", { timeZone: "Asia/Shanghai", hour12: false })}`;
     }
 
+    async function renderRegions() {
+      const selected = (dateInput.value || dateValue(chinaDateKey())).replaceAll("-", "");
+      const container = document.getElementById("regionRows");
+      const button = document.getElementById("loadRegionsButton");
+      button.disabled = true;
+      button.textContent = "加载中…";
+      container.innerHTML = '<div class="empty-hours">正在读取地区统计…</div>';
+      const regionEntries = Object.entries(CHINA_REGIONS);
+      const counts = await mapLimit(regionEntries, 3, async ([code]) => ({
+        name: CHINA_REGIONS[code],
+        count: await getCount("geo-CN", `${code}-${selected}`)
+      }));
+      const other = await getCount("geo-OTHER", `OTHER-${selected}`);
+      const unknown = await getCount("geo-UNKNOWN", `UNKNOWN-${selected}`);
+      if (other) counts.push({ name: "海外或其他", count: other });
+      if (unknown) counts.push({ name: "无法识别", count: unknown });
+      const active = counts.filter((item) => item.count > 0).sort((a, b) => b.count - a.count);
+      if (!active.length) {
+        container.innerHTML = '<div class="empty-hours">这个日期暂时没有可识别的地区记录</div>';
+      } else {
+        const maxCount = Math.max(...active.map((item) => item.count));
+        container.innerHTML = active.map((item) => `
+          <div class="region-row">
+            <span>${item.name}</span>
+            <span class="region-bar"><i style="width:${Math.max(8, item.count / maxCount * 100)}%"></i></span>
+            <b>${item.count}</b>
+          </div>
+        `).join("");
+      }
+      button.disabled = false;
+      button.textContent = "重新加载";
+    }
+
     async function hashAccessCode(code) {
       const bytes = new TextEncoder().encode(code);
       const digest = await crypto.subtle.digest("SHA-256", bytes);
@@ -260,7 +329,13 @@
     });
 
     document.getElementById("refreshButton").addEventListener("click", renderReport);
-    dateInput.addEventListener("change", renderReport);
+    dateInput.addEventListener("change", () => {
+      document.getElementById("regionRows").innerHTML =
+        '<div class="empty-hours">点击“加载地区”查看按省份归类的粗略位置</div>';
+      document.getElementById("loadRegionsButton").textContent = "加载地区";
+      renderReport();
+    });
+    document.getElementById("loadRegionsButton").addEventListener("click", renderRegions);
     document.getElementById("copyButton").addEventListener("click", async () => {
       try {
         await navigator.clipboard.writeText(location.href);
