@@ -62,10 +62,20 @@
     }
     .metric strong { display: block; font-size: 27px; line-height: 1.1; }
     .metric span { display: block; margin-top: 7px; color: var(--muted); font-size: 11px; line-height: 1.4; }
-    .history { width: 100%; margin-top: 20px; border-collapse: collapse; font-size: 12px; }
-    .history th, .history td { padding: 10px 7px; border-bottom: 1px solid var(--line); text-align: right; }
-    .history th:first-child, .history td:first-child { text-align: left; }
-    .history th { color: var(--muted); font-weight: 500; }
+    .section-title { margin: 24px 0 10px; font-size: 16px; }
+    .hourly-list { display: grid; gap: 8px; }
+    .hour-row {
+      display: grid;
+      grid-template-columns: 52px 1fr 28px;
+      gap: 9px;
+      align-items: center;
+      min-height: 28px;
+      font-size: 12px;
+    }
+    .hour-bar { height: 8px; overflow: hidden; border-radius: 999px; background: rgba(185, 82, 107, .1); }
+    .hour-bar i { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #c26478, #e8a7b4); }
+    .hour-row b { text-align: right; font-weight: 500; }
+    .empty-hours { padding: 18px; border: 1px dashed var(--line); border-radius: 14px; color: var(--muted); font-size: 12px; text-align: center; }
     .note { margin: 18px 0 0; color: var(--muted); font-size: 11px; line-height: 1.7; }
     .updated { margin-top: 12px; color: var(--muted); font-size: 11px; }
     .locked { display: none; }
@@ -77,7 +87,7 @@
       .card { padding: 18px 14px; border-radius: 18px; }
       .today { grid-template-columns: repeat(2, 1fr); }
       .metric:first-child { grid-column: 1 / -1; }
-      .history th, .history td { padding: 9px 4px; }
+      .hour-row { grid-template-columns: 45px 1fr 24px; gap: 7px; }
     }
   </style>
 </head>
@@ -108,20 +118,17 @@
         <div class="metric"><strong id="threeQuarterCount">–</strong><span>看到 75%</span></div>
         <div class="metric"><strong id="finishCount">–</strong><span>看到最后一页</span></div>
       </div>
-      <table class="history">
-        <thead>
-          <tr><th>日期</th><th>打开</th><th>25%</th><th>50%</th><th>75%</th><th>看完</th></tr>
-        </thead>
-        <tbody id="historyRows"></tbody>
-      </table>
-      <p class="note">记录只能说明这个链接被真实打开过，不能绝对确认使用者身份；链接被转发时，其他人打开也会计数。</p>
+      <h2 class="section-title">访问时段</h2>
+      <div class="hourly-list" id="hourlyRows"></div>
+      <p class="note">时间为北京时间，精确到小时。统计页验证通过后，当前浏览器会自动排除，不记录你自己的访问。记录只能说明链接被真实打开过，不能绝对确认使用者身份。</p>
+      <p class="note" id="ownerStatus"></p>
       <div class="updated" id="updatedAt"></div>
     </section>
   </main>
   <script>
     const ACCESS_HASH = "4774ee78afae54049587c87265f76432372c75ab819417d26b1751b63838816e";
     const BASE = "https://abacus.jasoncameron.dev";
-    const NAMESPACE = "xiaoting-memoir-a7f31c9e-c62b-4d96";
+    const NAMESPACE = "xiaoting-memoir-b91e6d4c-2f78-4a31";
     const dateInput = document.getElementById("reportDate");
     const reportEls = {
       visit: document.getElementById("openedCount"),
@@ -158,42 +165,64 @@
       }
     }
 
+    async function mapLimit(items, limit, worker) {
+      const results = new Array(items.length);
+      let cursor = 0;
+      async function run() {
+        while (cursor < items.length) {
+          const index = cursor;
+          cursor += 1;
+          results[index] = await worker(items[index], index);
+        }
+      }
+      await Promise.all(Array.from({ length: Math.min(limit, items.length) }, run));
+      return results;
+    }
+
     async function loadDay(dateKey) {
-      const [visit, m25, m50, m75, finish] = await Promise.all([
-        getCount("visit", dateKey),
+      const hourKeys = Array.from({ length: 24 }, (_, hour) =>
+        `${dateKey}${String(hour).padStart(2, "0")}`
+      );
+      const [hourly, m25, m50, m75, finish] = await Promise.all([
+        mapLimit(hourKeys, 4, (hourKey) => getCount("visit", hourKey)),
         getCount("m25", dateKey),
         getCount("m50", dateKey),
         getCount("m75", dateKey),
         getCount("finish", dateKey)
       ]);
-      return { date: dateKey, visit, m25, m50, m75, finish };
+      return {
+        date: dateKey,
+        visit: hourly.reduce((sum, count) => sum + count, 0),
+        hourly,
+        m25,
+        m50,
+        m75,
+        finish
+      };
     }
 
     async function renderReport() {
       const selected = (dateInput.value || dateValue(chinaDateKey())).replaceAll("-", "");
-      const days = [];
-      const base = new Date(`${dateValue(selected)}T12:00:00+08:00`);
-      for (let offset = 0; offset < 7; offset += 1) {
-        const date = new Date(base);
-        date.setDate(base.getDate() - offset);
-        days.push(chinaDateKey(date));
-      }
-      const rows = await Promise.all(days.map(loadDay));
-      const today = rows[0];
+      const today = await loadDay(selected);
       for (const [prefix, element] of Object.entries(reportEls)) {
         element.textContent = String(today[prefix]);
       }
-      const history = document.getElementById("historyRows");
-      history.innerHTML = rows.map((row) => `
-        <tr>
-          <td>${dateValue(row.date).slice(5)}</td>
-          <td>${row.visit}</td>
-          <td>${row.m25}</td>
-          <td>${row.m50}</td>
-          <td>${row.m75}</td>
-          <td>${row.finish}</td>
-        </tr>
-      `).join("");
+      const hourly = document.getElementById("hourlyRows");
+      const activeHours = today.hourly
+        .map((count, hour) => ({ count, hour }))
+        .filter((item) => item.count > 0);
+      if (!activeHours.length) {
+        hourly.innerHTML = '<div class="empty-hours">这个日期暂时还没有访问记录</div>';
+      } else {
+        const maxCount = Math.max(...activeHours.map((item) => item.count));
+        hourly.innerHTML = activeHours.map((item) => `
+          <div class="hour-row">
+            <span>${String(item.hour).padStart(2, "0")}:00</span>
+            <span class="hour-bar"><i style="width:${Math.max(8, item.count / maxCount * 100)}%"></i></span>
+            <b>${item.count}</b>
+          </div>
+        `).join("");
+      }
       document.getElementById("updatedAt").textContent =
         `更新于 ${new Date().toLocaleString("zh-CN", { timeZone: "Asia/Shanghai", hour12: false })}`;
     }
@@ -210,6 +239,12 @@
         return false;
       }
       document.body.classList.remove("locked");
+      try {
+        localStorage.setItem("memoirAnalyticsOptOut", "true");
+        document.getElementById("copyButton").textContent = "复制统计链接";
+      } catch {}
+      document.getElementById("ownerStatus").textContent =
+        "当前浏览器已排除统计，你自己打开回忆录不会被计数。";
       dateInput.value = dateValue(chinaDateKey());
       renderReport();
       setInterval(renderReport, 30000);

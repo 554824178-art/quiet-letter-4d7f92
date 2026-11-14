@@ -2792,9 +2792,14 @@
     window.addEventListener("hashchange", () => renderPage(readHashPage(), false));
 
     const ANALYTICS_BASE = "https://abacus.jasoncameron.dev";
-    const ANALYTICS_NAMESPACE = "xiaoting-memoir-a7f31c9e-c62b-4d96";
+    const ANALYTICS_NAMESPACE = "xiaoting-memoir-b91e6d4c-2f78-4a31";
+    let analyticsOptOut = false;
+    try {
+      analyticsOptOut = localStorage.getItem("memoirAnalyticsOptOut") === "true";
+    } catch {}
     const analyticsDisabled =
       location.protocol === "file:" ||
+      analyticsOptOut ||
       new URLSearchParams(location.search).get("analytics") === "off";
     const analyticsMilestones = new Set();
     let analyticsEngaged = false;
@@ -2807,6 +2812,15 @@
         month: "2-digit",
         day: "2-digit"
       }).format(date).replaceAll("-", "");
+    }
+
+    function analyticsHourKey(date = new Date()) {
+      const hour = new Intl.DateTimeFormat("en-GB", {
+        timeZone: "Asia/Shanghai",
+        hour: "2-digit",
+        hourCycle: "h23"
+      }).format(date);
+      return `${analyticsDateKey(date)}${hour}`;
     }
 
     function analyticsHit(key) {
@@ -2839,7 +2853,7 @@
       analyticsEngaged = true;
       if (!analyticsVisitLogged) {
         analyticsVisitLogged = true;
-        analyticsHit(`visit-${analyticsDateKey()}`);
+        analyticsHit(`visit-${analyticsHourKey()}`);
       }
       analyticsRecordProgress();
     }
