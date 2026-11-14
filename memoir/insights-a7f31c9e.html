@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <title>回忆录访问记录</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #472e34;
+      --muted: #8c7479;
+      --accent: #b9526b;
+      --line: rgba(118, 80, 89, .16);
+      --paper: rgba(255, 252, 249, .92);
+      --wash: #f6eeeb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 28px 16px 48px;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 20% 0%, rgba(239, 207, 214, .7), transparent 34rem),
+        linear-gradient(160deg, #fbf8f5, #f2e8e5);
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    main { width: min(100%, 760px); margin: 0 auto; }
+    .card {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: var(--paper);
+      box-shadow: 0 18px 52px rgba(78, 53, 60, .1);
+      backdrop-filter: blur(12px);
+    }
+    h1 { margin: 0 0 6px; font-size: clamp(25px, 7vw, 38px); }
+    .sub { margin: 0 0 18px; color: var(--muted); font-size: 13px; line-height: 1.7; }
+    .tools { display: flex; flex-wrap: wrap; gap: 9px; align-items: center; }
+    input, button {
+      min-height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      font: inherit;
+    }
+    input { flex: 1 1 155px; min-width: 0; padding: 8px 11px; background: #fff; color: var(--ink); }
+    button { padding: 8px 16px; color: #fff; background: var(--accent); cursor: pointer; }
+    button.secondary { color: var(--accent); background: transparent; }
+    .today {
+      display: grid;
+      grid-template-columns: 1.2fr repeat(4, 1fr);
+      gap: 9px;
+      margin-top: 18px;
+    }
+    .metric {
+      min-height: 92px;
+      padding: 14px 11px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: rgba(255, 255, 255, .62);
+    }
+    .metric strong { display: block; font-size: 27px; line-height: 1.1; }
+    .metric span { display: block; margin-top: 7px; color: var(--muted); font-size: 11px; line-height: 1.4; }
+    .history { width: 100%; margin-top: 20px; border-collapse: collapse; font-size: 12px; }
+    .history th, .history td { padding: 10px 7px; border-bottom: 1px solid var(--line); text-align: right; }
+    .history th:first-child, .history td:first-child { text-align: left; }
+    .history th { color: var(--muted); font-weight: 500; }
+    .note { margin: 18px 0 0; color: var(--muted); font-size: 11px; line-height: 1.7; }
+    .updated { margin-top: 12px; color: var(--muted); font-size: 11px; }
+    .locked { display: none; }
+    .error { margin-top: 12px; color: #a63d50; font-size: 12px; }
+    body.locked .app { display: none; }
+    body.locked .locked { display: block; }
+    @media (max-width: 560px) {
+      body { padding: 18px 12px 36px; }
+      .card { padding: 18px 14px; border-radius: 18px; }
+      .today { grid-template-columns: repeat(2, 1fr); }
+      .metric:first-child { grid-column: 1 / -1; }
+      .history th, .history td { padding: 9px 4px; }
+    }
+  </style>
+</head>
+<body class="locked">
+  <main>
+    <section class="card locked">
+      <h1>访问记录</h1>
+      <p class="sub">输入访问码后查看。这个页面不会被搜索引擎收录。</p>
+      <div class="tools">
+        <input id="accessCode" type="password" autocomplete="off" placeholder="访问码">
+        <button id="unlockButton" type="button">查看</button>
+      </div>
+      <div class="error" id="unlockError"></div>
+    </section>
+
+    <section class="card app">
+      <h1>回忆录访问记录</h1>
+      <p class="sub">只有停留或滑动、点击等真实交互后才会计数；微信预览不会算作打开。</p>
+      <div class="tools">
+        <input id="reportDate" type="date">
+        <button id="refreshButton" type="button">刷新</button>
+        <button class="secondary" id="copyButton" type="button">复制统计链接</button>
+      </div>
+      <div class="today">
+        <div class="metric"><strong id="openedCount">–</strong><span>当天真实打开</span></div>
+        <div class="metric"><strong id="quarterCount">–</strong><span>看到 25%</span></div>
+        <div class="metric"><strong id="halfCount">–</strong><span>看到 50%</span></div>
+        <div class="metric"><strong id="threeQuarterCount">–</strong><span>看到 75%</span></div>
+        <div class="metric"><strong id="finishCount">–</strong><span>看到最后一页</span></div>
+      </div>
+      <table class="history">
+        <thead>
+          <tr><th>日期</th><th>打开</th><th>25%</th><th>50%</th><th>75%</th><th>看完</th></tr>
+        </thead>
+        <tbody id="historyRows"></tbody>
+      </table>
+      <p class="note">记录只能说明这个链接被真实打开过，不能绝对确认使用者身份；链接被转发时，其他人打开也会计数。</p>
+      <div class="updated" id="updatedAt"></div>
+    </section>
+  </main>
+  <script>
+    const ACCESS_HASH = "4774ee78afae54049587c87265f76432372c75ab819417d26b1751b63838816e";
+    const BASE = "https://abacus.jasoncameron.dev";
+    const NAMESPACE = "xiaoting-memoir-a7f31c9e-c62b-4d96";
+    const dateInput = document.getElementById("reportDate");
+    const reportEls = {
+      visit: document.getElementById("openedCount"),
+      m25: document.getElementById("quarterCount"),
+      m50: document.getElementById("halfCount"),
+      m75: document.getElementById("threeQuarterCount"),
+      finish: document.getElementById("finishCount")
+    };
+
+    function chinaDateKey(date = new Date()) {
+      return new Intl.DateTimeFormat("en-CA", {
+        timeZone: "Asia/Shanghai",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit"
+      }).format(date).replaceAll("-", "");
+    }
+
+    function dateValue(date) {
+      return `${date.slice(0, 4)}-${date.slice(4, 6)}-${date.slice(6, 8)}`;
+    }
+
+    async function getCount(prefix, dateKey) {
+      try {
+        const response = await fetch(
+          `${BASE}/get/${NAMESPACE}/${encodeURIComponent(`${prefix}-${dateKey}`)}`,
+          { cache: "no-store" }
+        );
+        if (!response.ok) return 0;
+        const payload = await response.json();
+        return Number(payload.value) || 0;
+      } catch {
+        return 0;
+      }
+    }
+
+    async function loadDay(dateKey) {
+      const [visit, m25, m50, m75, finish] = await Promise.all([
+        getCount("visit", dateKey),
+        getCount("m25", dateKey),
+        getCount("m50", dateKey),
+        getCount("m75", dateKey),
+        getCount("finish", dateKey)
+      ]);
+      return { date: dateKey, visit, m25, m50, m75, finish };
+    }
+
+    async function renderReport() {
+      const selected = (dateInput.value || dateValue(chinaDateKey())).replaceAll("-", "");
+      const days = [];
+      const base = new Date(`${dateValue(selected)}T12:00:00+08:00`);
+      for (let offset = 0; offset < 7; offset += 1) {
+        const date = new Date(base);
+        date.setDate(base.getDate() - offset);
+        days.push(chinaDateKey(date));
+      }
+      const rows = await Promise.all(days.map(loadDay));
+      const today = rows[0];
+      for (const [prefix, element] of Object.entries(reportEls)) {
+        element.textContent = String(today[prefix]);
+      }
+      const history = document.getElementById("historyRows");
+      history.innerHTML = rows.map((row) => `
+        <tr>
+          <td>${dateValue(row.date).slice(5)}</td>
+          <td>${row.visit}</td>
+          <td>${row.m25}</td>
+          <td>${row.m50}</td>
+          <td>${row.m75}</td>
+          <td>${row.finish}</td>
+        </tr>
+      `).join("");
+      document.getElementById("updatedAt").textContent =
+        `更新于 ${new Date().toLocaleString("zh-CN", { timeZone: "Asia/Shanghai", hour12: false })}`;
+    }
+
+    async function hashAccessCode(code) {
+      const bytes = new TextEncoder().encode(code);
+      const digest = await crypto.subtle.digest("SHA-256", bytes);
+      return [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, "0")).join("");
+    }
+
+    async function unlock(code) {
+      if (await hashAccessCode(code) !== ACCESS_HASH) {
+        document.getElementById("unlockError").textContent = "访问码不对。";
+        return false;
+      }
+      document.body.classList.remove("locked");
+      dateInput.value = dateValue(chinaDateKey());
+      renderReport();
+      setInterval(renderReport, 30000);
+      return true;
+    }
+
+    document.getElementById("unlockButton").addEventListener("click", async () => {
+      const code = document.getElementById("accessCode").value.trim();
+      const url = new URL(location.href);
+      url.searchParams.set("key", code);
+      history.replaceState(null, "", url);
+      await unlock(code);
+    });
+
+    document.getElementById("refreshButton").addEventListener("click", renderReport);
+    dateInput.addEventListener("change", renderReport);
+    document.getElementById("copyButton").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(location.href);
+        document.getElementById("copyButton").textContent = "已复制";
+      } catch {
+        document.getElementById("copyButton").textContent = "复制失败";
+      }
+    });
+
+    const suppliedCode = new URL(location.href).searchParams.get("key") || "";
+    if (suppliedCode) {
+      document.getElementById("accessCode").value = suppliedCode;
+      unlock(suppliedCode);
+    }
+  </script>
+</body>
+</html>

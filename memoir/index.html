@@ -2593,6 +2593,7 @@
       }
       currentPage = Math.min(Math.max(index, 0), pages.length - 1);
       expandedReadingPages.clear();
+      analyticsRecordProgress(currentPage);
       const page = pages[currentPage];
       const renderedPage = currentPage;
       pageCard.className = `page-card${page.type ? ` ${page.type}` : ""}`;
@@ -2789,6 +2790,69 @@
       }
     }, { passive: true });
     window.addEventListener("hashchange", () => renderPage(readHashPage(), false));
+
+    const ANALYTICS_BASE = "https://abacus.jasoncameron.dev";
+    const ANALYTICS_NAMESPACE = "xiaoting-memoir-a7f31c9e-c62b-4d96";
+    const analyticsDisabled =
+      location.protocol === "file:" ||
+      new URLSearchParams(location.search).get("analytics") === "off";
+    const analyticsMilestones = new Set();
+    let analyticsEngaged = false;
+    let analyticsVisitLogged = false;
+
+    function analyticsDateKey(date = new Date()) {
+      return new Intl.DateTimeFormat("en-CA", {
+        timeZone: "Asia/Shanghai",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit"
+      }).format(date).replaceAll("-", "");
+    }
+
+    function analyticsHit(key) {
+      if (analyticsDisabled) return;
+      fetch(
+        `${ANALYTICS_BASE}/hit/${ANALYTICS_NAMESPACE}/${encodeURIComponent(key)}`,
+        { method: "GET", mode: "cors", cache: "no-store", keepalive: true }
+      ).catch(() => {});
+    }
+
+    function analyticsRecordProgress(pageIndex = currentPage) {
+      if (!analyticsEngaged || analyticsDisabled) return;
+      const progress = (pageIndex + 1) / pages.length;
+      const day = analyticsDateKey();
+      const milestones = [
+        ["m25", progress >= 0.25],
+        ["m50", progress >= 0.5],
+        ["m75", progress >= 0.75],
+        ["finish", pageIndex === pages.length - 1]
+      ];
+      for (const [name, reached] of milestones) {
+        if (!reached || analyticsMilestones.has(name)) continue;
+        analyticsMilestones.add(name);
+        analyticsHit(`${name}-${day}`);
+      }
+    }
+
+    function analyticsEngage() {
+      if (analyticsDisabled || analyticsEngaged || document.visibilityState !== "visible") return;
+      analyticsEngaged = true;
+      if (!analyticsVisitLogged) {
+        analyticsVisitLogged = true;
+        analyticsHit(`visit-${analyticsDateKey()}`);
+      }
+      analyticsRecordProgress();
+    }
+
+    if (!analyticsDisabled) {
+      ["pointerdown", "touchstart", "keydown"].forEach((eventName) => {
+        document.addEventListener(eventName, analyticsEngage, { once: true, passive: true });
+      });
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "visible") setTimeout(analyticsEngage, 6000);
+      });
+      setTimeout(analyticsEngage, 8000);
+    }
 
     buildToc();
     renderPage(readHashPage(), false);
